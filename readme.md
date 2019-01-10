@@ -27,6 +27,7 @@ You can include it as dependency in your `package.json`:
 - place a file `api.yml` (openapi v.3, swagger v.2 is also supported) in the root folder of your project
 - create a folder `/mocks` in the root folder of your project
 - run `npx openapi-server`
+- open your browser on `http://localhost:3000/api`
 
 ## Use
 
