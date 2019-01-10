@@ -1,0 +1,54 @@
+{
+  "name": "openapi-server",
+  "version": "1.0.0",
+  "description": "A web server based on openApi spec, with proxy, mocks and optional validation",
+  "main": "dist/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "bin": {
+    "openapi-server": "./bin/openapi-server.js"
+  },
+  "scripts": {
+    "install": "tsc",
+    "build": "tsc",
+    "start": "npm run build && node dist/index.js",
+    "test": "jest",
+    "tdd": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:ci": "jest --ci",
+    "install:types": "types-installer install"
+  },
+  "author": "alessandro falezza",
+  "license": "ISC",
+  "dependencies": {
+    "@types/ajv": "^1.0.0",
+    "@types/axios": "^0.14.0",
+    "@types/body-parser": "^1.17.0",
+    "@types/dotenv": "^6.1.0",
+    "@types/express": "^4.16.0",
+    "@types/jest": "^23.3.12",
+    "@types/js-yaml": "^3.11.4",
+    "@types/lodash": "^4.14.119",
+    "@types/typescript": "^2.0.0",
+    "ajv": "^6.6.2",
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "commander": "^2.19.0",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "jest": "^23.6.0",
+    "jest-transform-stub": "^1.0.0",
+    "js-yaml": "^3.12.0",
+    "json-refs": "^3.0.12",
+    "json-schema-resolve-allof": "^1.5.0",
+    "lodash": "^4.17.11",
+    "mock-express-request": "^0.2.2",
+    "mock-express-response": "^0.2.2",
+    "openapi-schema-validator": "^3.0.2",
+    "ts-jest": "^23.10.5",
+    "tslib": "^1.9.3",
+    "types-installer": "^1.4.0",
+    "typescript": "^3.2.2"
+  }
+}

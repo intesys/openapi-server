@@ -1,0 +1,33 @@
+import { RequestHandler } from 'express';
+import path from 'path';
+import voidMiddleware from './void';
+import _ from 'lodash';
+import { MOCKS_PATH } from '../lib/globals';
+
+/**
+ * @param method one value of `operations`
+ * @param route path key, as example: '/item/{id}'
+ */
+const tryMock = (method: string, route: string): RequestHandler => (req, res, next) => {
+
+  if (_.get(res, 'locals.body')) {
+    return voidMiddleware(req, res, next);
+  }
+
+  try {
+    const mockPath = path.join(MOCKS_PATH, route, method);
+    const mock = require(mockPath);
+    _.set(res, 'locals.body', mock);
+  } catch (err) {
+    const error = new Error(err);
+    if (!notFoundError(error)) {
+      throw error;
+    }
+  }
+
+  return next();
+}
+
+const notFoundError = (err: Error): boolean => /cannot find module/.test(err.message.toLowerCase());
+
+export default tryMock;

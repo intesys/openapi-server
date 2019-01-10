@@ -1,0 +1,119 @@
+[
+  {
+    "id": 0,
+    "name": "string",
+    "description": "string",
+    "date": "2019-01-10T15:55:35.274Z",
+    "additionalProp1": [
+      {
+        "id": 0,
+        "name": 0,
+        "date": "2019-01-10T15:55:35.274Z",
+        "description": "string",
+        "additionalProp1": "string",
+        "additionalProp2": "string",
+        "additionalProp3": "string"
+      }
+    ],
+    "additionalProp2": [
+      {
+        "id": 0,
+        "name": 0,
+        "date": "2019-01-10T15:55:35.274Z",
+        "description": "string",
+        "additionalProp1": "string",
+        "additionalProp2": "string",
+        "additionalProp3": "string"
+      }
+    ],
+    "additionalProp3": [
+      {
+        "id": 0,
+        "name": 0,
+        "date": "2019-01-10T15:55:35.274Z",
+        "description": "string",
+        "additionalProp1": "string",
+        "additionalProp2": "string",
+        "additionalProp3": "string"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "string",
+    "description": "string",
+    "date": "2019-01-10T15:55:35.274Z",
+    "additionalProp1": [
+      {
+        "id": 0,
+        "name": 0,
+        "date": "2019-01-10T15:55:35.274Z",
+        "description": "string",
+        "additionalProp1": "string",
+        "additionalProp2": "string",
+        "additionalProp3": "string"
+      }
+    ],
+    "additionalProp2": [
+      {
+        "id": 0,
+        "name": 0,
+        "date": "2019-01-10T15:55:35.274Z",
+        "description": "string",
+        "additionalProp1": "string",
+        "additionalProp2": "string",
+        "additionalProp3": "string"
+      }
+    ],
+    "additionalProp3": [
+      {
+        "id": 0,
+        "name": 0,
+        "date": "2019-01-10T15:55:35.274Z",
+        "description": "string",
+        "additionalProp1": "string",
+        "additionalProp2": "string",
+        "additionalProp3": "string"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "string",
+    "description": "string",
+    "date": "2019-01-10T15:55:35.274Z",
+    "additionalProp1": [
+      {
+        "id": 0,
+        "name": 0,
+        "date": "2019-01-10T15:55:35.274Z",
+        "description": "string",
+        "additionalProp1": "string",
+        "additionalProp2": "string",
+        "additionalProp3": "string"
+      }
+    ],
+    "additionalProp2": [
+      {
+        "id": 0,
+        "name": 0,
+        "date": "2019-01-10T15:55:35.274Z",
+        "description": "string",
+        "additionalProp1": "string",
+        "additionalProp2": "string",
+        "additionalProp3": "string"
+      }
+    ],
+    "additionalProp3": [
+      {
+        "id": 0,
+        "name": 0,
+        "date": "2019-01-10T15:55:35.274Z",
+        "description": "string",
+        "additionalProp1": "string",
+        "additionalProp2": "string",
+        "additionalProp3": "string"
+      }
+    ]
+  }
+]
