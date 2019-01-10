@@ -9,7 +9,7 @@ In addition you can validate the responses (both from backend and mock).
 npm i https://gitlab.intesys.it/open-source/openapi-server.git
 ```
 
-You can include it as dependency in your `packege.json`:
+You can include it as dependency in your `package.json`:
 
 ```js
 {
@@ -105,6 +105,25 @@ Options:
   --PROXY_RESOURCES_PREFIX [value]
   -h, --help                        output usage information
 ```
+
+### Defaults
+
+API_YML: 'api.yml'  
+API_PREFIX: '/api'  
+API_PORT: '3000'  
+API_PROTOCOL: 'http'  
+API_HOSTNAME: 'localhost'  
+RESOURCES_PREFIX: '/resources'  
+MOCKS_PATH: '/mocks'  
+
+PROXY_PROTOCOL: 'http'  
+PROXY_HOSTNAME: 'localhost'  
+PROXY_PORT: '3001'  
+PROXY_PREFIX: '/api'  
+PROXY_RESOURCES_PREFIX: '/resources'  
+
+SKIP_VALIDATION: false  
+LOG: false
 
 ## Mocks
 
