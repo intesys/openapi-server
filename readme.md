@@ -177,10 +177,12 @@ Openapi-server is an express web server with some middleware, it:
 ## TO DO
 
 - validate the request
+- generate mocks from yml examples
 - expose the module as express middleware
 - cleanup the code
 - more tests
 
 ### Nice to have
 
+- allow validator to be less restrictive
 - allow `js` mocks to export a standard express middleware (and be able to access to req/res)
