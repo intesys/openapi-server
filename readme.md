@@ -3,6 +3,8 @@
 It's a simple proxy for development purpose, which allows you to quickly mock responses, in case the real backend server doesn't reply correctly.  
 In addition you can validate the responses (both from backend and mock).
 
+![schema](./assets/schema.png)
+
 ## Install
 
 ```
