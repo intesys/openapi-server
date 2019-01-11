@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import bodyParser from 'body-parser';
 import Path from 'path';
 import { OpenAPI } from 'openapi-types';
@@ -22,6 +23,7 @@ const port = API_PORT || '3000';
     openApiSchemaValidate(spec);
 
     const app = express();
+    app.use(cors())
     app.use(bodyParser.json());
     app.use(API_PREFIX,
       routes(spec),
