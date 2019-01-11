@@ -63,9 +63,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Route'
+                $ref: '#/components/schemas/Routes'
   '/routes/{routeId}':
     put:
       summary: Updates a route
@@ -97,6 +95,7 @@ paths:
             format: int64
       responses:
         '200':
+          description: description
           content:
             application/json:
               schema:
@@ -117,8 +116,16 @@ paths:
   '/routes/{routeId}/sub/action':
     get:
       operationId: routeSubAction
+      parameters:
+        - in: path
+          name: routeId
+          required: true
+          schema:
+            type: integer
+            format: int64
       responses:
         '200':
+          description: description
           content:
             application/json:
               schema:
