@@ -10,7 +10,7 @@ import load from './lib/load';
 
 import { API_YML, API_PREFIX, API_PORT, API_PROTOCOL, API_HOSTNAME, RESOURCES_PREFIX } from './lib/globals';
 
-const apiFile = Path.join(__dirname, '..', API_YML);
+const apiFile = findUp(API_YML, Path.join(__dirname, '../..')) || Path.join(__dirname, '..', API_YML);
 
 const port = API_PORT || '3000';
 
