@@ -1,0 +1,42 @@
+import express, { Router } from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import Path from 'path';
+import { OpenAPI } from 'openapi-types';
+import openApiSchemaValidate from './lib/openApiSchemaValidate';
+import routes from './routes';
+import handleErrors from './middlewares/handleErrors';
+import sendBody from './middlewares/sendBody';
+import load from './lib/load';
+import findUp from './lib/findUp';
+import { API_YML, API_PREFIX } from './lib/globals';
+
+const apiFile = findUp(API_YML, Path.join(__dirname, '../..')) || Path.join(__dirname, '..', API_YML);
+
+const router = async (): Promise<Router> => {
+  const router: Router = express.Router();
+  try {
+
+    const spec: OpenAPI.Document = await load(apiFile);
+    openApiSchemaValidate(spec);
+
+    router.use(
+      cors(),
+      bodyParser.json()
+    );
+
+    router.use(API_PREFIX,
+      routes(spec),
+      sendBody(),
+      handleErrors()
+    );
+
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+
+  return router;
+}
+
+export default router;

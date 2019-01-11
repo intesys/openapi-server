@@ -2,7 +2,7 @@
   "name": "openapi-server",
   "version": "1.0.3",
   "description": "A web server based on openApi spec, with proxy, mocks and optional validation",
-  "main": "dist/index.js",
+  "main": "dist/cli.js",
   "directories": {
     "lib": "lib"
   },
@@ -12,7 +12,7 @@
   "scripts": {
     "install": "tsc",
     "build": "tsc",
-    "start": "npm run build && node dist/index.js",
+    "start": "npm run build && node dist/cli.js",
     "test": "jest",
     "tdd": "jest --watch",
     "test:coverage": "jest --coverage",

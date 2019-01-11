@@ -49,6 +49,27 @@ npx openapi-server [options]
 }
 ```
 
+### As express router
+
+```typescript
+import { app, router } from 'openapi-server';
+import express, { Application, Router } from "express";
+
+// if you want to start server programmatically 
+app();
+
+// if you want to configure your server and apply the router
+const myApp: Application = express();
+
+(async () => {
+
+  const myRouter: Router = await router();
+  myApp.use(myRouter);
+  const myServer = myApp.listen();
+
+})();
+```
+
 ## Configuration
 
 Configure the server in two ways:
@@ -92,7 +113,7 @@ Options:
   -v, --version                     output the version number
   -a,--API_YML [value]              api yml file
   -m,--MOCKS_PATH [value]           mocks path
-  -l,--LOG [value]                  enable console log
+  -l,--LOG                          enable console log
   -s,--SKIP_VALIDATION              turn off validation
   --API_PREFIX [value]
   --API_PORT [value]
