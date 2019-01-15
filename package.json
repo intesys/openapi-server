@@ -10,7 +10,6 @@
     "openapi-server": "./bin/openapi-server.js"
   },
   "scripts": {
-    "postinstall": "tsc",
     "build": "tsc",
     "start": "npm run build && node dist/cli.js",
     "prepack": "npm run build",
