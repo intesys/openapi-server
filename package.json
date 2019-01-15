@@ -20,7 +20,10 @@
     "install:types": "types-installer install"
   },
   "files": [
-    "dist/**/*"
+    "dist/**/*",
+    "bin/**/*",
+    ".env",
+    "api.yml"
   ],
   "author": "alessandro falezza",
   "license": "ISC",
