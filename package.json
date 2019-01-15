@@ -2,10 +2,7 @@
   "name": "openapi-server",
   "version": "1.1.1",
   "description": "A web server based on openApi spec, with proxy, mocks and optional validation",
-  "main": "dist/cli.js",
-  "directories": {
-    "lib": "lib"
-  },
+  "main": "dist/index.js",
   "bin": {
     "openapi-server": "./bin/openapi-server.js"
   },
