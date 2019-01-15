@@ -6,6 +6,9 @@
   "bin": {
     "openapi-server": "./bin/openapi-server.js"
   },
+  "engines": {
+    "node": ">9.0.0"
+  },
   "scripts": {
     "build": "tsc",
     "start": "npm run build && node dist/cli.js",
