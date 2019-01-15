@@ -15,8 +15,7 @@
     "prepare": "npm run build",
     "test": "jest",
     "tdd": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "test:ci": "jest --ci",
+    "coverage": "jest --coverage",
     "install:types": "types-installer install"
   },
   "files": [
