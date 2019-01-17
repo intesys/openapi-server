@@ -6,18 +6,18 @@ import { PROXY_PREFIX } from './globals';
 export default (url: string): RequestHandler => async (req, res, next) => {
   try {
     const method = req.method.toLowerCase();
-    // const axiosFn = axios[method];
+    const fullUrl = `${url}${req.url}`;
     const response = await axios({
       method,
-      url: `${url}${req.url}`,
+      url: fullUrl,
       data: req.body
     });
     res.locals.body = response.data;
     log({
-      'Proxy request to': url,
+      'Proxy request to': fullUrl,
       'Method': method.toUpperCase(),
       'Request body': req.body,
-      'Response body': response
+      'Response': response.data
     });
     next();
   } catch (err) {
