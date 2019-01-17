@@ -32,8 +32,10 @@ describe('TryMock', () => {
     const req: Request = new MockExpressRequest();
     const res: Response = new MockExpressResponse();
     const next = jest.fn();
+    sut(req, res, next);
 
-    expect(() => sut(req, res, next)).toThrow();
+    const expectedErrorMessage = 'SyntaxError: Unexpected token } in JSON at position 19';
+    expect(next).toBeCalledWith(new Error(expectedErrorMessage));
   });
 
 });

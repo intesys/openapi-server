@@ -22,7 +22,7 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
     log({
       'Mocking request': req.originalUrl,
       'Response body': mock
-    })
+    });
   } catch (err) {
     const error = new Error(err);
     if (!notFoundError(error)) {
