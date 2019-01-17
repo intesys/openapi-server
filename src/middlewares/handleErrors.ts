@@ -8,7 +8,7 @@ interface ErrorWithStatus extends Error {
 export default (): ErrorRequestHandler => (err, req, res, next) => {
   if (err) {
     logError({
-      'Request': req.path,
+      'Request': `${req.method.toUpperCase()} ${req.originalUrl}`,
       'Error': err
     });
     const error = formatError(err);

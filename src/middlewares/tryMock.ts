@@ -20,13 +20,13 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
     const mock = require(mockPath);
     _.set(res, 'locals.body', mock);
     log({
-      'Mocking request': req.path,
+      'Mocking request': req.originalUrl,
       'Response body': mock
     })
   } catch (err) {
     const error = new Error(err);
     if (!notFoundError(error)) {
-      throw error;
+      return next(error);
     }
   }
 
