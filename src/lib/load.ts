@@ -1,7 +1,7 @@
 import fs from 'fs';
 import yaml from 'js-yaml';
 import { OpenAPI } from 'openapi-types';
-import JsonRefs, { JsonRefsOptions } from 'json-refs';
+import JsonRefs from 'json-refs';
 import resolveAllOf from 'json-schema-resolve-allof';
 
 export default async (file: string): Promise<OpenAPI.Document> => {
