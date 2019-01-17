@@ -14,7 +14,7 @@ const tryProxy = (method: string, route: string): RequestHandler => (req, res, n
     return voidMiddleware(req, res, next);
   }
 
-  const url = `${PROXY_PROTOCOL}://${PROXY_HOSTNAME}:${PROXY_PORT}${PROXY_PREFIX}${req.path}`;
+  const url = `${PROXY_PROTOCOL}://${PROXY_HOSTNAME}:${PROXY_PORT}${PROXY_PREFIX}`;
   return proxy(url)(req, res, next);
 }
 

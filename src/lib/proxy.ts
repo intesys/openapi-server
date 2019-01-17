@@ -1,12 +1,17 @@
 import axios from 'axios';
 import { RequestHandler } from 'express';
 import { log, error } from './log';
+import { PROXY_PREFIX } from './globals';
 
 export default (url: string): RequestHandler => async (req, res, next) => {
   try {
     const method = req.method.toLowerCase();
-    const axiosFn = axios[method];
-    const response = await axiosFn(req.url, req.body);
+    // const axiosFn = axios[method];
+    const response = await axios({
+      method,
+      url: `${url}${req.url}`,
+      data: req.body
+    });
     res.locals.body = response.data;
     log({
       'Proxy request to': url,
