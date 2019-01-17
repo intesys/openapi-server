@@ -3,6 +3,7 @@ import path from 'path';
 import voidMiddleware from './void';
 import _ from 'lodash';
 import { MOCKS_PATH } from '../lib/globals';
+import { log, error as logError } from '../lib/log';
 
 /**
  * @param method one value of `operations`
@@ -18,6 +19,10 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
     const mockPath = path.join(MOCKS_PATH, route, method);
     const mock = require(mockPath);
     _.set(res, 'locals.body', mock);
+    log({
+      'Mocking request': req.path,
+      'Response body': mock
+    })
   } catch (err) {
     const error = new Error(err);
     if (!notFoundError(error)) {

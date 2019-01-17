@@ -7,7 +7,10 @@ interface ErrorWithStatus extends Error {
 
 export default (): ErrorRequestHandler => (err, req, res, next) => {
   if (err) {
-    logError(err.stack || err.message);
+    logError({
+      'Request': req.path,
+      'Error': err
+    });
     const error = formatError(err);
     const status = error.status || res.statusCode || 500;
     return res.status(status).send(`Error ${status}: ${err.message}`);

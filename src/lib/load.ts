@@ -17,8 +17,12 @@ const loadYaml = async (file: string): Promise<OpenAPI.Document> => {
       if (err) {
         return reject(new Error(`Unable to load file ${file}`));
       }
-      const spec: OpenAPI.Document = yaml.safeLoad(data);
-      resolve(spec);
+      try {
+        const spec: OpenAPI.Document = yaml.safeLoad(data);
+        resolve(spec);
+      } catch (err) {
+        reject(new Error(`Error reading file ${file}`));
+      }
     })
   })
 };

@@ -2,10 +2,6 @@ import { LOG } from './globals';
 import { inspect, isString } from 'util';
 
 export const print = (message: any) => {
-  if (isString(message)) {
-    console.info(message);
-    return;
-  }
   console.info(stringify(message));
 }
 
@@ -22,5 +18,8 @@ export const error = (message: any, stack: any = '') => {
 }
 
 const stringify = (message: any): string => {
-  return inspect(message, { colors: true, compact: false }) as string;
+  if (isString(message)) {
+    return message;
+  }
+  return inspect(message, { colors: true, compact: false, breakLength: Infinity }) as string;
 }
