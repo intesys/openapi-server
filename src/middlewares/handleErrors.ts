@@ -1,5 +1,4 @@
 import { ErrorRequestHandler } from "express";
-import { isString } from 'lodash';
 import { error as logError } from '../lib/log';
 
 interface ErrorWithStatus extends Error {

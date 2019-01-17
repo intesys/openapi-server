@@ -1,28 +1,26 @@
-import { isString, toString } from 'lodash';
 import { LOG } from './globals';
+import { inspect, isString } from 'util';
+
+export const print = (message: any) => {
+  if (isString(message)) {
+    console.info(message);
+    return;
+  }
+  console.info(stringify(message));
+}
 
 export const log = (message: any) => {
-  const _message = stringify(message);
   if (LOG) {
-    console.log(_message);
+    console.log(stringify(message));
   }
 }
 
 export const error = (message: any, stack: any = '') => {
-  const _message = stringify(message);
   if (LOG) {
-    console.error(_message, stack);
+    console.error(stringify(message), stack);
   }
 }
 
 const stringify = (message: any): string => {
-  if (isString(message)) {
-    return message;
-  }
-
-  try {
-    return JSON.stringify(message);
-  } catch (err) {
-    return toString(message);
-  }
+  return inspect(message, { colors: true, compact: false }) as string;
 }

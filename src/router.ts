@@ -8,16 +8,13 @@ import routes from './routes';
 import handleErrors from './middlewares/handleErrors';
 import sendBody from './middlewares/sendBody';
 import load from './lib/load';
-import findUp from './lib/findUp';
 import { API_YML, API_PREFIX } from './lib/globals';
-
-const apiFile = findUp(API_YML, Path.join(__dirname, '../..')) || Path.join(__dirname, '..', API_YML);
 
 const router = async (): Promise<Router> => {
   const router: Router = express.Router();
   try {
 
-    const spec: OpenAPI.Document = await load(apiFile);
+    const spec: OpenAPI.Document = await load(API_YML);
     openApiSchemaValidate(spec);
 
     router.use(

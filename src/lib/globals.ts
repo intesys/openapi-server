@@ -11,8 +11,13 @@ const env = pick(process.env, options) as Env;
 
 const globals: Env = fixBooleans({ ...defaults, ...env }, booleans) as Env;
 
-// MOCKS_PATH must be absolute
-globals.MOCKS_PATH = findUp(globals.MOCKS_PATH, path.join(__dirname, '../../..')) || path.join(__dirname, '../..', globals.MOCKS_PATH);
+const find = (fileOrFolder: string): string =>
+  findUp(fileOrFolder, path.join(__dirname, '../../..'))
+  || path.join(__dirname, '../..', fileOrFolder);
+
+// MOCKS_PATH and API_YML must be absolute paths
+globals.MOCKS_PATH = find(globals.MOCKS_PATH);
+globals.API_YML = find(globals.API_YML);
 
 const {
   API_YML,
