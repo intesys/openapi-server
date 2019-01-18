@@ -21,7 +21,8 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
     _.set(res, 'locals.body', mock);
     log({
       'Mocking request': req.originalUrl,
-      'Response body': mock
+      'Method': method.toUpperCase(),
+      'Response': mock
     });
   } catch (err) {
     const error = new Error(err);
