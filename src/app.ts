@@ -1,6 +1,6 @@
 import express, { Application } from "express";
 import router from './router';
-import { API_YML, API_PORT, API_PROTOCOL, API_HOSTNAME, MOCKS_PATH, PROXY_PROTOCOL, PROXY_HOSTNAME, PROXY_PORT, PROXY_PREFIX, LOG, API_PREFIX } from './lib/globals';
+import { API_YML, API_PORT, API_PROTOCOL, API_HOSTNAME, MOCKS_PATH, PROXY_PROTOCOL, PROXY_HOSTNAME, PROXY_PORT, PROXY_PREFIX, LOG, API_PREFIX, SKIP_VALIDATION } from './lib/globals';
 import { print } from './lib/log';
 
 const port = API_PORT || '3000';
@@ -16,11 +16,12 @@ const app = async (): Promise<Application> => {
   const server = app.listen(port, () => {
     print(`Server running at ${API_PROTOCOL}://${API_HOSTNAME}:${port}`);
     print({
-      'API YML': API_YML,
-      'API PREFIX': API_PREFIX,
-      'MOCKS PATH': MOCKS_PATH,
-      'PROXY URL': `${PROXY_PROTOCOL}://${PROXY_HOSTNAME}:${PROXY_PORT}${PROXY_PREFIX}`,
-      'LOG REQUESTS': LOG
+      'Api yml': API_YML,
+      'Api prefix': API_PREFIX,
+      'Mock path': MOCKS_PATH,
+      'Proxy URL': `${PROXY_PROTOCOL}://${PROXY_HOSTNAME}:${PROXY_PORT}${PROXY_PREFIX}`,
+      'Validate responses': SKIP_VALIDATION ? 'disabled' : 'enabled',
+      'Log requests': LOG ? 'enabled' : 'disabled'
     });
   });
 

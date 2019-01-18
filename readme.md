@@ -205,5 +205,7 @@ Openapi-server is an express web server with some middleware, it:
 
 ### Nice to have
 
+- live reload when mock changes
+- live reload when api file changes
 - allow validator to be less restrictive
 - allow `js` mocks to export a standard express middleware (and be able to access to req/res)
