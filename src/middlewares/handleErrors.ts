@@ -20,12 +20,10 @@ export default (): ErrorRequestHandler => (err, req, res, next) => {
 
 const formatError = (err: any): ErrorWithStatus => {
   if (err.request) {
-    err.status = 400;
-    return err;
+    return err.request;
   }
   if (err.response) {
-    err.status = parseInt(err.response.status, 10);
-    return err;
+    return err.response;
   }
   return err;
 }
