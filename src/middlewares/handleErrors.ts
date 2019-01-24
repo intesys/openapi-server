@@ -15,7 +15,7 @@ export default (): ErrorRequestHandler => (err, req, res, next) => {
     });
     const error = formatError(err);
     const status = error.status || res.statusCode || 500;
-    return res.status(status).send(`Error ${status}: ${err.message}`);
+    return res.status(status).send(`Error ${status}: ${error.message}`);
   }
   return next(err);
 }
