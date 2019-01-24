@@ -13,7 +13,8 @@ export default (): ErrorRequestHandler => (err, req, res, next) => {
     });
     const error = formatError(err);
     const status = error.status || res.statusCode || 500;
-    return res.status(status).send(`Error ${status}: ${err.message}`);
+    const message = err.message || err.Data || '';
+    return res.status(status).send(`Error ${status}: ${message}`);
   }
   return next(err);
 }
