@@ -28,5 +28,5 @@ const formatError = (err: any): ErrorWithStatus => {
 }
 
 const stringify = (obj: any): string => {
-  return inspect(obj, { colors: true, compact: false, breakLength: Infinity }) as string;
+  return inspect(obj, { colors: false, compact: false, breakLength: Infinity }) as string;
 }
