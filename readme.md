@@ -199,6 +199,7 @@ Openapi-server is an express web server with some middleware, it:
 
 ## TO DO
 
+- forward http headers to proxy
 - validate the request
 - generate mocks from yml examples
 - more tests
@@ -207,5 +208,6 @@ Openapi-server is an express web server with some middleware, it:
 
 - live reload when mock changes
 - live reload when api file changes
+- save snapshots of proxy responses in a mock-like fashion (to help mock creation/comparison)
 - allow validator to be less restrictive
 - allow `js` mocks to export a standard express middleware (and be able to access to req/res)
