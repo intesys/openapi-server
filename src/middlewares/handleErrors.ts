@@ -21,14 +21,8 @@ export default (): ErrorRequestHandler => (err, req, res, next) => {
 }
 
 const formatError = (err: any): ErrorWithStatus => {
-  if (err.request) {
-    err.message = stringify(err.request);
-    return err;
-  }
-  if (err.response) {
-    err.message = stringify(err.response);
-    err.status = get(err, 'response.Status');
-    return err;
+  if (!err.message) {
+    err.message = stringify(err);
   }
   return err;
 }
