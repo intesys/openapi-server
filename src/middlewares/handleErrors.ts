@@ -24,6 +24,9 @@ const formatError = (err: any): ErrorWithStatus => {
   if (!err.message) {
     err.message = stringify(err);
   }
+  if (!err.status && err.Status) {
+    err.status = err.Status;
+  }
   return err;
 }
 
