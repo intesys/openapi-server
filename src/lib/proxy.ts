@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { RequestHandler } from 'express';
-import { log, error } from './log';
-import { PROXY_PREFIX } from './globals';
+import { log } from './log';
 
 export default (url: string): RequestHandler => async (req, res, next) => {
   try {
