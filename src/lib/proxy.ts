@@ -5,10 +5,12 @@ import { PROXY_PREFIX } from './globals';
 
 export default (url: string): RequestHandler => async (req, res, next) => {
   try {
+    const headers = req.headers;
     const method = req.method.toLowerCase();
     const fullUrl = `${url}${req.url}`;
     const response = await axios({
       method,
+      headers,
       url: fullUrl,
       data: req.body
     });

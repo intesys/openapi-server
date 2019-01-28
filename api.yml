@@ -74,6 +74,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Route'
+  '/routes/proxy':
+    get:
+      operationId: getRouteProxy
+      responses:
+        '200':
+          description: description
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
   '/routes/{routeId}':
     put:
       summary: Updates a route
