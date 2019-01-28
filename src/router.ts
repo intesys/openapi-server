@@ -19,6 +19,7 @@ const router = async (): Promise<Router> => {
 
     router.use(
       cors(),
+      bodyParser.urlencoded({ extended: false }),
       bodyParser.json()
     );
 
