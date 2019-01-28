@@ -25,6 +25,10 @@ const app = async (): Promise<Application> => {
     });
   });
 
+  server.on('error', (e: Error) => {
+    console.log(e);
+  })
+
   process.on('SIGINT', function () {
     print('Bye');
     server.close(() => { process.exit(0) });
