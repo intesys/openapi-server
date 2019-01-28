@@ -64,6 +64,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Routes'
+  '/routes/middleware':
+    get:
+      operationId: getRouteMiddleware
+      responses:
+        '200':
+          description: description
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
   '/routes/{routeId}':
     put:
       summary: Updates a route

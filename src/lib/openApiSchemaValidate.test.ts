@@ -41,7 +41,7 @@ describe('openApiSchemaValidate', () => {
     }
   }
 
-  const invalidV2 = (): OpenAPIV2.Document => ({
+  const invalidV2 = (): any => ({
     swagger: '2.0',
     info: {
       title: 'test'
@@ -59,7 +59,7 @@ describe('openApiSchemaValidate', () => {
     }
   })
 
-  const invalidV3 = (): OpenAPIV3.Document => ({
+  const invalidV3 = (): any => ({
     openapi: '3.0.0',
     info: {
       title: 'test'

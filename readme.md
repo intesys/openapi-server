@@ -155,8 +155,6 @@ Mocks are `.json` or `.js` files placed in the `MOCKS_PATH` directory.
 
 Mocks take precedence over proxy, if a mock is found for the requested route, it is server, otherwise the request is proxied to backend.
 
-`Json` files are server as responses, while `js` are required as standard node modules and can contain some logic.
-
 The MOCKS_PATH directory has a sub-folder structure which follows the paths to mock, as example:
 
 ```
@@ -186,6 +184,49 @@ MOCKS_PATH folder:
         get.js
 ```
 
+### JSON mocks
+
+Plain `Json` files are served as responses.
+
+### JS mocks
+
+Can write mocks as `.js` files (`.ts` are not allowed, because mocks are required at runtime and can't be transpiled).
+
+#### Node modules
+
+A `.js` mock can be a standard node module exporting the response object:
+
+```javascript
+// js mock
+
+const generatorFunction = () => ({
+  // ...response
+})
+
+module.exports = generatorFunction();
+```
+
+#### Mocks as middleware
+
+If a `.js` mock exports a function, it's supposed to be an express middleware and is invoked with express signature. It MUST write the response in the `res.locals` object and MUST call `next()` when ends.
+
+```javascript
+// js middleware mock
+
+const middleware = (req, res, next) => {
+  // ...some logic, can access to req and res objects
+
+  // MUST put the response into res.locals
+  res.locals = {
+    // ...response
+  };
+  
+  next(); // MUST be called
+}
+
+module.exports = middleware;
+```
+
 ## How it works
 
 Openapi-server is an express web server with some middleware, it:
@@ -209,4 +250,3 @@ Openapi-server is an express web server with some middleware, it:
 - live reload when api file changes
 - save snapshots of proxy responses in a mock-like fashion (to help mock creation/comparison)
 - allow validator to be less restrictive
-- allow `js` mocks to export a standard express middleware (and be able to access to req/res)
