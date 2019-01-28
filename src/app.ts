@@ -9,6 +9,8 @@ const app = async (): Promise<Application> => {
 
   const app: Application = express();
 
+  app.set('trust proxy', true);
+
   const _router = await router();
 
   app.use(_router);
