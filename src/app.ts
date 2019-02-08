@@ -14,7 +14,6 @@ const app = async (): Promise<Application> => {
   const server = await init(app);
 
   if (WATCH) {
-    print('Watch mode');
     watch(app, server);
   }
 

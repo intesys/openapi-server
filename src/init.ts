@@ -7,7 +7,7 @@
 
 import { Application } from "express";
 import { Server } from "net";
-import { API_PROTOCOL, API_HOSTNAME, API_YML, API_PREFIX, MOCKS_PATH, PROXY_PROTOCOL, PROXY_HOSTNAME, PROXY_PORT, PROXY_PREFIX, SKIP_VALIDATION, LOG, API_PORT } from "./lib/globals";
+import { API_PROTOCOL, API_HOSTNAME, API_YML, API_PREFIX, MOCKS_PATH, PROXY_PROTOCOL, PROXY_HOSTNAME, PROXY_PORT, PROXY_PREFIX, SKIP_VALIDATION, LOG, API_PORT, WATCH } from "./lib/globals";
 import { print, clear } from './lib/log';
 import router from "./router";
 import handleSigint from "./lib/handleSigint";
@@ -31,7 +31,8 @@ const init = async (app: Application): Promise<Server> => new Promise(async (res
         'Mock path': MOCKS_PATH,
         'Proxy URL': `${PROXY_PROTOCOL}://${PROXY_HOSTNAME}:${PROXY_PORT}${PROXY_PREFIX}`,
         'Validate responses': SKIP_VALIDATION ? 'disabled' : 'enabled',
-        'Log requests': LOG ? 'enabled' : 'disabled'
+        'Log requests': LOG ? 'enabled' : 'disabled',
+        'Watch mode': WATCH ? 'enabled' : 'disabled'
       });
       resolve(server);
     });
