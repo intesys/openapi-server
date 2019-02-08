@@ -7,7 +7,7 @@ import findUp from './findUp';
 
 require('./env');
 
-const env = pick(process.env, options) as Env;
+const env = pick(process.env, options) as unknown as Env;
 
 const globals: Env = fixBooleans({ ...defaults, ...env }, booleans) as Env;
 
@@ -33,7 +33,8 @@ const {
   PROXY_PREFIX,
   PROXY_RESOURCES_PREFIX,
   SKIP_VALIDATION,
-  LOG
+  LOG,
+  WATCH
 }: Env = globals;
 
 export {
@@ -50,5 +51,6 @@ export {
   PROXY_PREFIX,
   PROXY_RESOURCES_PREFIX,
   SKIP_VALIDATION,
-  LOG
+  LOG,
+  WATCH
 }

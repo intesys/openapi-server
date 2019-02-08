@@ -18,7 +18,8 @@ export const defaults: Env = {
   PROXY_RESOURCES_PREFIX: '/resources',
 
   SKIP_VALIDATION: false,
-  LOG: false
+  LOG: false,
+  WATCH: false
 };
 
 // list of config keys

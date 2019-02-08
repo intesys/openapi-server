@@ -13,6 +13,7 @@ program
   .option('-m,--MOCKS_PATH [value]', 'mocks path')
   .option('-l,--LOG', 'enable console log')
   .option('-s,--SKIP_VALIDATION', 'turn off validation')
+  .option('-w,--WATCH', 'restart the server on changes')
   .option('--API_PREFIX [value]')
   .option('--API_PORT [value]')
   .option('--API_PROTOCOL [value]')

@@ -1,7 +1,8 @@
 # Openapi server
 
 It's a simple proxy for development purpose, which allows you to quickly mock responses, in case the real backend server doesn't reply correctly.  
-In addition you can validate the responses (both from backend and mock).
+In addition you can validate the responses (both from backend and mock).  
+Can work in watch mode, reloading the server when Yaml or mock changes.
 
 ![schema](./assets/schema.png)
 
@@ -102,6 +103,7 @@ PROXY_RESOURCES_PREFIX=/resources
 # proxy configuration (development only)
 SKIP_VALIDATION=false
 LOG=false
+WATCH=false
 ```
 
 ### Via script options
@@ -117,6 +119,7 @@ Options:
   -m,--MOCKS_PATH [value]           mocks path
   -l,--LOG                          enable console log
   -s,--SKIP_VALIDATION              turn off validation
+  -w,--WATCH                        restart the server on changes
   --API_PREFIX [value]
   --API_PORT [value]
   --API_PROTOCOL [value]
@@ -148,6 +151,7 @@ PROXY_RESOURCES_PREFIX: '/resources'
 
 SKIP_VALIDATION: false  
 LOG: false
+WATCH=false
 
 ## Mocks
 
@@ -240,13 +244,13 @@ Openapi-server is an express web server with some middleware, it:
 
 ## TO DO
 
-- forward http headers to proxy
+- DONE: forward http headers to proxy
 - validate the request
 - generate mocks from yml examples
 - more tests
 
 ### Nice to have
 
-- live reload when api file changes
+- DONE: live reload when api file changes
 - save snapshots of proxy responses in a mock-like fashion (to help mock creation/comparison)
 - allow validator to be less restrictive

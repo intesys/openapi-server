@@ -12,7 +12,8 @@ declare type Env = {
   PROXY_PREFIX: string,
   PROXY_RESOURCES_PREFIX: string,
   SKIP_VALIDATION?: boolean,
-  LOG?: boolean
+  LOG?: boolean,
+  WATCH?: boolean
 };
 
 export default Env;

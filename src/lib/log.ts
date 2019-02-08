@@ -5,6 +5,8 @@ export const print = (message: any) => {
   console.info(stringify(message));
 }
 
+export const clear = () => console.clear();
+
 export const log = (message: any) => {
   if (LOG) {
     console.log(stringify(message));

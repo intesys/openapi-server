@@ -3,7 +3,7 @@ import path from 'path';
 import voidMiddleware from './void';
 import _ from 'lodash';
 import { MOCKS_PATH } from '../lib/globals';
-import { log, error as logError } from '../lib/log';
+import { log } from '../lib/log';
 
 /**
  * @param method one value of `operations`
