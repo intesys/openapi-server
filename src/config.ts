@@ -1,6 +1,5 @@
 import Env from './types/env';
 import { isBoolean } from 'lodash';
-import toBoolean from './lib/toBoolean';
 
 export const defaults: Env = {
   API_YML: 'api.yml',
