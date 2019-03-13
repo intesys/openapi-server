@@ -11,9 +11,11 @@ export default (url: string): RequestHandler => async (req, res, next) => {
       method,
       headers,
       url: fullUrl,
-      data: req.body
+      data: req.body,
+      withCredentials: true
     });
     res.locals.body = response.data;
+    res.set(response.headers);
     log({
       'Proxy request to': fullUrl,
       'Method': method.toUpperCase(),
