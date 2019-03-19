@@ -1,5 +1,5 @@
 import { LOG } from './globals';
-import { inspect, isString } from 'util';
+import { inspect } from 'util';
 
 export const print = (message: any) => {
   console.info(stringify(message));
@@ -20,7 +20,7 @@ export const error = (message: any, stack: any = '') => {
 };
 
 const stringify = (message: any): string => {
-  if (isString(message)) {
+  if (typeof message === 'string') {
     return message;
   }
   return inspect(message, { colors: true, compact: false, breakLength: Infinity }) as string;

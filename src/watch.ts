@@ -1,7 +1,3 @@
-/**
- * Restarts the server on file changes
- */
-
 import fs from 'fs';
 import { API_YML, MOCKS_PATH } from './lib/globals';
 import { Application } from 'express';
@@ -9,6 +5,9 @@ import { Server } from 'net';
 import { print, clear } from './lib/log';
 import init from './init';
 
+/**
+ * Restarts the server on file changes
+ */
 export default (app: Application, server: Server) => {
 
   let restarting = false;

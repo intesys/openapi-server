@@ -10,7 +10,7 @@
  * - Ajv: https://ajv.js.org
  * - JsonSchema: http://json-schema.org/
  */
-import _ from 'lodash';
+import { get } from 'lodash';
 import validate from '../lib/validate';
 import { RequestHandler } from 'express';
 import { OperationObject, ResponsesObject } from '../types/openApi';
@@ -34,8 +34,8 @@ const getResponseSchema = (
   code: number,
   format: string
 ): ResponsesObject => {
-  return _.get(spec, `responses.${code}.schema`) // swagger v.2
-    || _.get(spec, `responses.default.schema`) // swagger v.2
-    || _.get(spec, `responses.${code}.content.${format}.schema`) // openapi v.3.0.*
-    || _.get(spec, `responses.default.content.${format}.schema`) // openapi v.3.0.*
-}
+  return get(spec, `responses.${code}.schema`) // swagger v.2
+    || get(spec, `responses.default.schema`) // swagger v.2
+    || get(spec, `responses.${code}.content.${format}.schema`) // openapi v.3.0.*
+    || get(spec, `responses.default.content.${format}.schema`) // openapi v.3.0.*
+};
