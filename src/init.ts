@@ -41,7 +41,7 @@ const init = async (app: Application): Promise<Server> => new Promise(async (res
 
     server.on('error', (e: Error) => {
       console.log(e);
-    })
+    });
 
     handleSigint(server);
 

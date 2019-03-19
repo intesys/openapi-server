@@ -14,7 +14,6 @@ export default (server: Server) => {
   }
 
   unregisterSigint = handleSigint(server);
-
 }
 
 const handleSigint = (server: Server): Function => {
@@ -22,11 +21,11 @@ const handleSigint = (server: Server): Function => {
   const onExit = function () {
     print('Bye');
     server.close(() => { process.exit(0) });
-  }
+  };
 
   process.on('SIGINT', onExit);
 
   return function unregisterSigint() {
     process.off('SIGINT', onExit);
   }
-}
+};

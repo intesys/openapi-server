@@ -28,8 +28,8 @@ const formatError = (err: any): ErrorWithStatus => {
     err.status = err.Status;
   }
   return err;
-}
+};
 
 const stringify = (obj: any): string => {
   return inspect(obj, { colors: false, compact: false, breakLength: Infinity }) as string;
-}
+};

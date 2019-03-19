@@ -24,7 +24,7 @@ export default (app: Application, server: Server) => {
       scheduleRestart = false;
       onChange();
     }
-  }
+  };
 
   const onChange = async () => {
     if (restarting) {

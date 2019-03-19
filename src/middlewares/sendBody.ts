@@ -7,6 +7,6 @@ const sendBody = (): RequestHandler => (req, res, next) => {
     return res.send(res.locals.body);
   }
   return next();
-}
+};
 
 export default sendBody;

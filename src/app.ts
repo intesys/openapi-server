@@ -18,6 +18,6 @@ const app = async (): Promise<Application> => {
   }
 
   return app;
-}
+};
 
 export default app;

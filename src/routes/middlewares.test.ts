@@ -11,7 +11,7 @@ describe('Middlewares', () => {
   it('skip validation middleware if SKIP_VALIDATION is true', () => {
     jest.mock('../lib/globals', () => ({
       SKIP_VALIDATION: true
-    }))
+    }));
     const middlewares = require('./middlewares').default;
     const sut = middlewares('str', 'str', {});
 
@@ -21,7 +21,7 @@ describe('Middlewares', () => {
   it('uses validation middleware if SKIP_VALIDATION is false', () => {
     jest.mock('../lib/globals', () => ({
       SKIP_VALIDATION: false
-    }))
+    }));
     const middlewares = require('./middlewares').default;
     const sut = middlewares('str', 'str', {});
 

@@ -26,7 +26,7 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
         'Handled by middleware': mockPath
       });
       return mock(req, res, next);
-    };
+    }
 
     _.set(res, 'locals.body', mock);
     log({
@@ -42,7 +42,7 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
   }
 
   return next();
-}
+};
 
 const notFoundError = (err: Error): boolean => /cannot find module/.test(err.message.toLowerCase());
 

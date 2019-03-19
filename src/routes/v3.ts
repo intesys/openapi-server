@@ -16,8 +16,8 @@ const buildV3Routes = (router: Router, paths: Record<string, OpenAPIV3.PathItemO
       const middlewares: RequestHandler[] = getMiddlewares(method, route, operationSpec);
       routerRef[method](middlewares);
     })
-  })
+  });
   return router;
-}
+};
 
 export default buildV3Routes;

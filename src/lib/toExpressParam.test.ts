@@ -6,7 +6,7 @@ describe('toExpressParam', () => {
     const path = '/path/to/{param}';
     const sut = toExpressParam(path);
     expect(sut).toEqual('/path/to/:param');
-  })
+  });
 
   it('replaces multiple matches', () => {
     const path = '/path/to/{param}/and/{param2}';
@@ -14,4 +14,4 @@ describe('toExpressParam', () => {
     expect(sut).toEqual('/path/to/:param/and/:param2');
   })
 
-})
+});

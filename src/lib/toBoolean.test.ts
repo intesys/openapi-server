@@ -27,7 +27,7 @@ describe('toBoolean', () => {
       const input = {
         nonBoolean: 'string',
         boolean: 'true'
-      }
+      };
       const sut = fixBooleans(input, booleans);
 
       expect(sut).toMatchObject({ nonBoolean: 'string', boolean: true });
