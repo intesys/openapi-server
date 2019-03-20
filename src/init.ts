@@ -7,9 +7,10 @@
 
 import { Application } from "express";
 import { Server } from "net";
-import { API_PROTOCOL, API_HOSTNAME, API_YML, API_PREFIX, MOCKS_PATH, PROXY_PROTOCOL, PROXY_HOSTNAME, PROXY_PORT, PROXY_PREFIX, SKIP_VALIDATION, LOG, API_PORT, WATCH } from "./lib/globals";
+import {
+  API_PROTOCOL, API_HOSTNAME, API_YML, API_PREFIX, MOCKS_PATH, SKIP_VALIDATION, LOG, API_PORT, WATCH, proxyUrl
+} from "./lib/globals";
 import { print, clear } from './lib/log';
-import { proxyUrl } from './middlewares/tryProxy';
 import router from "./router";
 import handleSigint from "./lib/handleSigint";
 

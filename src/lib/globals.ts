@@ -2,6 +2,8 @@ import Env from "../types/env";
 import path from 'path';
 import { options, defaults, booleans } from '../config';
 import { pick } from 'lodash';
+import getPort from './getPort';
+import getPrefix from './getPrefix';
 import { fixBooleans } from './toBoolean';
 import findUp from './findUp';
 
@@ -54,3 +56,5 @@ export {
   LOG,
   WATCH
 }
+
+export const proxyUrl = `${PROXY_PROTOCOL}://${PROXY_HOSTNAME}${getPort(PROXY_PORT)}/${getPrefix(PROXY_PREFIX)}`;

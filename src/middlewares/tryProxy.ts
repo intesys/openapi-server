@@ -2,11 +2,9 @@ import { RequestHandler } from 'express';
 import voidMiddleware from './void';
 import proxy from '../lib/proxy';
 import _ from 'lodash';
-import { PROXY_PROTOCOL, PROXY_HOSTNAME, PROXY_PORT, PROXY_PREFIX } from '../lib/globals';
-import getPort from '../lib/getPort';
-import getPrefix from '../lib/getPrefix';
+import { PROXY_PROTOCOL, PROXY_HOSTNAME, PROXY_PORT, PROXY_PREFIX, proxyUrl } from '../lib/globals';
 
-export const proxyUrl = `${PROXY_PROTOCOL}://${PROXY_HOSTNAME}${getPort(PROXY_PORT)}/${getPrefix(PROXY_PREFIX)}`;
+
 
 /**
  * @param method one value of `operations`
