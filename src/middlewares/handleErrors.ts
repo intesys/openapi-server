@@ -1,7 +1,6 @@
 import { ErrorRequestHandler } from "express";
 import { error as logError } from '../lib/log';
-import { inspect, isString } from 'util';
-import { get } from "lodash";
+import { inspect } from 'util';
 
 interface ErrorWithStatus extends Error {
   status?: number;
@@ -28,8 +27,8 @@ const formatError = (err: any): ErrorWithStatus => {
     err.status = err.Status;
   }
   return err;
-}
+};
 
 const stringify = (obj: any): string => {
   return inspect(obj, { colors: false, compact: false, breakLength: Infinity }) as string;
-}
+};

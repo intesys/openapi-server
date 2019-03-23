@@ -42,4 +42,4 @@ const findFiles = (files: string[], dir: string, root: string): string | undefin
 
   const upperPath = path.join(dir, '..');
   return findFiles(files, upperPath, root);
-}
+};

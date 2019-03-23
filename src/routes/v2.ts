@@ -16,8 +16,8 @@ const buildV2Routes = (router: Router, paths: OpenAPIV2.PathsObject): Router => 
       const middlewares: RequestHandler[] = getMiddlewares(method, route, operationSpec);
       routerRef[method](middlewares);
     })
-  })
+  });
   return router;
-}
+};
 
 export default buildV2Routes;

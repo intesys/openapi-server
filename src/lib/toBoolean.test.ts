@@ -22,12 +22,12 @@ describe('toBoolean', () => {
 
   describe('fixBooleans', () => {
 
-    it('converts booelans', () => {
+    it('converts booleans', () => {
       const booleans = ['boolean'];
       const input = {
         nonBoolean: 'string',
         boolean: 'true'
-      }
+      };
       const sut = fixBooleans(input, booleans);
 
       expect(sut).toMatchObject({ nonBoolean: 'string', boolean: true });

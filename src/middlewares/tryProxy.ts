@@ -2,9 +2,9 @@ import { RequestHandler } from 'express';
 import voidMiddleware from './void';
 import proxy from '../lib/proxy';
 import _ from 'lodash';
-import { PROXY_PROTOCOL, PROXY_HOSTNAME, PROXY_PORT, PROXY_PREFIX } from '../lib/globals';
-import getPort from '../lib/getPort';
-import getPrefix from '../lib/getPrefix';
+import { PROXY_PROTOCOL, PROXY_HOSTNAME, PROXY_PORT, PROXY_PREFIX, proxyUrl } from '../lib/globals';
+
+
 
 /**
  * @param method one value of `operations`
@@ -16,8 +16,7 @@ const tryProxy = (method: string, route: string): RequestHandler => (req, res, n
     return voidMiddleware(req, res, next);
   }
 
-  const url = `${PROXY_PROTOCOL}://${PROXY_HOSTNAME}${getPort(PROXY_PORT)}/${getPrefix(PROXY_PREFIX)}`;
-  return proxy(url)(req, res, next);
-}
+  return proxy(proxyUrl)(req, res, next);
+};
 
 export default tryProxy;
