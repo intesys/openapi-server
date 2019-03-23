@@ -1,4 +1,4 @@
-import Version from '../types/openApiVersion';
+import Version from "../types/openApiVersion";
 
 export default (spec: any) => {
   if (spec.openapi && spec.openapi.match(/^3/)) {
@@ -7,5 +7,5 @@ export default (spec: any) => {
   if (spec.swagger && spec.swagger.match(/^2/)) {
     return Version.v2;
   }
-  throw new Error('Unsupported openApi schema version');
-}
+  throw new Error("Unsupported openApi schema version");
+};

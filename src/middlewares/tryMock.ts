@@ -1,17 +1,20 @@
-import { RequestHandler } from 'express';
-import path from 'path';
-import voidMiddleware from './void';
-import _ from 'lodash';
-import { MOCKS_PATH } from '../lib/globals';
-import { log } from '../lib/log';
+import { RequestHandler } from "express";
+import path from "path";
+import voidMiddleware from "./void";
+import _ from "lodash";
+import { MOCKS_PATH } from "../lib/globals";
+import { log } from "../lib/log";
 
 /**
  * @param method one value of `operations`
  * @param route path key, as example: '/item/{id}'
  */
-const tryMock = (method: string, route: string): RequestHandler => (req, res, next) => {
-
-  if (_.get(res, 'locals.body')) {
+const tryMock = (method: string, route: string): RequestHandler => (
+  req,
+  res,
+  next
+) => {
+  if (_.get(res, "locals.body")) {
     return voidMiddleware(req, res, next);
   }
 
@@ -21,18 +24,18 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
 
     if (isFunction(mock)) {
       log({
-        'Mocking request': req.originalUrl,
-        'Method': method.toUpperCase(),
-        'Handled by middleware': mockPath
+        "Mocking request": req.originalUrl,
+        Method: method.toUpperCase(),
+        "Handled by middleware": mockPath
       });
       return mock(req, res, next);
-    };
+    }
 
-    _.set(res, 'locals.body', mock);
+    _.set(res, "locals.body", mock);
     log({
-      'Mocking request': req.originalUrl,
-      'Method': method.toUpperCase(),
-      'Response': mock
+      "Mocking request": req.originalUrl,
+      Method: method.toUpperCase(),
+      Response: mock
     });
   } catch (err) {
     const error = new Error(err);
@@ -42,10 +45,11 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
   }
 
   return next();
-}
+};
 
-const notFoundError = (err: Error): boolean => /cannot find module/.test(err.message.toLowerCase());
+const notFoundError = (err: Error): boolean =>
+  /cannot find module/.test(err.message.toLowerCase());
 
-const isFunction = (value: any): boolean => typeof value === 'function';
+const isFunction = (value: any): boolean => typeof value === "function";
 
 export default tryMock;

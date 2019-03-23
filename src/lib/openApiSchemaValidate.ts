@@ -1,8 +1,7 @@
-
-import OpenAPISchemaValidator from 'openapi-schema-validator';
-import openApiVersion from './openApiVersion';
-import { OpenAPI } from 'openapi-types';
-import { log } from './log';
+import OpenAPISchemaValidator from "openapi-schema-validator";
+import openApiVersion from "./openApiVersion";
+import { OpenAPI } from "openapi-types";
+import { log } from "./log";
 
 /**
  * @param {OpenApi{}} spec
@@ -19,6 +18,6 @@ export default (spec: OpenAPI.Document): boolean => {
     throw new Error(`Invalid openApi schema: ${error}`);
   }
 
-  log('Valid openApi schema');
+  log("Valid openApi schema");
   return true;
-}
+};

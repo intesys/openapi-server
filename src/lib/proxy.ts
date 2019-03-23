@@ -1,6 +1,6 @@
-import axios from 'axios';
-import { RequestHandler } from 'express';
-import { log } from './log';
+import axios from "axios";
+import { RequestHandler } from "express";
+import { log } from "./log";
 
 export default (url: string): RequestHandler => async (req, res, next) => {
   try {
@@ -17,10 +17,10 @@ export default (url: string): RequestHandler => async (req, res, next) => {
     res.locals.body = response.data;
     res.set(response.headers);
     log({
-      'Proxy request to': fullUrl,
-      'Method': method.toUpperCase(),
-      'Request body': req.body,
-      'Response': response.data
+      "Proxy request to": fullUrl,
+      Method: method.toUpperCase(),
+      "Request body": req.body,
+      Response: response.data
     });
     next();
   } catch (err) {
@@ -34,4 +34,4 @@ export default (url: string): RequestHandler => async (req, res, next) => {
     }
     next(err);
   }
-}
+};

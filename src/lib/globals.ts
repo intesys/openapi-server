@@ -1,19 +1,19 @@
 import Env from "../types/env";
-import path from 'path';
-import { options, defaults, booleans } from '../config';
-import { pick } from 'lodash';
-import { fixBooleans } from './toBoolean';
-import findUp from './findUp';
+import path from "path";
+import { options, defaults, booleans } from "../config";
+import { pick } from "lodash";
+import { fixBooleans } from "./toBoolean";
+import findUp from "./findUp";
 
-require('./env');
+require("./env");
 
-const env = pick(process.env, options) as unknown as Env;
+const env = (pick(process.env, options) as unknown) as Env;
 
 const globals: Env = fixBooleans({ ...defaults, ...env }, booleans) as Env;
 
 const find = (fileOrFolder: string): string =>
-  findUp(fileOrFolder, path.join(__dirname, '../../..'))
-  || path.join(__dirname, '../..', fileOrFolder);
+  findUp(fileOrFolder, path.join(__dirname, "../../..")) ||
+  path.join(__dirname, "../..", fileOrFolder);
 
 // MOCKS_PATH and API_YML must be absolute paths
 globals.MOCKS_PATH = find(globals.MOCKS_PATH);
@@ -53,4 +53,4 @@ export {
   SKIP_VALIDATION,
   LOG,
   WATCH
-}
+};
