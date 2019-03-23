@@ -55,21 +55,19 @@ npx openapi-server [options]
 ### As express router
 
 ```typescript
-import { app, router } from 'openapi-server';
+import { app, router } from "openapi-server";
 import express, { Application, Router } from "express";
 
-// if you want to start server programmatically 
+// if you want to start server programmatically
 app();
 
 // if you want to configure your server and apply the router
 const myApp: Application = express();
 
 (async () => {
-
   const myRouter: Router = await router();
   myApp.use(myRouter);
   const myServer = myApp.listen();
-
 })();
 ```
 
@@ -80,7 +78,6 @@ Configure the server in two ways:
 ### Via `.env` file
 
 Place in the root of you project an `.env.development.local`, `.env.development` or `.env` file, with this variables (feel free to change values) :
-
 
 ```
 # api endpoint used by frontend
@@ -104,11 +101,12 @@ PROXY_RESOURCES_PREFIX=/resources
 SKIP_VALIDATION=false
 LOG=false
 WATCH=false
+AUTO_MOCK=false
 ```
 
 ### Via script options
 
-Script options overwrite env variables.  
+Script options overwrite env variables.
 
 ```
 Usage: index [options]
@@ -120,6 +118,7 @@ Options:
   -l,--LOG                          enable console log
   -s,--SKIP_VALIDATION              turn off validation
   -w,--WATCH                        restart the server on changes
+  --AUTO_MOCK                       try to mock from openApi examples
   --API_PREFIX [value]
   --API_PORT [value]
   --API_PROTOCOL [value]
@@ -141,17 +140,18 @@ API_PORT: '3000'
 API_PROTOCOL: 'http'  
 API_HOSTNAME: 'localhost'  
 RESOURCES_PREFIX: '/resources'  
-MOCKS_PATH: '/mocks'  
+MOCKS_PATH: '/mocks'
 
 PROXY_PROTOCOL: 'http'  
 PROXY_HOSTNAME: 'localhost'  
 PROXY_PORT: '3001'  
 PROXY_PREFIX: '/api'  
-PROXY_RESOURCES_PREFIX: '/resources'  
+PROXY_RESOURCES_PREFIX: '/resources'
 
 SKIP_VALIDATION: false  
 LOG: false
 WATCH=false
+AUTO_MOCK=false
 
 ## Mocks
 
@@ -205,7 +205,7 @@ A `.js` mock can be a standard node module exporting the response object:
 
 const generatorFunction = () => ({
   // ...response
-})
+});
 
 module.exports = generatorFunction();
 ```
@@ -224,12 +224,16 @@ const middleware = (req, res, next) => {
   res.locals = {
     // ...response
   };
-  
+
   next(); // MUST be called
-}
+};
 
 module.exports = middleware;
 ```
+
+#### Auto mocks from examples
+
+If enabled, try to mock using openApi examples
 
 ## How it works
 
@@ -246,7 +250,7 @@ Openapi-server is an express web server with some middleware, it:
 
 - DONE: forward http headers to proxy
 - validate the request
-- generate mocks from yml examples
+- DONE: generate mocks from yml examples
 - more tests
 
 ### Nice to have
