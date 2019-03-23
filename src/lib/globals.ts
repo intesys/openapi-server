@@ -34,7 +34,8 @@ const {
   PROXY_RESOURCES_PREFIX,
   SKIP_VALIDATION,
   LOG,
-  WATCH
+  WATCH,
+  AUTO_MOCK
 }: Env = globals;
 
 export {
@@ -52,5 +53,6 @@ export {
   PROXY_RESOURCES_PREFIX,
   SKIP_VALIDATION,
   LOG,
-  WATCH
+  WATCH,
+  AUTO_MOCK
 };

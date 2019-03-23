@@ -183,6 +183,11 @@ components:
           format: "date-time"
       additionalProperties:
         $ref: '#/components/schemas/Options'
+      example: 
+        id: 2
+        name: 'route name'
+        description: 'route description'
+        date: '2019-01-01T00:00:00.000Z'
     Options:
       type: array
       items:

@@ -14,6 +14,7 @@ declare type Env = {
   SKIP_VALIDATION?: boolean;
   LOG?: boolean;
   WATCH?: boolean;
+  AUTO_MOCK?: boolean;
 };
 
 export default Env;
