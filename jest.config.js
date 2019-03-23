@@ -27,5 +27,6 @@ module.exports = {
     "src/**/*.{js,jsx}",
     "!src/generated/**"
   ],
-  "coverageDirectory": "./coverage"
-}
+  "coverageDirectory": "./coverage",
+  "testEnvironment": "node"
+};

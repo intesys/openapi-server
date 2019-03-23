@@ -38,6 +38,6 @@ const router = async (): Promise<Router> => {
   }
 
   return router;
-}
+};
 
 export default router;

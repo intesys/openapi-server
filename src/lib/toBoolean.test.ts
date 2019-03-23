@@ -18,7 +18,7 @@ describe("toBoolean", () => {
   });
 
   describe("fixBooleans", () => {
-    it("converts booelans", () => {
+    it("converts booleans", () => {
       const booleans = ["boolean"];
       const input = {
         nonBoolean: "string",

@@ -1,7 +1,6 @@
 import { ErrorRequestHandler } from "express";
 import { error as logError } from "../lib/log";
-import { inspect, isString } from "util";
-import { get } from "lodash";
+import { inspect } from "util";
 
 interface ErrorWithStatus extends Error {
   status?: number;

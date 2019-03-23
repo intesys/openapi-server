@@ -4,8 +4,7 @@ import { OpenAPI } from "openapi-types";
 import { log } from "./log";
 
 /**
- * @param {OpenApi{}} spec
- * @param {number} version 2 or 3: openapi schema version
+ * @param {OpenApi.Document} spec
  */
 export default (spec: OpenAPI.Document): boolean => {
   const version = openApiVersion(spec);
