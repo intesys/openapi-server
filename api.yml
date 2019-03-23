@@ -197,6 +197,14 @@ components:
               type: string
           additionalProperties:
             type: string
+      example: {
+        description: 'an option description',
+        property1: 'value',
+        property2: 'value',
+        property3: {
+          subProperty: 'value'
+        }
+      }
     BaseOption:
       type: object
       properties:
@@ -207,3 +215,8 @@ components:
         date:
           type: "string"
           format: "date-time"
+      example: {
+        id: 1,
+        name: 'base option name',
+        date: '2019-01-01'
+      }
