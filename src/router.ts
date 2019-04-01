@@ -7,10 +7,12 @@ import routes from './routes';
 import handleErrors from './middlewares/handleErrors';
 import sendBody from './middlewares/sendBody';
 import load from './lib/load';
-import { API_YML, API_PREFIX } from './lib/globals';
+import * as globals from './lib/globals';
 import getPrefix from './lib/getPrefix';
+import Env from './types/env';
 
-const router = async (): Promise<Router> => {
+const router = async (env: Env): Promise<Router> => {
+  const { API_PREFIX, API_YML } = { ...globals, ...env };
   const router: Router = express.Router();
   try {
 
