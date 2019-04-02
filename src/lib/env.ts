@@ -1,14 +1,9 @@
-import Path from 'path';
-import findUp from './findUp';
+import findInCwd from "./findInCwd";
 
-const envFiles = ['.env.development.local', '.env.development', '.env'];
+const envFiles = [".env.development.local", ".env.development", ".env"];
 
-const ENV_FILE = findUp(envFiles, Path.join(__dirname, '../../..'));
+const ENV_FILE = findInCwd(envFiles);
 
 if (ENV_FILE) {
-  require('dotenv').config({ path: ENV_FILE });
-} else {
-  // fallback to local .env file, useful for tests only
-  const MODULE_ENV_FILE = Path.join(__dirname, '../../.env');
-  require('dotenv').config({ path: MODULE_ENV_FILE });
+  require("dotenv").config({ path: ENV_FILE });
 }
