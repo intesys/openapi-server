@@ -1,31 +1,29 @@
-describe('Middlewares', () => {
-
+describe("Middlewares", () => {
   beforeEach(() => {
     jest.resetModules();
   });
 
   afterAll(() => {
-    jest.unmock('../lib/globals');
+    jest.unmock("../lib/globals");
   });
 
-  it('skip validation middleware if SKIP_VALIDATION is true', () => {
-    jest.mock('../lib/globals', () => ({
+  it("skip validation middleware if SKIP_VALIDATION is true", () => {
+    jest.mock("../lib/globals", () => ({
       SKIP_VALIDATION: true
     }));
-    const middlewares = require('./middlewares').default;
-    const sut = middlewares('str', 'str', {});
+    const middlewares = require("./middlewares").default;
+    const sut = middlewares("str", "str", {});
 
-    expect(sut.length).toEqual(2)
+    expect(sut.length).toEqual(3);
   });
 
-  it('uses validation middleware if SKIP_VALIDATION is false', () => {
-    jest.mock('../lib/globals', () => ({
+  it("uses validation middleware if SKIP_VALIDATION is false", () => {
+    jest.mock("../lib/globals", () => ({
       SKIP_VALIDATION: false
     }));
-    const middlewares = require('./middlewares').default;
-    const sut = middlewares('str', 'str', {});
+    const middlewares = require("./middlewares").default;
+    const sut = middlewares("str", "str", {});
 
-    expect(sut.length).toEqual(3)
+    expect(sut.length).toEqual(4);
   });
-
 });
