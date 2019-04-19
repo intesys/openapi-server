@@ -41,6 +41,7 @@
     "commander": "^2.19.0",
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",
+    "dotenv-expand": "^5.1.0",
     "express": "^4.16.4",
     "jest": "^24.5.0",
     "jest-transform-stub": "^2.0.0",
