@@ -1,21 +1,20 @@
-import fs from 'fs';
-import { API_YML, MOCKS_PATH } from './lib/globals';
-import { Application } from 'express';
-import { Server } from 'net';
-import { print, clear } from './lib/log';
-import init from './init';
+import fs from "fs";
+import { API_YML } from "./lib/globals";
+import { Application } from "express";
+import { Server } from "net";
+import { print, clear } from "./lib/log";
+import init from "./init";
 
 /**
  * Restarts the server on file changes
  */
 export default (app: Application, server: Server) => {
-
   let restarting = false;
   let scheduleRestart = false;
 
   const restart = async () => {
     clear();
-    print('Restarting server');
+    print("Restarting server");
     server = await init(app);
     restarting = false;
 
@@ -32,12 +31,9 @@ export default (app: Application, server: Server) => {
     }
     restarting = true;
     clear();
-    print('Stopping server');
+    print("Stopping server");
     server.close(restart);
   };
 
   fs.watch(API_YML, {}, onChange);
-
-  fs.watch(MOCKS_PATH, { recursive: true }, onChange);
-
-}
+};

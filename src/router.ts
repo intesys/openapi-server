@@ -9,7 +9,6 @@ import sendBody from "./middlewares/sendBody";
 import load from "./lib/load";
 import { API_PREFIX, API_YML } from "./lib/globals";
 import getPrefix from "./lib/getPrefix";
-import Env from "./types/env";
 
 const router = async (): Promise<Router> => {
   const router: Router = express.Router();

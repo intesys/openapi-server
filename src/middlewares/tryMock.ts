@@ -1,8 +1,8 @@
 import { RequestHandler } from "express";
 import path from "path";
 import voidMiddleware from "./void";
-import _ from "lodash";
-import { MOCKS_PATH } from "../lib/globals";
+import { isUndefined, get, set } from "lodash";
+import { MOCKS_PATH, WATCH } from "../lib/globals";
 import { log } from "../lib/log";
 
 /**
@@ -14,12 +14,17 @@ const tryMock = (method: string, route: string): RequestHandler => (
   res,
   next
 ) => {
-  if (!_.isUndefined(_.get(res, "locals.body"))) {
+  if (!isUndefined(get(res, "locals.body"))) {
     return voidMiddleware(req, res, next);
   }
 
   try {
     const mockPath = path.join(MOCKS_PATH, route, method);
+
+    if (WATCH) {
+      invalidateRequireCache(mockPath);
+    }
+
     const mock = require(mockPath);
 
     if (isFunction(mock)) {
@@ -31,7 +36,7 @@ const tryMock = (method: string, route: string): RequestHandler => (
       return mock(req, res, next);
     }
 
-    _.set(res, "locals.body", mock);
+    set(res, "locals.body", mock);
     log({
       "Mocking request": req.originalUrl,
       Method: method.toUpperCase(),
@@ -51,5 +56,14 @@ const notFoundError = (err: Error): boolean =>
   /cannot find module/.test(err.message.toLowerCase());
 
 const isFunction = (value: any): boolean => typeof value === "function";
+
+const invalidateRequireCache = (name: string) => {
+  try {
+    const key = require.resolve(name);
+    if (Boolean(require.cache[key])) {
+      delete require.cache[key];
+    }
+  } catch (e) {}
+};
 
 export default tryMock;
