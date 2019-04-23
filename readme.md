@@ -244,6 +244,7 @@ Openapi-server is an express web server with some middleware, it:
 ## TO DO
 
 - DONE: forward http headers to proxy
+- handle static resources: serve from local directory or proxy
 - validate the request
 - generate mocks from yml examples
 - more tests
