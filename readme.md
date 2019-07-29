@@ -211,7 +211,7 @@ module.exports = generatorFunction();
 
 #### Mocks as middleware
 
-If a `.js` mock exports a function, it's supposed to be an express middleware and is invoked with express signature. It MUST write the response in the `res.locals` object and MUST call `next()` when ends.
+If a `.js` mock exports a function, it's supposed to be an express middleware and is invoked with express signature. It MUST write the response in the `res.locals.body` object and MUST call `next()` when ends.
 
 ```javascript
 // js middleware mock
@@ -219,9 +219,11 @@ If a `.js` mock exports a function, it's supposed to be an express middleware an
 const middleware = (req, res, next) => {
   // ...some logic, can access to req and res objects
 
-  // MUST put the response into res.locals
+  // MUST put the response into res.locals.body
   res.locals = {
-    // ...response
+    body: {
+      // ...response
+    }
   };
 
   next(); // MUST be called
