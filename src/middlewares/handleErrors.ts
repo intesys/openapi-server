@@ -1,6 +1,7 @@
 import { ErrorRequestHandler } from "express";
-import { error as logError } from '../lib/log';
-import { inspect } from 'util';
+import { error as logError } from "../lib/log";
+import { inspect } from "util";
+import { RemoteError } from "../lib/proxy";
 
 interface ErrorWithStatus extends Error {
   status?: number;
@@ -8,16 +9,38 @@ interface ErrorWithStatus extends Error {
 
 export default (): ErrorRequestHandler => (err, req, res, next) => {
   if (err) {
-    logError({
-      'Request': `${req.method.toUpperCase()} ${req.originalUrl}`,
-      'Error': err
-    });
-    const error = formatError(err);
-    const status = error.status || res.statusCode || 500;
-    return res.status(status).send(`Error ${status}: ${error.message}`);
+    if (err instanceof RemoteError) {
+      return handleRemoteError(err, req, res, next);
+    }
+    return handleLocalError(err, req, res, next);
   }
   return next(err);
-}
+};
+
+const handleRemoteError: ErrorRequestHandler = (err, req, res) => {
+  const { error } = err;
+  const { data, headers } = error;
+  logError({
+    Request: `${req.method.toUpperCase()} ${req.originalUrl}`,
+    Error: err.error,
+    ErrorSource: err.source
+  });
+  const status = error.status || res.statusCode || 500;
+  res.set(headers);
+  res.status(status);
+  return res.send(data);
+};
+
+const handleLocalError: ErrorRequestHandler = (err, req, res) => {
+  logError({
+    Request: `${req.method.toUpperCase()} ${req.originalUrl}`,
+    Error: err
+  });
+  const error = formatError(err);
+  const status = error.status || res.statusCode || 500;
+  res.status(status);
+  return res.send(`Error ${status}: ${error.message}`);
+};
 
 const formatError = (err: any): ErrorWithStatus => {
   if (!err.message) {
@@ -30,5 +53,9 @@ const formatError = (err: any): ErrorWithStatus => {
 };
 
 const stringify = (obj: any): string => {
-  return inspect(obj, { colors: false, compact: false, breakLength: Infinity }) as string;
+  return inspect(obj, {
+    colors: false,
+    compact: false,
+    breakLength: Infinity
+  }) as string;
 };

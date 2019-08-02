@@ -2,6 +2,18 @@ import axios from "axios";
 import { RequestHandler } from "express";
 import { log } from "./log";
 
+export class RemoteError {
+  _remote: boolean;
+  source: string;
+  error: any;
+
+  constructor(source: string, error: any) {
+    this._remote = true;
+    this.source = source;
+    this.error = error;
+  }
+}
+
 export default (url: string): RequestHandler => async (req, res, next) => {
   try {
     const headers = req.headers;
@@ -25,11 +37,8 @@ export default (url: string): RequestHandler => async (req, res, next) => {
     next();
   } catch (err) {
     if (err.response) {
-      next({
-        Status: err.response.status,
-        Headers: err.response.headers,
-        Data: err.response.data
-      });
+      // it's an axios error
+      next(new RemoteError(url, err.response));
       return;
     }
     next(err);
