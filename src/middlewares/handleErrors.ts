@@ -41,7 +41,7 @@ const handleLocalError: ErrorRequestHandler = (err, req, res) => {
   const error = formatError(err);
   const status = error.status || res.statusCode || 500;
   res.status(status);
-  return res.send(`Error ${status}: ${error.message}`);
+  return res.send(error.message);
 };
 
 const formatError = (err: any): ErrorWithStatus => {

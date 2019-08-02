@@ -28,11 +28,20 @@ paths:
         "500":
           description: server error
           content:
+            text/html:
+              schema:
+                type: string
+
+  /500/json:
+    get:
+      responses:
+        "500":
+          description: server error
+          content:
             application/json:
               schema:
                 type: object
-
-  /500/json:
+  /routes/500:
     get:
       responses:
         "500":
@@ -41,6 +50,17 @@ paths:
             text/html:
               schema:
                 type: string
+
+  /routes/500/json:
+    get:
+      responses:
+        "500":
+          description: server error
+          content:
+            application/json:
+              schema:
+                type: object
+
   /routes:
     post:
       operationId: createRoute
