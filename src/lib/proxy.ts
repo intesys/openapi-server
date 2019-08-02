@@ -1,4 +1,6 @@
 import axios from "axios";
+import http from "http";
+import https from "https";
 import { RequestHandler } from "express";
 import { log } from "./log";
 
@@ -24,7 +26,9 @@ export default (url: string): RequestHandler => async (req, res, next) => {
       headers,
       url: fullUrl,
       data: req.body,
-      withCredentials: true
+      withCredentials: true,
+      httpAgent: new http.Agent(),
+      httpsAgent: new https.Agent()
     });
     res.locals.body = response.data;
     res.set(response.headers);
