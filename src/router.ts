@@ -13,7 +13,7 @@ import getPrefix from "./lib/getPrefix";
 const router = async (): Promise<Router> => {
   const router: Router = express.Router();
   try {
-    const prefix = "/" + getPrefix(API_PREFIX);
+    const prefix = getPrefix(API_PREFIX);
     const spec: OpenAPI.Document = await load(API_YML);
     openApiSchemaValidate(spec);
 

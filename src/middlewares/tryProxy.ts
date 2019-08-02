@@ -1,14 +1,8 @@
 import { RequestHandler } from "express";
-import voidMiddleware from "./void";
-import proxy from "../lib/proxy";
 import _ from "lodash";
-import {
-  PROXY_PROTOCOL,
-  PROXY_HOSTNAME,
-  PROXY_PORT,
-  PROXY_PREFIX,
-  proxyUrl
-} from "../lib/globals";
+import { proxyUrl } from "../lib/globals";
+import proxy from "../lib/proxy";
+import voidMiddleware from "./void";
 
 /**
  * @param method one value of `operations`

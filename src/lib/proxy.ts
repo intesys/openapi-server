@@ -15,10 +15,10 @@ export class RemoteError {
 }
 
 export default (url: string): RequestHandler => async (req, res, next) => {
+  const fullUrl = `${url}${req.url}`;
   try {
     const headers = req.headers;
     const method = req.method.toLowerCase();
-    const fullUrl = `${url}${req.url}`;
     const response = await axios({
       method,
       headers,
@@ -38,7 +38,7 @@ export default (url: string): RequestHandler => async (req, res, next) => {
   } catch (err) {
     if (err.response) {
       // it's an axios error
-      next(new RemoteError(url, err.response));
+      next(new RemoteError(fullUrl, err.response));
       return;
     }
     next(err);

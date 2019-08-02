@@ -1,6 +1,3 @@
-const getPort = (port?: string): string | undefined =>
-  port
-    ? `:${port}`
-    : undefined;
+const getPort = (port?: string): string => (port ? `:${port}` : "");
 
 export default getPort;

@@ -67,4 +67,4 @@ export {
 
 export const proxyUrl = `${PROXY_PROTOCOL}://${PROXY_HOSTNAME}${getPort(
   PROXY_PORT
-)}/${getPrefix(PROXY_PREFIX)}`;
+)}${getPrefix(PROXY_PREFIX)}`;
