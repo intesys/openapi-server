@@ -1,12 +1,10 @@
-import Env from "../types/env";
-import fs from "fs";
-import path from "path";
-import { options, defaults, booleans } from "../config";
 import { pick } from "lodash";
+import { booleans, defaults, options } from "../config";
+import Env from "../types/env";
+import { findDirInCwd, findFileInCwd } from "./findInCwd";
 import getPort from "./getPort";
 import getPrefix from "./getPrefix";
 import { fixBooleans } from "./toBoolean";
-import { findFileInCwd, findDirInCwd } from "./findInCwd";
 
 require("./env");
 
@@ -65,6 +63,7 @@ export {
   WATCH
 };
 
-export const proxyUrl = `${PROXY_PROTOCOL}://${PROXY_HOSTNAME}${getPort(
-  PROXY_PORT
-)}${getPrefix(PROXY_PREFIX)}`;
+const port = getPort(PROXY_PORT);
+const prefix = getPrefix(PROXY_PREFIX);
+
+export const proxyUrl = `${PROXY_PROTOCOL}://${PROXY_HOSTNAME}${port}${prefix}`;

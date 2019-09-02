@@ -1,8 +1,8 @@
-import fs from 'fs';
-import yaml from 'js-yaml';
-import { OpenAPI } from 'openapi-types';
-import JsonRefs from 'json-refs';
-import resolveAllOf from 'json-schema-resolve-allof';
+import fs from "fs";
+import yaml from "js-yaml";
+import { OpenAPI } from "openapi-types";
+import JsonRefs from "json-refs";
+import resolveAllOf from "json-schema-resolve-allof";
 
 export default async (file: string): Promise<OpenAPI.Document> => {
   const spec: OpenAPI.Document = await loadYaml(file);
@@ -13,7 +13,7 @@ export default async (file: string): Promise<OpenAPI.Document> => {
 
 const loadYaml = async (file: string): Promise<OpenAPI.Document> => {
   return new Promise((resolve: Function, reject: Function) => {
-    fs.readFile(file, 'utf8', (err, data) => {
+    fs.readFile(file, "utf8", (err, data) => {
       if (err) {
         return reject(new Error(`Unable to load file ${file}`));
       }
@@ -23,14 +23,14 @@ const loadYaml = async (file: string): Promise<OpenAPI.Document> => {
       } catch (err) {
         reject(new Error(`Error reading file ${file}`));
       }
-    })
-  })
+    });
+  });
 };
 
 const resolve = async (spec: OpenAPI.Document): Promise<OpenAPI.Document> => {
   const options = {
     loaderOptions: {
-      processContent: function (res: any, callback: Function) {
+      processContent: function(res: any, callback: Function) {
         callback(null, yaml.safeLoad(res.text));
       }
     }

@@ -1,8 +1,8 @@
 import { RequestHandler } from "express";
-import _ from "lodash";
+import { get, isUndefined } from "lodash";
 
 const sendBody = (): RequestHandler => (req, res, next) => {
-  if (!_.isUndefined(_.get(res, "locals.body"))) {
+  if (!isUndefined(get(res, "locals.body"))) {
     return res.send(res.locals.body);
   }
   return next();

@@ -1,14 +1,14 @@
-import express, { Router } from "express";
-import cors from "cors";
 import bodyParser from "body-parser";
+import cors from "cors";
+import express, { Router } from "express";
 import { OpenAPI } from "openapi-types";
+import getPrefix from "./lib/getPrefix";
+import { API_PREFIX, API_YML } from "./lib/globals";
+import load from "./lib/load";
 import openApiSchemaValidate from "./lib/openApiSchemaValidate";
-import routes from "./routes";
 import handleErrors from "./middlewares/handleErrors";
 import sendBody from "./middlewares/sendBody";
-import load from "./lib/load";
-import { API_PREFIX, API_YML } from "./lib/globals";
-import getPrefix from "./lib/getPrefix";
+import routes from "./routes";
 
 const router = async (): Promise<Router> => {
   const router: Router = express.Router();

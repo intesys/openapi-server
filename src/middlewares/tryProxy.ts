@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import _ from "lodash";
+import { get, isUndefined } from "lodash";
 import { proxyUrl } from "../lib/globals";
 import proxy from "../lib/proxy";
 import voidMiddleware from "./void";
@@ -13,7 +13,7 @@ const tryProxy = (method: string, route: string): RequestHandler => (
   res,
   next
 ) => {
-  if (!_.isUndefined(_.get(res, "locals.body"))) {
+  if (!isUndefined(get(res, "locals.body"))) {
     return voidMiddleware(req, res, next);
   }
 
