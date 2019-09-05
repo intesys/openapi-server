@@ -4,12 +4,11 @@
     "outDir": "./dist",
     "module": "commonjs",
     "target": "es6",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
+    "lib": ["esnext", "dom"],
     "sourceMap": true,
-    "allowJs": true,
+    // "allowJs": true,
+    "declaration": true,
+    "declarationDir": "./dist",
     "jsx": "react",
     "moduleResolution": "node",
     "rootDir": "src",
@@ -25,10 +24,6 @@
     "resolveJsonModule": true,
     "esModuleInterop": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "**/*.test.ts"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["**/*.test.ts"]
 }
