@@ -16,6 +16,9 @@ export class RemoteError {
   }
 }
 
+const httpAgent = new http.Agent();
+const httpsAgent = new https.Agent({ rejectUnauthorized: false });
+
 export default (url: string): RequestHandler => async (req, res, next) => {
   const fullUrl = `${url}${req.url}`;
   try {
@@ -27,8 +30,8 @@ export default (url: string): RequestHandler => async (req, res, next) => {
       url: fullUrl,
       data: req.body,
       withCredentials: true,
-      httpAgent: new http.Agent(),
-      httpsAgent: new https.Agent()
+      httpAgent,
+      httpsAgent
     });
     res.locals.body = response.data;
     res.set(response.headers);
