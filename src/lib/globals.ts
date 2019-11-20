@@ -24,8 +24,10 @@ globals.MOCKS_PATH =
   findDirInCwd(globals.MOCKS_PATH) ||
   exitWithError(`Directory not found: ${globals.MOCKS_PATH}`);
 globals.API_YML =
-  findFileInCwd(globals.API_YML) ||
-  exitWithError(`File not found: ${globals.API_YML}`);
+  findDirInCwd(globals.API_YML) ||
+  exitWithError(`Directory not found: ${globals.API_YML}`);
+// findFileInCwd(globals.API_YML) ||
+// exitWithError(`File not found: ${globals.API_YML}`);
 
 const {
   API_YML,

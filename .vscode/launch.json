@@ -7,12 +7,10 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
-      "program": "${workspaceFolder}\\dist\\index.js",
+      "name": "Launch NodeJS",
+      "program": "${workspaceFolder}/dist/cli.js",
       "preLaunchTask": "npm: build",
-      "outFiles": [
-        "${workspaceFolder}/dist/**/*.js"
-      ]
+      "skipFiles": ["<node_internals>/**"]
     }
   ]
 }

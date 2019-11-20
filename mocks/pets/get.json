@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "pluto",
+    "tag": "bla"
+  },
+  {
+    "id": 2,
+    "name": "pippo",
+    "tag": "bla"
+  },
+  {
+    "id": 1,
+    "name": "paperino",
+    "tag": "bla"
+  }
+]
