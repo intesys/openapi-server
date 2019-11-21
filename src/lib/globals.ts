@@ -1,7 +1,7 @@
 import { pick } from "lodash";
 import { booleans, defaults, options } from "../config";
 import Env from "../types/env";
-import { findDirInCwd, findFileInCwd } from "./findInCwd";
+import { findDirInCwd, getApiYmlParams } from "./findInCwd";
 import getPort from "./getPort";
 import getPrefix from "./getPrefix";
 import { fixBooleans } from "./toBoolean";
@@ -24,8 +24,10 @@ globals.MOCKS_PATH =
   findDirInCwd(globals.MOCKS_PATH) ||
   exitWithError(`Directory not found: ${globals.MOCKS_PATH}`);
 globals.API_YML =
-  findFileInCwd(globals.API_YML) ||
-  exitWithError(`File not found: ${globals.API_YML}`);
+  getApiYmlParams(globals.API_YML) ||
+  exitWithError(`Invalid param: ${globals.API_YML}`);
+// findFileInCwd(globals.API_YML) ||
+// exitWithError(`File not found: ${globals.API_YML}`);
 
 const {
   API_YML,

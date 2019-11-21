@@ -1,7 +1,9 @@
 import bodyParser from "body-parser";
 import cors from "cors";
 import express, { Router } from "express";
+import glob from "glob";
 import { OpenAPI } from "openapi-types";
+import Path from "path";
 import getPrefix from "./lib/getPrefix";
 import { API_PREFIX, API_YML } from "./lib/globals";
 import load from "./lib/load";
@@ -9,23 +11,42 @@ import openApiSchemaValidate from "./lib/openApiSchemaValidate";
 import handleErrors from "./middlewares/handleErrors";
 import sendBody from "./middlewares/sendBody";
 import routes from "./routes";
+import { ISourceYml } from "./types/env";
 
 const router = async (): Promise<Router> => {
   const router: Router = express.Router();
   try {
-    const prefix = getPrefix(API_PREFIX);
-    const spec: OpenAPI.Document = await load(API_YML);
-    openApiSchemaValidate(spec);
-
     router.options("*", cors());
-
     router.use(
       cors({ credentials: true }),
       bodyParser.urlencoded({ extended: false }),
       bodyParser.json()
     );
 
-    router.use(prefix, routes(spec), sendBody(), handleErrors());
+    const prefix = getPrefix(API_PREFIX);
+
+    API_YML.forEach((item: ISourceYml) => {
+      const globOptions = {
+        ...(item.type === "directory"
+          ? { cwd: Path.join(process.cwd(), item.path) }
+          : {})
+      };
+      const regex =
+        item.type == "directory"
+          ? `**/*.{yaml,yml}`
+          : `${Path.join(process.cwd(), item.path)}`;
+      glob(regex, globOptions, (er, files) => {
+        files.forEach(async (file: string) => {
+          const absPathFile =
+            item.type === "directory"
+              ? Path.resolve(Path.join(process.cwd(), item.path, file))
+              : Path.resolve(file);
+          const spec: OpenAPI.Document = await load(absPathFile);
+          openApiSchemaValidate(spec);
+          router.use(prefix, routes(spec), sendBody(), handleErrors());
+        });
+      });
+    });
   } catch (err) {
     console.error(err);
     process.exit(1);
