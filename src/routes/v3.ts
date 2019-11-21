@@ -1,9 +1,9 @@
-import { Router, RequestHandler } from "express";
+import { RequestHandler, Router } from "express";
+import { get } from "lodash";
 import { OpenAPIV3 } from "openapi-types";
 import toExpressParam from "../lib/toExpressParam";
 import { operations } from "../routes";
 import getMiddlewares from "./middlewares";
-import { get } from "lodash";
 
 const buildV3Routes = (
   router: Router,
@@ -33,7 +33,7 @@ const buildV3Routes = (
     if (servers.length > 0) {
       // TODO: multi url da gestire in futuro
       const url = new URL(getServerUrlWithoutPlaceholder(servers));
-      // TODO: "host" e "schemes" da gestire in futuro
+      // TODO: "host" e "schemes" da gestire eventualmente in futuro
       // const host = url.host;
       // const schemes = url.protocol.replace(/:/g, "");
       const basePath = url.pathname;
@@ -44,7 +44,6 @@ const buildV3Routes = (
 
   Object.keys(paths).forEach((route: string) => {
     const expressRoute = toExpressParam(getRoute(route, servers));
-    console.log(expressRoute);
     const routerRef = router.route(expressRoute);
     const methods = Object.keys(operations);
     const spec: OpenAPIV3.PathItemObject = paths[route];

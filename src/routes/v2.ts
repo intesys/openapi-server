@@ -1,6 +1,5 @@
 import { RequestHandler, Router } from "express";
 import { OpenAPIV2 } from "openapi-types";
-import path from "path";
 import toExpressParam from "../lib/toExpressParam";
 import { operations } from "../routes";
 import getMiddlewares from "./middlewares";
@@ -13,7 +12,6 @@ const buildV2Routes = (
   Object.keys(paths).forEach((route: string) => {
     const fullRoute = basePath + route;
     const expressRoute = toExpressParam(fullRoute);
-    console.log(expressRoute);
     const routerRef = router.route(expressRoute);
     const methods = Object.keys(operations);
     const spec: OpenAPIV2.PathItemObject = paths[route];

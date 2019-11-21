@@ -2,7 +2,8 @@ import { isBoolean } from "lodash";
 import Env from "./types/env";
 
 export const defaults: Env = {
-  API_YML: "api.yml",
+  API_YML: "/api",
+  // API_YML: "api.yml",
   API_PREFIX: "/api",
   API_PORT: "3000",
   API_PROTOCOL: "http",
