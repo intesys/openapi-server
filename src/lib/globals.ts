@@ -25,7 +25,7 @@ globals.MOCKS_PATH =
   exitWithError(`Directory not found: ${globals.MOCKS_PATH}`);
 globals.API_YML =
   getApiYmlParams(globals.API_YML) ||
-  exitWithError(`Malformed param: ${globals.API_YML}`);
+  exitWithError(`Invalid param: ${globals.API_YML}`);
 // findFileInCwd(globals.API_YML) ||
 // exitWithError(`File not found: ${globals.API_YML}`);
 

@@ -85,7 +85,7 @@ API_IGNORE_HOST=false
 API_PROTOCOL=http
 API_HOSTNAME=localhost
 API_PORT=3000
-API_YML=/src/api_files
+API_YML=/api.yml
 API_PREFIX=/api
 RESOURCES_PREFIX=/resources
 MOCKS_PATH=/mocks
@@ -114,7 +114,7 @@ Usage: index [options]
 
 Options:
   -v, --version                     output the version number
-  -a,--API_YML [value]              api yml file
+  -a,--API_YML [value]              api yml file / folder / list of file or folders
   -m,--MOCKS_PATH [value]           mocks path
   -l,--LOG                          enable console log
   -s,--SKIP_VALIDATION              turn off validation
