@@ -41,7 +41,6 @@ const router = async (): Promise<Router> => {
             item.type === "directory"
               ? Path.resolve(Path.join(process.cwd(), item.path, file))
               : Path.resolve(file);
-          console.log(absPathFile);
           const spec: OpenAPI.Document = await load(absPathFile);
           openApiSchemaValidate(spec);
           router.use(prefix, routes(spec), sendBody(), handleErrors());
