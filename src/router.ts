@@ -15,6 +15,7 @@ import { ISourceYml } from "./types/env";
 
 const router = async (): Promise<Router> => {
   const router: Router = express.Router();
+
   try {
     router.options("*", cors());
     router.use(

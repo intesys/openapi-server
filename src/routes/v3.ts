@@ -30,15 +30,16 @@ const buildV3Routes = (
   };
 
   const getRoute = (route: string, servers: OpenAPIV3.ServerObject[]) => {
-    if (servers.length > 0) {
-      // TODO: multi url da gestire in futuro
-      const url = new URL(getServerUrlWithoutPlaceholder(servers));
-      // TODO: "host" e "schemes" da gestire eventualmente in futuro
-      // const host = url.host;
-      // const schemes = url.protocol.replace(/:/g, "");
-      const basePath = url.pathname;
-      return basePath + route;
-    }
+    // TODO: IMPORTANTE!! da decidere cosa fare con il parametro servers nei file v3
+    // if (servers.length > 0) {
+    //   // TODO: multi url da gestire in futuro
+    //   const url = new URL(getServerUrlWithoutPlaceholder(servers));
+    //   // TODO: "host" e "schemes" da gestire eventualmente in futuro
+    //   // const host = url.host;
+    //   // const schemes = url.protocol.replace(/:/g, "");
+    //   const basePath = url.pathname;
+    //   return basePath + route;
+    // }
     return route;
   };
 
