@@ -3,6 +3,7 @@ import { OpenAPIV2 } from "openapi-types";
 import toExpressParam from "../lib/toExpressParam";
 import { operations } from "../routes";
 import getMiddlewares from "./middlewares";
+import { log } from "../lib/log";
 
 const buildV2Routes = (
   router: Router,
