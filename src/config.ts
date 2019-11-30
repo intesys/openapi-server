@@ -2,17 +2,17 @@ import { isBoolean } from "lodash";
 import Env from "./types/env";
 
 export const defaults: Env = {
-  API_YML: "api.yml",
+  API_YML: "/examples/api.yml,/examples/api",
   API_PREFIX: "/api",
   API_PORT: "3000",
   API_PROTOCOL: "http",
   API_HOSTNAME: "localhost",
 
   RESOURCES: false,
-  RESOURCES_PREFIX: "/resources",
+  RESOURCES_PREFIX: "/examples/resources",
 
   MOCKS: true,
-  MOCKS_PATH: "/mocks",
+  MOCKS_PATH: "/examples/mocks",
 
   PROXY: false,
   PROXY_PROTOCOL: "http",
