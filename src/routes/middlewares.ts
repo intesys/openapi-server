@@ -1,4 +1,4 @@
-import { SKIP_VALIDATION } from "../lib/globals";
+import { SKIP_VALIDATION, MOCKS, PROXY } from "../lib/globals";
 import { RequestHandler } from "express";
 import tryMock from "../middlewares/tryMock";
 import tryProxy from "../middlewares/tryProxy";
@@ -11,15 +11,11 @@ export default (
   route: string,
   operationSpec: OperationObject
 ): RequestHandler[] => {
-  const middlewares = [
-    setProxyHeaders(),
-    tryMock(method, route),
-    tryProxy(method, route)
-  ];
+  const middlewares = [setProxyHeaders()];
 
-  if (!SKIP_VALIDATION) {
-    middlewares.push(validateResponse(operationSpec));
-  }
+  MOCKS && middlewares.push(tryMock(method, route));
+  PROXY && middlewares.push(tryProxy(method, route));
+  !SKIP_VALIDATION && middlewares.push(validateResponse(operationSpec));
 
   return middlewares;
 };

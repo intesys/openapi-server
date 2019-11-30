@@ -8,8 +8,11 @@ declare type Env = {
   API_PORT: string;
   API_PROTOCOL: string;
   API_HOSTNAME: string;
+  RESOURCES: boolean;
   RESOURCES_PREFIX: string;
+  MOCKS: boolean;
   MOCKS_PATH: string;
+  PROXY: boolean;
   PROXY_PROTOCOL: string;
   PROXY_HOSTNAME: string;
   PROXY_PORT: string;

@@ -7,9 +7,14 @@ export const defaults: Env = {
   API_PORT: "3000",
   API_PROTOCOL: "http",
   API_HOSTNAME: "localhost",
+
+  RESOURCES: false,
   RESOURCES_PREFIX: "/resources",
+
+  MOCKS: true,
   MOCKS_PATH: "/mocks",
 
+  PROXY: false,
   PROXY_PROTOCOL: "http",
   PROXY_HOSTNAME: "localhost",
   PROXY_PORT: "3001",
