@@ -1,10 +1,11 @@
 import { pick } from "lodash";
 import { booleans, defaults, options } from "../config";
 import Env from "../types/env";
-import { findDirInCwd, findSpecs } from "./findInCwd";
+import { findDirInCwd } from "./findInCwd";
 import getPort from "./getPort";
 import getPrefix from "./getPrefix";
 import { fixBooleans } from "./toBoolean";
+import { findSpecs } from "./findSpecs";
 
 require("./env");
 
