@@ -1,8 +1,8 @@
-import Env from "./types/env";
-import path from "path";
 import program from "commander";
-import { options } from "./config";
 import { pick } from "lodash";
+import path from "path";
+import { options } from "./config";
+import Env from "./types/env";
 
 const version = require(path.join(__dirname, "../package.json")).version;
 
