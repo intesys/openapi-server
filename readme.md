@@ -91,13 +91,13 @@ Options:
   -w,--WATCH                        restart the server on changes
   --API_PREFIX [value]
   --API_PORT [value]
-  --API_PROTOCOL [value]
+  --API_PROTOCOL [value]            http and https are supported
   --API_HOSTNAME [value]
   --RESOURCES                       enable static file server
   --RESOURCES_PREFIX [value]        static files prefix
   --RESOURCES_FOLDER [value]        static files folder
   --PROXY                           enable proxy
-  --PROXY_PROTOCOL [value]
+  --PROXY_PROTOCOL [value]          http and https are supported
   --PROXY_HOSTNAME [value]
   --PROXY_PORT [value]
   --PROXY_PREFIX [value]
