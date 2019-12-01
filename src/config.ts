@@ -8,9 +8,9 @@ export const defaults: Env = {
   API_PROTOCOL: HTTPProtocol.http,
   API_HOSTNAME: "localhost",
 
-  SERVE_STATIC: false,
-  SERVE_STATIC_PREFIX: "/resources",
-  SERVE_STATIC_PATH: "/resources",
+  STATIC: false,
+  STATIC_PREFIX: "/resources",
+  STATIC_PATH: "/resources",
 
   MOCKS: true,
   MOCKS_PATH: "/mocks",

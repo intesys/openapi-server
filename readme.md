@@ -93,9 +93,9 @@ Options:
   --API_PORT [value]
   --API_PROTOCOL [value]            http and https are supported
   --API_HOSTNAME [value]
-  --SERVE_STATIC                       enable static file server
-  --SERVE_STATIC_PREFIX [value]        static files prefix
-  --SERVE_STATIC_PATH [value]        static files folder
+  --STATIC                          enable static file server
+  --STATIC_PREFIX [value]           static files prefix
+  --STATIC_PATH [value]             static files folder
   --PROXY                           enable proxy
   --PROXY_PROTOCOL [value]          http and https are supported
   --PROXY_HOSTNAME [value]
@@ -116,7 +116,7 @@ API_HOSTNAME=localhost
 API_PORT=3000
 API_YML=/api.yml
 API_PREFIX=/api
-SERVE_STATIC_PREFIX=/resources
+STATIC_PREFIX=/resources
 MOCKS_PATH=/mocks
 
 # backend endpoint used by nginx and proxy
@@ -141,9 +141,9 @@ API_PORT: '3000'
 API_PROTOCOL: 'http'  
 API_HOSTNAME: 'localhost'
 
-SERVE_STATIC: false  
-SERVE_STATIC_PREFIX: '/resources'  
-SERVE_STATIC_PATH: '/resources'
+STATIC: false  
+STATIC_PREFIX: '/resources'  
+STATIC_PATH: '/resources'
 
 MOCKS: true  
 MOCKS_PATH: '/mocks'
@@ -152,7 +152,7 @@ PROXY: false
 PROXY_PROTOCOL: ''  
 PROXY_HOSTNAME: ''  
 PROXY_PORT: ''  
-PROXY_PREFIX: ''  
+PROXY_PREFIX: ''
 
 SKIP_VALIDATION: false  
 LOG: false

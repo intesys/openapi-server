@@ -18,9 +18,9 @@
         "API_PROTOCOL": "http",
         "API_HOSTNAME": "localhost",
 
-        "SERVE_STATIC": "true",
-        "SERVE_STATIC_PREFIX": "/resources",
-        "SERVE_STATIC_PATH": "/examples/resources",
+        "STATIC": "true",
+        "STATIC_PREFIX": "/resources",
+        "STATIC_PATH": "/examples/resources",
 
         "MOCKS": "true",
         "MOCKS_PATH": "/examples/mocks",

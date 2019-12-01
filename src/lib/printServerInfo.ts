@@ -8,9 +8,9 @@ import {
   MOCKS_PATH,
   PROXY,
   proxyUrl,
-  SERVE_STATIC,
-  SERVE_STATIC_PATH,
-  SERVE_STATIC_PREFIX,
+  STATIC,
+  STATIC_PATH,
+  STATIC_PREFIX,
   SKIP_VALIDATION,
   WATCH
 } from "./globals";
@@ -30,11 +30,11 @@ export default () => {
   Proxy URL: ${proxyUrl}`
       : ``
   }    
-  Static files are ${SERVE_STATIC ? "enabled" : "disabled"}${
-    SERVE_STATIC
+  Static files are ${STATIC ? "enabled" : "disabled"}${
+    STATIC
       ? `
-  Static prefix: ${SERVE_STATIC_PREFIX}
-  Static path: ${SERVE_STATIC_PATH}`
+  Static prefix: ${STATIC_PREFIX}
+  Static path: ${STATIC_PATH}`
       : ``
   }  
   Validation is ${SKIP_VALIDATION ? "disabled" : "enabled"}
