@@ -19,7 +19,7 @@ import { clear, print } from "./log";
 export default () => {
   clear();
   print(`
-  Server running at ${API_PROTOCOL}://${API_HOSTNAME}:${API_PORT}
+  Openapi server running at ${API_PROTOCOL}://${API_HOSTNAME}:${API_PORT}
 
   Api yml: ${API_YML}
   Api prefix: ${API_PREFIX}
