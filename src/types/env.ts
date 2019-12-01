@@ -1,13 +1,3 @@
-export enum SourceType {
-  file,
-  directory
-}
-
-export interface ISourceYml {
-  type: SourceType;
-  path: string;
-}
-
 type Env = {
   API_YML: string;
   API_PREFIX: string;
