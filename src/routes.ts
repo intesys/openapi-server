@@ -1,10 +1,10 @@
 import express, { Router } from "express";
+import { get } from "lodash";
 import { OpenAPI } from "openapi-types";
 import openApiVersion from "./lib/openApiVersion";
+import buildV2Routes, { getV2BasePath } from "./routes/v2";
+import buildV3Routes, { getV3BasePath } from "./routes/v3";
 import Version from "./types/openApiVersion";
-import buildV2Routes from "./routes/v2";
-import buildV3Routes from "./routes/v3";
-import { get } from "lodash";
 
 export const operations = {
   get: "get",
@@ -24,15 +24,9 @@ export default (spec: OpenAPI.Document): Router => {
 
   switch (version) {
     case Version.v2:
-      // per api V2
-      // const host = get(spec, "host",""); // TODO: da gestire
-      // const schemes = get(spec, "schemes", ""); // TODO: da gestire
-      const basePath = get(spec, "basePath", "");
-      return buildV2Routes(router, paths, basePath);
+      return buildV2Routes(router, paths, getV2BasePath(spec));
     case Version.v3:
-      // per api V3
-      const servers = get(spec, "servers", []);
-      return buildV3Routes(router, paths, servers);
+      return buildV3Routes(router, paths, getV3BasePath(spec));
   }
   throw new Error("Unsupported openApi version");
 };

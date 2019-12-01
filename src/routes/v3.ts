@@ -8,7 +8,7 @@
 
 import { RequestHandler, Router } from "express";
 import { get } from "lodash";
-import { OpenAPIV3 } from "openapi-types";
+import { OpenAPIV3, OpenAPI } from "openapi-types";
 import toExpressParam from "../lib/toExpressParam";
 import { operations } from "../routes";
 import getMiddlewares from "./middlewares";
@@ -45,13 +45,17 @@ const getPath = (server: string): string => {
   return url.pathname;
 };
 
+export const getV3BasePath = (spec: OpenAPI.Document): string => {
+  const servers = get(spec, "servers", []);
+  const server = getServer(servers);
+  return getPath(server);
+};
+
 const buildV3Routes = (
   router: Router,
   paths: Record<string, OpenAPIV3.PathItemObject>,
-  servers: OpenAPIV3.ServerObject[]
+  basePath: string
 ): Router => {
-  const server = getServer(servers);
-  const basePath = getPath(server);
   Object.keys(paths).forEach((route: string) => {
     const fullRoute = basePath + route;
     const expressRoute = toExpressParam(fullRoute);

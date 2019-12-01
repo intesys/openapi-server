@@ -1,12 +1,11 @@
 import bodyParser from "body-parser";
 import cors from "cors";
 import express, { Router } from "express";
-import { OpenAPI } from "openapi-types";
-import { forEachAsync } from "./lib/forEachAsync";
 import getPrefix from "./lib/getPrefix";
 import { API_PREFIX, specs } from "./lib/globals";
 import load from "./lib/load";
 import openApiSchemaValidate from "./lib/openApiSchemaValidate";
+import { validateSpecsOrThrow } from "./lib/validatePaths";
 import handleErrors from "./middlewares/handleErrors";
 import sendBody from "./middlewares/sendBody";
 import routes from "./routes";
@@ -24,8 +23,11 @@ const router = async (): Promise<Router> => {
 
     const prefix = getPrefix(API_PREFIX);
 
-    await forEachAsync(specs, async (file: string) => {
-      const spec: OpenAPI.Document = await load(file);
+    const specDocs = await Promise.all(specs.map(spec => load(spec)));
+
+    validateSpecsOrThrow(specDocs);
+
+    specDocs.forEach(spec => {
       openApiSchemaValidate(spec);
       router.use(prefix, routes(spec), sendBody(), handleErrors());
     });

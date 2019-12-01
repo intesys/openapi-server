@@ -1,9 +1,12 @@
 import { RequestHandler, Router } from "express";
-import { OpenAPIV2 } from "openapi-types";
+import { OpenAPIV2, OpenAPI } from "openapi-types";
 import toExpressParam from "../lib/toExpressParam";
 import { operations } from "../routes";
 import getMiddlewares from "./middlewares";
-import { log } from "../lib/log";
+import { get } from "lodash";
+
+export const getV2BasePath = (spec: OpenAPI.Document): string =>
+  get(spec, "basePath", "");
 
 const buildV2Routes = (
   router: Router,
