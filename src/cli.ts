@@ -21,15 +21,14 @@ program
   .option("--API_PORT [value]")
   .option("--API_PROTOCOL [value]")
   .option("--API_HOSTNAME [value]")
-  .option("--RESOURCES", "enable static resources")
-  .option("--RESOURCES_PREFIX [value]")
-  .option("--RESOURCES_FOLDER [value]")
+  .option("--SERVE_STATIC", "enable static resources")
+  .option("--SERVE_STATIC_PREFIX [value]")
+  .option("--SERVE_STATIC_PATH [value]")
   .option("--PROXY", "enable proxy")
   .option("--PROXY_PROTOCOL [value]")
   .option("--PROXY_HOSTNAME [value]")
   .option("--PROXY_PORT [value]")
   .option("--PROXY_PREFIX [value]")
-  .option("--PROXY_RESOURCES_PREFIX [value]")
   .parse(process.argv);
 
 const cliOptions: Partial<Env> = pick(program, options);

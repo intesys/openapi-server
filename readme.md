@@ -93,15 +93,14 @@ Options:
   --API_PORT [value]
   --API_PROTOCOL [value]            http and https are supported
   --API_HOSTNAME [value]
-  --RESOURCES                       enable static file server
-  --RESOURCES_PREFIX [value]        static files prefix
-  --RESOURCES_FOLDER [value]        static files folder
+  --SERVE_STATIC                       enable static file server
+  --SERVE_STATIC_PREFIX [value]        static files prefix
+  --SERVE_STATIC_PATH [value]        static files folder
   --PROXY                           enable proxy
   --PROXY_PROTOCOL [value]          http and https are supported
   --PROXY_HOSTNAME [value]
   --PROXY_PORT [value]
   --PROXY_PREFIX [value]
-  --PROXY_RESOURCES_PREFIX [value]
   -h, --help                        output usage information
 ```
 
@@ -117,7 +116,7 @@ API_HOSTNAME=localhost
 API_PORT=3000
 API_YML=/api.yml
 API_PREFIX=/api
-RESOURCES_PREFIX=/resources
+SERVE_STATIC_PREFIX=/resources
 MOCKS_PATH=/mocks
 
 # backend endpoint used by nginx and proxy
@@ -125,7 +124,6 @@ PROXY_PROTOCOL=http
 PROXY_HOSTNAME=localhost
 PROXY_PORT=3001
 PROXY_PREFIX=/api
-PROXY_RESOURCES_PREFIX=/resources
 
 # proxy configuration (development only)
 SKIP_VALIDATION=false
@@ -143,9 +141,9 @@ API_PORT: '3000'
 API_PROTOCOL: 'http'  
 API_HOSTNAME: 'localhost'
 
-RESOURCES: false  
-RESOURCES_PREFIX: '/resources'  
-RESOURCES_FOLDER: '/resources'
+SERVE_STATIC: false  
+SERVE_STATIC_PREFIX: '/resources'  
+SERVE_STATIC_PATH: '/resources'
 
 MOCKS: true  
 MOCKS_PATH: '/mocks'
@@ -155,7 +153,6 @@ PROXY_PROTOCOL: ''
 PROXY_HOSTNAME: ''  
 PROXY_PORT: ''  
 PROXY_PREFIX: ''  
-PROXY_RESOURCES_PREFIX: ''
 
 SKIP_VALIDATION: false  
 LOG: false

@@ -4,9 +4,9 @@ import express, { Router } from "express";
 import getPrefix from "./lib/getPrefix";
 import {
   API_PREFIX,
-  RESOURCES,
-  RESOURCES_FOLDER,
-  RESOURCES_PREFIX,
+  SERVE_STATIC,
+  SERVE_STATIC_PATH,
+  SERVE_STATIC_PREFIX,
   specs
 } from "./lib/globals";
 import load from "./lib/load";
@@ -28,7 +28,8 @@ const router = async (): Promise<Router> => {
       bodyParser.json()
     );
 
-    RESOURCES && router.use(RESOURCES_PREFIX, handleStatic(RESOURCES_FOLDER));
+    SERVE_STATIC &&
+      router.use(SERVE_STATIC_PREFIX, handleStatic(SERVE_STATIC_PATH));
 
     const prefix = getPrefix(API_PREFIX);
 

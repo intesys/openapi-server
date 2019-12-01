@@ -18,9 +18,9 @@
         "API_PROTOCOL": "http",
         "API_HOSTNAME": "localhost",
 
-        "RESOURCES": "true",
-        "RESOURCES_PREFIX": "/resources",
-        "RESOURCES_FOLDER": "/examples/resources",
+        "SERVE_STATIC": "true",
+        "SERVE_STATIC_PREFIX": "/resources",
+        "SERVE_STATIC_PATH": "/examples/resources",
 
         "MOCKS": "true",
         "MOCKS_PATH": "/examples/mocks",
@@ -30,7 +30,6 @@
         "PROXY_HOSTNAME": "localhost",
         "PROXY_PORT": "3001",
         "PROXY_PREFIX": "/api",
-        "PROXY_RESOURCES_PREFIX": "/resources",
 
         "SKIP_VALIDATION": "false",
         "LOG": "false",

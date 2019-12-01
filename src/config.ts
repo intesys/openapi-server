@@ -8,9 +8,9 @@ export const defaults: Env = {
   API_PROTOCOL: HTTPProtocol.http,
   API_HOSTNAME: "localhost",
 
-  RESOURCES: false,
-  RESOURCES_PREFIX: "/resources",
-  RESOURCES_FOLDER: "/resources",
+  SERVE_STATIC: false,
+  SERVE_STATIC_PREFIX: "/resources",
+  SERVE_STATIC_PATH: "/resources",
 
   MOCKS: true,
   MOCKS_PATH: "/mocks",
@@ -20,7 +20,6 @@ export const defaults: Env = {
   PROXY_HOSTNAME: "",
   PROXY_PORT: "",
   PROXY_PREFIX: "",
-  PROXY_RESOURCES_PREFIX: "",
 
   SKIP_VALIDATION: false,
   LOG: false,

@@ -9,9 +9,9 @@ type Env = {
   API_PORT: string;
   API_PROTOCOL: HTTPProtocol;
   API_HOSTNAME: string;
-  RESOURCES: boolean;
-  RESOURCES_PREFIX: string;
-  RESOURCES_FOLDER: string;
+  SERVE_STATIC: boolean;
+  SERVE_STATIC_PREFIX: string;
+  SERVE_STATIC_PATH: string;
   MOCKS: boolean;
   MOCKS_PATH: string;
   PROXY: boolean;
@@ -19,7 +19,6 @@ type Env = {
   PROXY_HOSTNAME: string;
   PROXY_PORT: string;
   PROXY_PREFIX: string;
-  PROXY_RESOURCES_PREFIX: string;
   SKIP_VALIDATION?: boolean;
   LOG?: boolean;
   WATCH?: boolean;
