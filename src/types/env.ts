@@ -6,6 +6,7 @@ type Env = {
   API_HOSTNAME: string;
   RESOURCES: boolean;
   RESOURCES_PREFIX: string;
+  RESOURCES_FOLDER: string;
   MOCKS: boolean;
   MOCKS_PATH: string;
   PROXY: boolean;

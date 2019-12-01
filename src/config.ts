@@ -10,6 +10,7 @@ export const defaults: Env = {
 
   RESOURCES: false,
   RESOURCES_PREFIX: "/resources",
+  RESOURCES_FOLDER: "/resources",
 
   MOCKS: true,
   MOCKS_PATH: "/mocks",

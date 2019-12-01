@@ -18,8 +18,9 @@
         "API_PROTOCOL": "http",
         "API_HOSTNAME": "localhost",
 
-        "RESOURCES": "false",
-        "RESOURCES_PREFIX": "/examples/resources",
+        "RESOURCES": "true",
+        "RESOURCES_PREFIX": "/resources",
+        "RESOURCES_FOLDER": "/examples/resources",
 
         "MOCKS": "true",
         "MOCKS_PATH": "/examples/mocks",

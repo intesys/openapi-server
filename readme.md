@@ -75,9 +75,39 @@ const myApp: Application = express();
 
 Configure the server in two ways:
 
-### Via `.env` file
+### Configuration using CLI
 
-Place an `.env.development.local`, `.env.development` or `.env` file, with this variables (feel free to change values) :
+CLI options take precedence over env variables.
+
+```
+Usage: index [options]
+
+Options:
+  -v, --version                     output the version number
+  -a,--API_YML [value]              api yml file / folder / list of file or folders
+  -m,--MOCKS_PATH [value]           mocks path
+  -l,--LOG                          enable console log
+  -s,--SKIP_VALIDATION              turn off validation
+  -w,--WATCH                        restart the server on changes
+  --API_PREFIX [value]
+  --API_PORT [value]
+  --API_PROTOCOL [value]
+  --API_HOSTNAME [value]
+  --RESOURCES                       enable static file server
+  --RESOURCES_PREFIX [value]        static files prefix
+  --RESOURCES_FOLDER [value]        static files folder
+  --PROXY                           enable proxy
+  --PROXY_PROTOCOL [value]
+  --PROXY_HOSTNAME [value]
+  --PROXY_PORT [value]
+  --PROXY_PREFIX [value]
+  --PROXY_RESOURCES_PREFIX [value]
+  -h, --help                        output usage information
+```
+
+### Configuration using `.env` file
+
+Place an `.env.{NODE_ENV}.local`, `.env.{NODE_ENV}` or `.env` file, with this variables (feel free to change values) :
 
 ```
 # api endpoint used by frontend
@@ -105,56 +135,37 @@ WATCH=false
 
 > Note: place .env file(s) in the directory you use to launch the server, because it looks for files in `process.cwd()` (_current working directory_)
 
-### Via script options
-
-Script options overwrite env variables.
-
-```
-Usage: index [options]
-
-Options:
-  -v, --version                     output the version number
-  -a,--API_YML [value]              api yml file / folder / list of file or folders
-  -m,--MOCKS_PATH [value]           mocks path
-  -l,--LOG                          enable console log
-  -s,--SKIP_VALIDATION              turn off validation
-  -w,--WATCH                        restart the server on changes
-  --API_PREFIX [value]
-  --API_PORT [value]
-  --API_PROTOCOL [value]
-  --API_HOSTNAME [value]
-  --RESOURCES_PREFIX [value]
-  --PROXY_PROTOCOL [value]
-  --PROXY_HOSTNAME [value]
-  --PROXY_PORT [value]
-  --PROXY_PREFIX [value]
-  --PROXY_RESOURCES_PREFIX [value]
-  -h, --help                        output usage information
-```
-
 ### Defaults
 
 API_YML: 'api.yml'  
 API_PREFIX: '/api'  
 API_PORT: '3000'  
 API_PROTOCOL: 'http'  
-API_HOSTNAME: 'localhost'  
+API_HOSTNAME: 'localhost'
+
+RESOURCES: false  
 RESOURCES_PREFIX: '/resources'  
+RESOURCES_FOLDER: '/resources'
+
+MOCKS: true  
 MOCKS_PATH: '/mocks'
 
-PROXY_PROTOCOL: 'http'  
-PROXY_HOSTNAME: 'localhost'  
-PROXY_PORT: '3001'  
-PROXY_PREFIX: '/api'  
-PROXY_RESOURCES_PREFIX: '/resources'
+PROXY: false  
+PROXY_PROTOCOL: ''  
+PROXY_HOSTNAME: ''  
+PROXY_PORT: ''  
+PROXY_PREFIX: ''  
+PROXY_RESOURCES_PREFIX: ''
 
 SKIP_VALIDATION: false  
 LOG: false
-WATCH=false
+WATCH: false
 
 ## Mocks
 
 Mocks are `.json` or `.js` files placed in the `MOCKS_PATH` directory.
+
+Mocks are enabled by default. The only way to disable is using an ENV variable.
 
 Mocks take precedence over proxy, if a mock is found for the requested route, it is server, otherwise the request is proxied to backend.
 
@@ -231,6 +242,12 @@ const middleware = (req, res, next) => {
 
 module.exports = middleware;
 ```
+
+## Proxy
+
+Proxy is disabled by default. To enable it, use --PROXY flag in CLI or set `PROXY=true` in `.env` file.
+
+When proxy is enabled, all valid requests which doesn't have a mock are forwarder to proxy.
 
 ## How it works
 

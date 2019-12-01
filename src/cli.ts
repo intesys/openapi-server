@@ -23,6 +23,7 @@ program
   .option("--API_HOSTNAME [value]")
   .option("--RESOURCES", "enable static resources")
   .option("--RESOURCES_PREFIX [value]")
+  .option("--RESOURCES_FOLDER [value]")
   .option("--PROXY", "enable proxy")
   .option("--PROXY_PROTOCOL [value]")
   .option("--PROXY_HOSTNAME [value]")
