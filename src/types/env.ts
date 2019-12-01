@@ -1,8 +1,13 @@
+export enum HTTPProtocol {
+  "http" = "http",
+  "https" = "https"
+}
+
 type Env = {
   API_YML: string;
   API_PREFIX: string;
   API_PORT: string;
-  API_PROTOCOL: string;
+  API_PROTOCOL: HTTPProtocol;
   API_HOSTNAME: string;
   RESOURCES: boolean;
   RESOURCES_PREFIX: string;
@@ -10,7 +15,7 @@ type Env = {
   MOCKS: boolean;
   MOCKS_PATH: string;
   PROXY: boolean;
-  PROXY_PROTOCOL: string;
+  PROXY_PROTOCOL: HTTPProtocol;
   PROXY_HOSTNAME: string;
   PROXY_PORT: string;
   PROXY_PREFIX: string;

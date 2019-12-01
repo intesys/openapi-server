@@ -1,11 +1,11 @@
 import { isBoolean } from "lodash";
-import Env from "./types/env";
+import Env, { HTTPProtocol } from "./types/env";
 
 export const defaults: Env = {
   API_YML: "api.yaml",
   API_PREFIX: "/api",
   API_PORT: "3000",
-  API_PROTOCOL: "http",
+  API_PROTOCOL: HTTPProtocol.http,
   API_HOSTNAME: "localhost",
 
   RESOURCES: false,
@@ -16,7 +16,7 @@ export const defaults: Env = {
   MOCKS_PATH: "/mocks",
 
   PROXY: false,
-  PROXY_PROTOCOL: "",
+  PROXY_PROTOCOL: HTTPProtocol.http,
   PROXY_HOSTNAME: "",
   PROXY_PORT: "",
   PROXY_PREFIX: "",

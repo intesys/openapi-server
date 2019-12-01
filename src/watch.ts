@@ -1,4 +1,4 @@
-import { Application } from "express";
+import { Express } from "express";
 import fs from "fs";
 import { Server } from "net";
 import init from "./init";
@@ -8,7 +8,7 @@ import { clear, print } from "./lib/log";
 /**
  * Restarts the server on file changes
  */
-export default (app: Application, server: Server) => {
+export default (app: Express, server: Server) => {
   let restarting = false;
   let scheduleRestart = false;
 
