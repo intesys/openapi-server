@@ -1,8 +1,25 @@
 # Openapi server
 
-It's a simple proxy for development purpose, which allows you to quickly mock responses, in case the real backend server doesn't reply correctly.  
-In addition you can validate the responses (both from backend and mock).  
-Can work in watch mode, reloading the server when Yaml or mock changes.
+It's a simple mock server for development purpose, which allows you to proxy requests to a real backend server.
+
+Common use is when starting prototype a single page application, without a working backend. You should define API specs (using openapi), then you can start developing by mocking all services.  
+When some real service becomes available, you can selectively disable mocks and proxy to the real backend.
+
+You can also use mocks for testing purpose, as to run end-to-end tests with predictable api responses.
+
+### Features
+
+- configurable via env vars, env files and cli params
+- validates openapi specs (both version 3 and 2, aka swagger) `yaml` format
+- supports multiple spec files, also loads specs from directories, checking all defined paths and methods to avoid conflicts
+- quick mocks, supporting .json files as wel as .js modules and express middlewares
+- proxy requests to another server
+- optionally validates responses
+- static file server
+- estensible via custom [express](https://expressjs.com/) middlewares
+- supports http and https
+- watch mode
+- can be used programmatically, importing entire application or express router only
 
 ![schema](./assets/schema.png)
 
@@ -203,12 +220,12 @@ Plain `Json` files are served as responses.
 
 Can write mocks as `.js` files (`.ts` are not allowed, because mocks are required at runtime and can't be transpiled).
 
-#### Node modules
+#### Mocks as node modules
 
 A `.js` mock can be a standard node module exporting the response object:
 
 ```javascript
-// js mock
+// node module mock
 
 const generatorFunction = () => ({
   // ...response
@@ -217,12 +234,12 @@ const generatorFunction = () => ({
 module.exports = generatorFunction();
 ```
 
-#### Mocks as middleware
+#### Mocks as express middlewares
 
 If a `.js` mock exports a function, it's supposed to be an express middleware and is invoked with express signature. It MUST write the response in the `res.locals.body` object and MUST call `next()` when ends.
 
 ```javascript
-// js middleware mock
+// express middleware mock
 
 const middleware = (req, res, next) => {
   // ...some logic, can access to req and res objects
@@ -240,6 +257,43 @@ const middleware = (req, res, next) => {
 module.exports = middleware;
 ```
 
+## Static resources
+
+If `STATIC` is set to true, files contained on `STATIC_PATH` are served on `STATIC_PREFIX`.
+
+## Extending mock server
+
+If `MOCKS` are enabled (default), you can add a `__router.js` file in mocks directory, exporting an Express middleware. It will be mounted before any other middleware, enabling to intercept all requests.
+
+You can use it to decorate all requests or to define custom routes, not described in openapi spec.
+
+Examples:
+
+```javascript
+const express = require("express");
+const router = express.Router();
+
+// Decorate all requests
+router.use((req, res, next) => {
+  console.log("called pre-middleware");
+  next();
+});
+
+// Define a custom route, not included in openapi spec
+router.get("/custom-route", (req, res) => {
+  console.log("called custom route");
+  res.send("Response sent by custom route");
+});
+
+// Execute post-request tasks
+router.use((req, res, next) => {
+  next();
+  console.log("post request task");
+});
+
+module.exports = router;
+```
+
 ## Proxy
 
 Proxy is disabled by default. To enable it, use --PROXY flag in CLI or set `PROXY=true` in `.env` file.
@@ -248,7 +302,7 @@ When proxy is enabled, all valid requests which doesn't have a mock are forwarde
 
 ## How it works
 
-Openapi-server is an express web server with some middleware, it:
+Openapi-server is an [express](https://expressjs.com/) web server with some middleware, it:
 
 - validates the openapi file
 - configure routes based on openapi paths
@@ -256,17 +310,3 @@ Openapi-server is an express web server with some middleware, it:
   - looks for a mock (replies with mock if found)
   - proxies the request to the backend server
   - (optional) validates the response
-
-## TO DO
-
-- DONE: forward http headers to proxy
-- handle static resources: serve from local directory or proxy
-- validate the request
-- generate mocks from yml examples
-- more tests
-
-### Nice to have
-
-- DONE: live reload when api file changes
-- save snapshots of proxy responses in a mock-like fashion (to help mock creation/comparison)
-- allow validator to be less restrictive
