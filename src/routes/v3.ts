@@ -41,12 +41,20 @@ const getServer = (servers: OpenAPIV3.ServerObject[]): string => {
 };
 
 const getPath = (server: string): string => {
-  const url = new URL(server);
-  return url.pathname;
+  try {
+    const url = new URL(server);
+    return url.pathname;
+  } catch (e) {
+    // assuming server is a partial uri
+    return server;
+  }
 };
 
 export const getV3BasePath = (spec: OpenAPI.Document): string => {
-  const servers = get(spec, "servers", []);
+  const serverFallback: OpenAPIV3.ServerObject = { url: "" };
+  const servers: OpenAPIV3.ServerObject[] = get(spec, "servers", [
+    serverFallback
+  ]);
   const server = getServer(servers);
   return getPath(server);
 };
@@ -65,6 +73,10 @@ const buildV3Routes = (
     methods.forEach(_method => {
       const method = operations[_method];
       const operationSpec: OpenAPIV3.OperationObject = spec[method];
+      if (!operationSpec) {
+        // skip because method is not defined in spec
+        return;
+      }
       const middlewares: RequestHandler[] = getMiddlewares(
         method,
         fullRoute,
