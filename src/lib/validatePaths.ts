@@ -1,5 +1,6 @@
 import { get } from "lodash";
 import { OpenAPI } from "openapi-types";
+import { operations } from "../routes";
 import { getV2BasePath } from "../routes/v2";
 import { getV3BasePath } from "../routes/v3";
 import Version from "../types/openApiVersion";
@@ -18,11 +19,14 @@ const getBasePath = (spec: OpenAPI.Document): string => {
 const getFullPaths = (spec: OpenAPI.Document): string[] => {
   const basePath = getBasePath(spec);
   const paths = get(spec, "paths", {});
+  const operationMethods = Object.values(operations);
   return Object.keys(paths)
-    .map(path => {
-      const methods = Object.keys(paths[path]);
-      return methods.map(method => `${basePath}${path}/${method}`);
-    })
+    .map(path =>
+      Object.keys(paths[path])
+        // only valid http methods are evaluated
+        .filter(method => operationMethods.indexOf(method) > -1)
+        .map(method => `${basePath}${path}/${method}`)
+    )
     .reduce((paths, specPaths) => paths.concat(specPaths), []);
 };
 
