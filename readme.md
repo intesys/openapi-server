@@ -296,7 +296,7 @@ module.exports = router;
 
 ### Exporting an async function
 
-You can also export an async function, wich MUST resolve to an express router or middleware.
+You can also export an async function, which MUST resolve to an express router or middleware.
 
 ```javascript
 // using Parcel to build and watch your single page application
