@@ -294,6 +294,37 @@ router.use((req, res, next) => {
 module.exports = router;
 ```
 
+### Exporting an async function
+
+You can also export an async function, wich MUST resolve to an express router or middleware.
+
+```javascript
+// using Parcel to build and watch your single page application
+
+const Bundler = require("parcel-bundler");
+
+const entrypoint = "public/index.html";
+
+const options = {
+  open: false,
+  outDir: "dist/",
+  publicUrl: "/"
+};
+
+const build = async (file, options = {}) => {
+  const bundler = new Bundler(file, options);
+  const parcelMiddleware = await bundler.middleware();
+  return new Promise((resolve, reject) => {
+    bundler.on("bundled", () => resolve(parcelMiddleware));
+    bundler.on("buildError", error => reject(error));
+  });
+};
+
+module.exports = async () => build(entrypoint, options);
+```
+
+**Note: you can't export a regular function returning a Promise, MUST export an async function!**
+
 ## Proxy
 
 Proxy is disabled by default. To enable it, use --PROXY flag in CLI or set `PROXY=true` in `.env` file.

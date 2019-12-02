@@ -19,7 +19,8 @@ const init = async (app: Express): Promise<Server> =>
     try {
       app.set("trust proxy", true);
 
-      app.use(customRouter());
+      const _customRouter = await customRouter();
+      app.use(_customRouter);
 
       const _router = await router();
       app.use(_router);
