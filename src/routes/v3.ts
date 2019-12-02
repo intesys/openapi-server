@@ -71,7 +71,7 @@ const buildV3Routes = (
     const methods = Object.keys(operations);
     const spec: OpenAPIV3.PathItemObject = paths[route];
     methods.forEach(_method => {
-      const method = operations[_method];
+      const method: string = operations[_method];
       const operationSpec: OpenAPIV3.OperationObject = spec[method];
       if (!operationSpec) {
         // skip because method is not defined in spec
