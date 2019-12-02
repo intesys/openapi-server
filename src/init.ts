@@ -7,6 +7,7 @@
 
 import { Express } from "express";
 import { Server } from "net";
+import customRouter from "./customRouter";
 import { API_PORT, API_PROTOCOL } from "./lib/globals";
 import handleSigint from "./lib/handleSigint";
 import printServerInfo from "./lib/printServerInfo";
@@ -17,6 +18,8 @@ const init = async (app: Express): Promise<Server> =>
   new Promise(async (resolve, reject) => {
     try {
       app.set("trust proxy", true);
+
+      app.use(customRouter());
 
       const _router = await router();
       app.use(_router);
