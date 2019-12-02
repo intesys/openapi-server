@@ -20,8 +20,6 @@ const exitWithError = (message: string, code: number = 1) => {
   return ""; // for typescript compliance only
 };
 
-export const ROOT_DIR = process.cwd();
-
 // MOCKS_PATH and API_YML must be absolute paths
 
 if (globals.MOCKS) {

@@ -4,10 +4,10 @@ import express, { Router } from "express";
 import getPrefix from "./lib/getPrefix";
 import {
   API_PREFIX,
+  specs,
   STATIC,
   STATIC_PATH,
-  STATIC_PREFIX,
-  specs
+  STATIC_PREFIX
 } from "./lib/globals";
 import load from "./lib/load";
 import openApiSchemaValidate from "./lib/openApiSchemaValidate";
@@ -28,8 +28,7 @@ const router = async (): Promise<Router> => {
       bodyParser.json()
     );
 
-    STATIC &&
-      router.use(STATIC_PREFIX, handleStatic(STATIC_PATH));
+    STATIC && router.use(STATIC_PREFIX, handleStatic(STATIC_PATH));
 
     const prefix = getPrefix(API_PREFIX);
 

@@ -1,7 +1,6 @@
 import fs from "fs";
 import Path from "path";
 import { isString } from "util";
-import { ROOT_DIR } from "./globals";
 
 /**
  * Searches for files in current working directory, returns the first file found.
@@ -16,7 +15,7 @@ export const findFileInCwd = (files: string | string[]): string | undefined => {
   }
   const file = files.find(file => {
     try {
-      const path = Path.join(ROOT_DIR, file);
+      const path = Path.join(process.cwd(), file);
       const stat = fs.statSync(path);
       return stat.isFile();
     } catch (e) {
@@ -25,7 +24,7 @@ export const findFileInCwd = (files: string | string[]): string | undefined => {
   });
 
   if (file) {
-    return Path.join(ROOT_DIR, file);
+    return Path.join(process.cwd(), file);
   }
   return;
 };
