@@ -3,7 +3,7 @@
 It's a simple mock server for development purpose, which allows you to proxy requests to a real backend server.
 
 Common use is when starting prototype a single page application, without a working backend. You should define API specs (using openapi), then you can start developing by mocking all services.  
-When some real service becomes available, you can selectively disable mocks and proxy to the real backend.
+When some real service becomes available, you can selectively disable mocks and proxy to backend.
 
 You can also use mocks for testing purpose, as to run end-to-end tests with predictable api responses.
 
