@@ -1,8 +1,8 @@
-import Env from "./types/env";
-import path from "path";
 import program from "commander";
-import { options } from "./config";
 import { pick } from "lodash";
+import path from "path";
+import { options } from "./config";
+import Env from "./types/env";
 
 const version = require(path.join(__dirname, "../package.json")).version;
 
@@ -21,12 +21,14 @@ program
   .option("--API_PORT [value]")
   .option("--API_PROTOCOL [value]")
   .option("--API_HOSTNAME [value]")
-  .option("--RESOURCES_PREFIX [value]")
+  .option("--STATIC", "enable static resources")
+  .option("--STATIC_PREFIX [value]")
+  .option("--STATIC_PATH [value]")
+  .option("--PROXY", "enable proxy")
   .option("--PROXY_PROTOCOL [value]")
   .option("--PROXY_HOSTNAME [value]")
   .option("--PROXY_PORT [value]")
   .option("--PROXY_PREFIX [value]")
-  .option("--PROXY_RESOURCES_PREFIX [value]")
   .parse(process.argv);
 
 const cliOptions: Partial<Env> = pick(program, options);

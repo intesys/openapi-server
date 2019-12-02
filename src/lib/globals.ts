@@ -1,10 +1,11 @@
 import { pick } from "lodash";
 import { booleans, defaults, options } from "../config";
 import Env from "../types/env";
-import { findDirInCwd, getApiYmlParams } from "./findInCwd";
+import { findDirInCwd } from "./findInCwd";
 import getPort from "./getPort";
 import getPrefix from "./getPrefix";
 import { fixBooleans } from "./toBoolean";
+import { findSpecs } from "./findSpecs";
 
 require("./env");
 
@@ -20,14 +21,16 @@ const exitWithError = (message: string, code: number = 1) => {
 };
 
 // MOCKS_PATH and API_YML must be absolute paths
-globals.MOCKS_PATH =
-  findDirInCwd(globals.MOCKS_PATH) ||
-  exitWithError(`Directory not found: ${globals.MOCKS_PATH}`);
-globals.API_YML =
-  getApiYmlParams(globals.API_YML) ||
+
+if (globals.MOCKS) {
+  globals.MOCKS_PATH =
+    findDirInCwd(globals.MOCKS_PATH) ||
+    exitWithError(`Directory not found: ${globals.MOCKS_PATH}`);
+}
+
+export const specs: string[] =
+  findSpecs(globals.API_YML) ||
   exitWithError(`Invalid param: ${globals.API_YML}`);
-// findFileInCwd(globals.API_YML) ||
-// exitWithError(`File not found: ${globals.API_YML}`);
 
 const {
   API_YML,
@@ -35,13 +38,16 @@ const {
   API_PORT,
   API_PROTOCOL,
   API_HOSTNAME,
-  RESOURCES_PREFIX,
+  STATIC,
+  STATIC_PREFIX,
+  STATIC_PATH,
+  MOCKS,
   MOCKS_PATH,
+  PROXY,
   PROXY_PROTOCOL,
   PROXY_HOSTNAME,
   PROXY_PORT,
   PROXY_PREFIX,
-  PROXY_RESOURCES_PREFIX,
   SKIP_VALIDATION,
   LOG,
   WATCH
@@ -53,13 +59,16 @@ export {
   API_PORT,
   API_PROTOCOL,
   API_HOSTNAME,
-  RESOURCES_PREFIX,
+  STATIC,
+  STATIC_PREFIX,
+  STATIC_PATH,
+  MOCKS,
   MOCKS_PATH,
+  PROXY,
   PROXY_PROTOCOL,
   PROXY_HOSTNAME,
   PROXY_PORT,
   PROXY_PREFIX,
-  PROXY_RESOURCES_PREFIX,
   SKIP_VALIDATION,
   LOG,
   WATCH

@@ -75,39 +75,9 @@ const myApp: Application = express();
 
 Configure the server in two ways:
 
-### Via `.env` file
+### Configuration using CLI
 
-Place an `.env.development.local`, `.env.development` or `.env` file, with this variables (feel free to change values) :
-
-```
-# api endpoint used by frontend
-API_IGNORE_HOST=false
-API_PROTOCOL=http
-API_HOSTNAME=localhost
-API_PORT=3000
-API_YML=/api.yml
-API_PREFIX=/api
-RESOURCES_PREFIX=/resources
-MOCKS_PATH=/mocks
-
-# backend endpoint used by nginx and proxy
-PROXY_PROTOCOL=http
-PROXY_HOSTNAME=localhost
-PROXY_PORT=3001
-PROXY_PREFIX=/api
-PROXY_RESOURCES_PREFIX=/resources
-
-# proxy configuration (development only)
-SKIP_VALIDATION=false
-LOG=false
-WATCH=false
-```
-
-> Note: place .env file(s) in the directory you use to launch the server, because it looks for files in `process.cwd()` (_current working directory_)
-
-### Via script options
-
-Script options overwrite env variables.
+CLI options take precedence over env variables.
 
 ```
 Usage: index [options]
@@ -121,16 +91,47 @@ Options:
   -w,--WATCH                        restart the server on changes
   --API_PREFIX [value]
   --API_PORT [value]
-  --API_PROTOCOL [value]
+  --API_PROTOCOL [value]            http and https are supported
   --API_HOSTNAME [value]
-  --RESOURCES_PREFIX [value]
-  --PROXY_PROTOCOL [value]
+  --STATIC                          enable static file server
+  --STATIC_PREFIX [value]           static files prefix
+  --STATIC_PATH [value]             static files folder
+  --PROXY                           enable proxy
+  --PROXY_PROTOCOL [value]          http and https are supported
   --PROXY_HOSTNAME [value]
   --PROXY_PORT [value]
   --PROXY_PREFIX [value]
-  --PROXY_RESOURCES_PREFIX [value]
   -h, --help                        output usage information
 ```
+
+### Configuration using `.env` file
+
+Place an `.env.{NODE_ENV}.local`, `.env.{NODE_ENV}` or `.env` file, with this variables (feel free to change values) :
+
+```
+# api endpoint used by frontend
+API_IGNORE_HOST=false
+API_PROTOCOL=http
+API_HOSTNAME=localhost
+API_PORT=3000
+API_YML=/api.yml
+API_PREFIX=/api
+STATIC_PREFIX=/resources
+MOCKS_PATH=/mocks
+
+# backend endpoint used by nginx and proxy
+PROXY_PROTOCOL=http
+PROXY_HOSTNAME=localhost
+PROXY_PORT=3001
+PROXY_PREFIX=/api
+
+# proxy configuration (development only)
+SKIP_VALIDATION=false
+LOG=false
+WATCH=false
+```
+
+> Note: place .env file(s) in the directory you use to launch the server, because it looks for files in `process.cwd()` (_current working directory_)
 
 ### Defaults
 
@@ -138,23 +139,30 @@ API_YML: 'api.yml'
 API_PREFIX: '/api'  
 API_PORT: '3000'  
 API_PROTOCOL: 'http'  
-API_HOSTNAME: 'localhost'  
-RESOURCES_PREFIX: '/resources'  
+API_HOSTNAME: 'localhost'
+
+STATIC: false  
+STATIC_PREFIX: '/resources'  
+STATIC_PATH: '/resources'
+
+MOCKS: true  
 MOCKS_PATH: '/mocks'
 
-PROXY_PROTOCOL: 'http'  
-PROXY_HOSTNAME: 'localhost'  
-PROXY_PORT: '3001'  
-PROXY_PREFIX: '/api'  
-PROXY_RESOURCES_PREFIX: '/resources'
+PROXY: false  
+PROXY_PROTOCOL: ''  
+PROXY_HOSTNAME: ''  
+PROXY_PORT: ''  
+PROXY_PREFIX: ''
 
 SKIP_VALIDATION: false  
 LOG: false
-WATCH=false
+WATCH: false
 
 ## Mocks
 
 Mocks are `.json` or `.js` files placed in the `MOCKS_PATH` directory.
+
+Mocks are enabled by default. The only way to disable is using an ENV variable.
 
 Mocks take precedence over proxy, if a mock is found for the requested route, it is server, otherwise the request is proxied to backend.
 
@@ -231,6 +239,12 @@ const middleware = (req, res, next) => {
 
 module.exports = middleware;
 ```
+
+## Proxy
+
+Proxy is disabled by default. To enable it, use --PROXY flag in CLI or set `PROXY=true` in `.env` file.
+
+When proxy is enabled, all valid requests which doesn't have a mock are forwarder to proxy.
 
 ## How it works
 

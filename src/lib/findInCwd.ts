@@ -1,7 +1,6 @@
 import fs from "fs";
 import Path from "path";
 import { isString } from "util";
-import { ISourceYml } from "../types/env";
 
 /**
  * Searches for files in current working directory, returns the first file found.
@@ -41,18 +40,4 @@ export const findDirInCwd = (dir: string): string | undefined => {
   } catch (err) {
     return;
   }
-};
-
-export const getApiYmlParams = (param: any): ISourceYml[] => {
-  const tempSources = param.split(",").filter(Boolean);
-  const sources = tempSources.map((item: string) => {
-    const isFile = findFileInCwd(item);
-    const isDirectory = findDirInCwd(item);
-    if (!(isFile || isDirectory)) {
-      throw new Error(`Invalid path or file: ${item}`);
-    }
-    return { type: isFile ? "file" : "directory", path: item };
-  });
-
-  return sources;
 };

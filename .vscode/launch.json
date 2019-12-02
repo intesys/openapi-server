@@ -10,7 +10,31 @@
       "name": "Launch NodeJS",
       "program": "${workspaceFolder}/dist/cli.js",
       "preLaunchTask": "npm: build",
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": ["<node_internals>/**"],
+      "env": {
+        "API_YML": "/examples/api.yml,/examples/api",
+        "API_PREFIX": "/api",
+        "API_PORT": "3000",
+        "API_PROTOCOL": "http",
+        "API_HOSTNAME": "localhost",
+
+        "STATIC": "true",
+        "STATIC_PREFIX": "/resources",
+        "STATIC_PATH": "/examples/resources",
+
+        "MOCKS": "true",
+        "MOCKS_PATH": "/examples/mocks",
+
+        "PROXY": "false",
+        "PROXY_PROTOCOL": "http",
+        "PROXY_HOSTNAME": "localhost",
+        "PROXY_PORT": "3001",
+        "PROXY_PREFIX": "/api",
+
+        "SKIP_VALIDATION": "false",
+        "LOG": "false",
+        "WATCH": "false"
+      }
     }
   ]
 }

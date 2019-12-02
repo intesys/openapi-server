@@ -1,15 +1,14 @@
+import { Express } from "express";
 import fs from "fs";
-import { API_YML } from "./lib/globals";
-import { Application } from "express";
 import { Server } from "net";
-import { print, clear } from "./lib/log";
 import init from "./init";
-import { ISourceYml } from "./types/env";
+import { specs } from "./lib/globals";
+import { clear, print } from "./lib/log";
 
 /**
  * Restarts the server on file changes
  */
-export default (app: Application, server: Server) => {
+export default (app: Express, server: Server) => {
   let restarting = false;
   let scheduleRestart = false;
 
@@ -36,7 +35,7 @@ export default (app: Application, server: Server) => {
     server.close(restart);
   };
 
-  Object.values(API_YML).forEach((item: ISourceYml) => {
-    fs.watch(item.path, {}, onChange);
+  Object.values(specs).forEach((item: string) => {
+    fs.watch(item, {}, onChange);
   });
 };
