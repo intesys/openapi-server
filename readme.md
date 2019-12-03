@@ -270,7 +270,7 @@ You can use it to decorate all requests or to define custom routes, not describe
 Examples:
 
 ```javascript
-// prejs and post.js
+// pre.js and post.js
 
 const express = require("express");
 const router = express.Router();
