@@ -1,7 +1,19 @@
 import { isBoolean } from "lodash";
 import Env, { HTTPProtocol } from "./types/env";
 
-export const CUSTOM_ROUTER_NAME = "__router.js";
+export enum CUSTOM_MIDDLEWARES {
+  "PRE",
+  "POST",
+}
+export type CUSTOM_MIDDLEWARES_TYPE = {
+  [CUSTOM_MIDDLEWARES.PRE]: string;
+  [CUSTOM_MIDDLEWARES.POST]: string;
+};
+export const CUSTOM_MIDDLEWARES_PATH = "__middlewares__";
+export const CUSTOM_MIDDLEWARES_NAMES: CUSTOM_MIDDLEWARES_TYPE = {
+  [CUSTOM_MIDDLEWARES.PRE]: "pre.js",
+  [CUSTOM_MIDDLEWARES.POST]: "post.js",
+};
 
 export const defaults: Env = {
   API_YML: "api.yaml",
@@ -25,13 +37,11 @@ export const defaults: Env = {
 
   SKIP_VALIDATION: false,
   LOG: false,
-  WATCH: false
+  WATCH: false,
 };
 
 // list of config keys
 export const options: string[] = Object.keys(defaults);
 
 // boolean config values
-export const booleans: string[] = options.filter(key =>
-  isBoolean(defaults[key])
-);
+export const booleans: string[] = options.filter(key => isBoolean(defaults[key]));
