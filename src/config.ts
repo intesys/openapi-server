@@ -1,6 +1,8 @@
 import { isBoolean } from "lodash";
 import Env, { HTTPProtocol } from "./types/env";
 
+export const CUSTOM_ROUTER_NAME = "__router.js";
+
 export const defaults: Env = {
   API_YML: "api.yaml",
   API_PREFIX: "/api",
