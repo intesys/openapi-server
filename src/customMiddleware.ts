@@ -13,7 +13,7 @@ export default async (middleware: CUSTOM_MIDDLEWARES) => {
   try {
     const stat = Fs.statSync(routerFile);
     if (stat.isFile()) {
-      print(`Using ${middleware} middleware: ${routerFile}`);
+      print(`Using custom middleware: ${routerFile}`);
       const customRouter = require(routerFile);
       if (isAsyncFunction(customRouter)) {
         const awaitedCustomRouter = await customRouter();
