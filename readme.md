@@ -16,7 +16,7 @@ You can also use mocks for testing purpose, as to run end-to-end tests with pred
 - proxy requests to another server
 - optionally validates responses
 - static file server
-- estensible via custom [express](https://expressjs.com/) middlewares
+- extensible via custom [express](https://expressjs.com/) middlewares
 - supports http and https
 - watch mode
 - can be used programmatically, importing entire application or express router only
@@ -248,7 +248,7 @@ const middleware = (req, res, next) => {
   res.locals = {
     body: {
       // ...response
-    }
+    },
   };
 
   next(); // MUST be called
@@ -263,13 +263,15 @@ If `STATIC` is set to true, files contained on `STATIC_PATH` are served on `STAT
 
 ## Extending mock server
 
-If `MOCKS` are enabled (default), you can add a `__router.js` file in mocks directory, exporting an Express middleware. It will be mounted before any other middleware, enabling to intercept all requests.
+If `MOCKS` are enabled (default), you can add a `__middlewares__` folder in mocks directory, exporting one or two [express](https://expressjs.com/) middlewares: `pre.js` and `post.js`. They will be mounted before and after any other middleware, enabling to intercept all requests and respnses.
 
 You can use it to decorate all requests or to define custom routes, not described in openapi spec.
 
 Examples:
 
 ```javascript
+// prejs and post.js
+
 const express = require("express");
 const router = express.Router();
 
@@ -299,7 +301,12 @@ module.exports = router;
 You can also export an async function, which MUST resolve to an express router or middleware.
 
 ```javascript
+// post.js
 // using Parcel to build and watch your single page application
+
+// Parcel intercepts all routes and redirects to an index,
+// so must be used after other routers
+// to prevent it intercepting valid mocked or proxyied routes
 
 const Bundler = require("parcel-bundler");
 
@@ -308,7 +315,7 @@ const entrypoint = "public/index.html";
 const options = {
   open: false,
   outDir: "dist/",
-  publicUrl: "/"
+  publicUrl: "/",
 };
 
 const build = async (file, options = {}) => {
@@ -323,7 +330,7 @@ const build = async (file, options = {}) => {
 module.exports = async () => build(entrypoint, options);
 ```
 
-**Note: you can't export a regular function returning a Promise, MUST export an async function!**
+**Note: you can't export a regular function returning a Promise, MUST export an `async` function!**
 
 ## Proxy
 
