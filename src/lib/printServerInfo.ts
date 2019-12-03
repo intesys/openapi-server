@@ -12,7 +12,7 @@ import {
   STATIC_PATH,
   STATIC_PREFIX,
   SKIP_VALIDATION,
-  WATCH
+  WATCH,
 } from "./globals";
 import { clear, print } from "./log";
 

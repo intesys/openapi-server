@@ -32,8 +32,8 @@ const resolve = async (spec: OpenAPI.Document): Promise<OpenAPI.Document> => {
     loaderOptions: {
       processContent: function(res: any, callback: Function) {
         callback(null, yaml.safeLoad(res.text));
-      }
-    }
+      },
+    },
   };
   const res: any = await JsonRefs.resolveRefs(spec, options);
   return res.resolved as OpenAPI.Document;

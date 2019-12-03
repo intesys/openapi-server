@@ -23,14 +23,10 @@ const exitWithError = (message: string, code: number = 1) => {
 // MOCKS_PATH and API_YML must be absolute paths
 
 if (globals.MOCKS) {
-  globals.MOCKS_PATH =
-    findDirInCwd(globals.MOCKS_PATH) ||
-    exitWithError(`Directory not found: ${globals.MOCKS_PATH}`);
+  globals.MOCKS_PATH = findDirInCwd(globals.MOCKS_PATH) || exitWithError(`Directory not found: ${globals.MOCKS_PATH}`);
 }
 
-export const specs: string[] =
-  findSpecs(globals.API_YML) ||
-  exitWithError(`Invalid param: ${globals.API_YML}`);
+export const specs: string[] = findSpecs(globals.API_YML) || exitWithError(`Invalid param: ${globals.API_YML}`);
 
 const {
   API_YML,
@@ -50,7 +46,7 @@ const {
   PROXY_PREFIX,
   SKIP_VALIDATION,
   LOG,
-  WATCH
+  WATCH,
 }: Env = globals;
 
 export {
@@ -71,7 +67,7 @@ export {
   PROXY_PREFIX,
   SKIP_VALIDATION,
   LOG,
-  WATCH
+  WATCH,
 };
 
 const port = getPort(PROXY_PORT);

@@ -10,32 +10,29 @@
  * - Ajv: https://ajv.js.org
  * - JsonSchema: http://json-schema.org/
  */
-import { get } from 'lodash';
-import validate from '../lib/validate';
-import { RequestHandler } from 'express';
-import { OperationObject, ResponsesObject } from '../types/openApi';
+import { get } from "lodash";
+import validate from "../lib/validate";
+import { RequestHandler } from "express";
+import { OperationObject, ResponsesObject } from "../types/openApi";
 
 export default (spec: OperationObject): RequestHandler => (req, res, next) => {
   const code = res.statusCode || 200;
-  const format = res.get('Content-Type') || 'application/json';
+  const format = res.get("Content-Type") || "application/json";
   const schema = getResponseSchema(spec, code, format);
   try {
     validate(schema, res.locals.body);
     next();
-  }
-  catch (err) {
+  } catch (err) {
     const message = `invalid response: ${err.message}`;
     next(new Error(message));
   }
-}
+};
 
-const getResponseSchema = (
-  spec: OperationObject,
-  code: number,
-  format: string
-): ResponsesObject => {
-  return get(spec, `responses.${code}.schema`) // swagger v.2
-    || get(spec, `responses.default.schema`) // swagger v.2
-    || get(spec, `responses.${code}.content.${format}.schema`) // openapi v.3.0.*
-    || get(spec, `responses.default.content.${format}.schema`) // openapi v.3.0.*
+const getResponseSchema = (spec: OperationObject, code: number, format: string): ResponsesObject => {
+  return (
+    get(spec, `responses.${code}.schema`) || // swagger v.2
+    get(spec, `responses.default.schema`) || // swagger v.2
+    get(spec, `responses.${code}.content.${format}.schema`) || // openapi v.3.0.*
+    get(spec, `responses.default.content.${format}.schema`)
+  ); // openapi v.3.0.*
 };

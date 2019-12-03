@@ -6,11 +6,7 @@ import validateResponse from "../middlewares/validateResponse";
 import { OperationObject } from "../types/openApi";
 import setProxyHeaders from "../middlewares/setProxyHeaders";
 
-export default (
-  method: string,
-  route: string,
-  operationSpec: OperationObject
-): RequestHandler[] => {
+export default (method: string, route: string, operationSpec: OperationObject): RequestHandler[] => {
   const middlewares = [setProxyHeaders()];
 
   MOCKS && middlewares.push(tryMock(method, route));

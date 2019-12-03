@@ -30,24 +30,19 @@ const getFullPaths = (spec: OpenAPI.Document): string[] => {
     .reduce((paths, specPaths) => paths.concat(specPaths), []);
 };
 
-const findDuplicates = (arr: string[]) =>
-  arr.filter((item, index) => arr.indexOf(item) != index);
+const findDuplicates = (arr: string[]) => arr.filter((item, index) => arr.indexOf(item) != index);
 
 const validatePathsOrThrow = (paths: string[]): boolean => {
   const duplicates = findDuplicates(paths);
   if (duplicates.length) {
     throw new Error(
-      `Duplicate routes found: ${duplicates.join(
-        ",\n"
-      )}.\nRoutes should be unique, please remove doubles.`
+      `Duplicate routes found: ${duplicates.join(",\n")}.\nRoutes should be unique, please remove doubles.`
     );
   }
   return true;
 };
 
 export const validateSpecsOrThrow = (specs: OpenAPI.Document[]): boolean => {
-  const paths = specs
-    .map(spec => getFullPaths(spec))
-    .reduce((paths, spec) => paths.concat(spec), []);
+  const paths = specs.map(spec => getFullPaths(spec)).reduce((paths, spec) => paths.concat(spec), []);
   return validatePathsOrThrow(paths);
 };

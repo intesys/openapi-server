@@ -1,99 +1,97 @@
-import { OpenAPIV2, OpenAPIV3, OpenAPI } from 'openapi-types';
-import openApiSchemaValidate from './openApiSchemaValidate';
+import { OpenAPIV2, OpenAPIV3, OpenAPI } from "openapi-types";
+import openApiSchemaValidate from "./openApiSchemaValidate";
 
-describe('openApiSchemaValidate', () => {
-
+describe("openApiSchemaValidate", () => {
   const v2: OpenAPIV2.Document = {
-    swagger: '2.0',
+    swagger: "2.0",
     info: {
-      title: 'test',
-      version: '0'
+      title: "test",
+      version: "0",
     },
     paths: {
-      '/': {
+      "/": {
         get: {
           responses: {
-            '200': {
-              description: ''
-            }
-          }
-        }
-      }
-    }
-  }
+            "200": {
+              description: "",
+            },
+          },
+        },
+      },
+    },
+  };
 
   const v3: OpenAPIV3.Document = {
-    openapi: '3.0.0',
+    openapi: "3.0.0",
     info: {
-      title: 'test',
-      version: '0'
+      title: "test",
+      version: "0",
     },
     paths: {
-      '/': {
+      "/": {
         get: {
           responses: {
-            '200': {
-              description: ''
-            }
-          }
-        }
-      }
-    }
-  }
+            "200": {
+              description: "",
+            },
+          },
+        },
+      },
+    },
+  };
 
   const invalidV2 = (): any => ({
-    swagger: '2.0',
+    swagger: "2.0",
     info: {
-      title: 'test'
+      title: "test",
       // missing version
     },
     paths: {
-      '/': {
+      "/": {
         get: {
           responses: {
-            '200': '',
-            default: ''
-          }
-        }
-      }
-    }
-  })
+            "200": "",
+            default: "",
+          },
+        },
+      },
+    },
+  });
 
   const invalidV3 = (): any => ({
-    openapi: '3.0.0',
+    openapi: "3.0.0",
     info: {
-      title: 'test'
+      title: "test",
       // missing version
     },
     paths: {
-      '/': {
+      "/": {
         get: {
           responses: {
-            '200': {
+            "200": {
               // missing description
-            }
-          }
-        }
-      }
-    }
-  })
+            },
+          },
+        },
+      },
+    },
+  });
 
-  it('validates v2', () => {
+  it("validates v2", () => {
     const sut = openApiSchemaValidate(v2);
     expect(sut).toBeTruthy();
-  })
+  });
 
-  it('validates v3', () => {
+  it("validates v3", () => {
     const sut = openApiSchemaValidate(v3);
     expect(sut).toBeTruthy();
-  })
+  });
 
-  it('throws on invalid v2', () => {
+  it("throws on invalid v2", () => {
     expect(() => openApiSchemaValidate(invalidV2())).toThrow();
-  })
+  });
 
-  it('throws on invalid v3', () => {
+  it("throws on invalid v3", () => {
     expect(() => openApiSchemaValidate(invalidV3())).toThrow();
-  })
-
-})
+  });
+});

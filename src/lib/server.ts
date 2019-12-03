@@ -21,7 +21,7 @@ const createHttps = (app: Express) =>
   https.createServer(
     {
       key: fs.readFileSync(Path.join(__dirname, "../cert/server.key")),
-      cert: fs.readFileSync(Path.join(__dirname, "../cert/server.cert"))
+      cert: fs.readFileSync(Path.join(__dirname, "../cert/server.cert")),
     },
     app
   );

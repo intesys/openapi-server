@@ -25,7 +25,7 @@ const handleRemoteError: ErrorRequestHandler = (err, req, res) => {
     Status: status,
     Source: err.source,
     Headers: headers,
-    Error: data
+    Error: data,
   });
   const statusCode = error.status || res.statusCode || 500;
   res.set(headers);
@@ -36,7 +36,7 @@ const handleRemoteError: ErrorRequestHandler = (err, req, res) => {
 const handleLocalError: ErrorRequestHandler = (err, req, res) => {
   logError({
     Request: `${req.method.toUpperCase()} ${req.originalUrl}`,
-    Error: err
+    Error: err,
   });
   const error = formatError(err);
   const status = error.status || res.statusCode || 500;
@@ -58,6 +58,6 @@ const stringify = (obj: any): string => {
   return inspect(obj, {
     colors: false,
     compact: false,
-    breakLength: Infinity
+    breakLength: Infinity,
   }) as string;
 };

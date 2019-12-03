@@ -9,11 +9,7 @@ import { log } from "../lib/log";
  * @param method one value of `operations`
  * @param route path key, as example: '/item/{id}'
  */
-const tryMock = (method: string, route: string): RequestHandler => (
-  req,
-  res,
-  next
-) => {
+const tryMock = (method: string, route: string): RequestHandler => (req, res, next) => {
   if (!isUndefined(get(res, "locals.body"))) {
     return voidMiddleware(req, res, next);
   }
@@ -31,7 +27,7 @@ const tryMock = (method: string, route: string): RequestHandler => (
       log({
         "Mocking request": req.originalUrl,
         Method: method.toUpperCase(),
-        "Handled by middleware": mockPath
+        "Handled by middleware": mockPath,
       });
       return mock(req, res, next);
     }
@@ -40,7 +36,7 @@ const tryMock = (method: string, route: string): RequestHandler => (
     log({
       "Mocking request": req.originalUrl,
       Method: method.toUpperCase(),
-      Response: mock
+      Response: mock,
     });
   } catch (err) {
     const error = new Error(err);
@@ -52,8 +48,7 @@ const tryMock = (method: string, route: string): RequestHandler => (
   return next();
 };
 
-const notFoundError = (err: Error): boolean =>
-  /cannot find module/.test(err.message.toLowerCase());
+const notFoundError = (err: Error): boolean => /cannot find module/.test(err.message.toLowerCase());
 
 const isFunction = (value: any): boolean => typeof value === "function";
 

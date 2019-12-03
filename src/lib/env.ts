@@ -14,7 +14,7 @@ const loadEnv = () => {
     // since normally you expect tests to produce the same
     // results for everyone
     NODE_ENV !== "test" && ".env.local",
-    ".env"
+    ".env",
   ].filter(Boolean);
 
   dotenvFiles.map(dotenvFile => {

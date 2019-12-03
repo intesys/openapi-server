@@ -1,6 +1,6 @@
 export enum HTTPProtocol {
   "http" = "http",
-  "https" = "https"
+  "https" = "https",
 }
 
 type Env = {

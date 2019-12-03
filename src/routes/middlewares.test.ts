@@ -11,7 +11,7 @@ describe("Middlewares", () => {
     jest.mock("../lib/globals", () => ({
       MOCKS: true,
       PROXY: true,
-      SKIP_VALIDATION: true
+      SKIP_VALIDATION: true,
     }));
     const middlewares = require("./middlewares").default;
     const sut = middlewares("str", "str", {});
@@ -23,7 +23,7 @@ describe("Middlewares", () => {
     jest.mock("../lib/globals", () => ({
       MOCKS: false,
       PROXY: true,
-      SKIP_VALIDATION: false
+      SKIP_VALIDATION: false,
     }));
     const middlewares = require("./middlewares").default;
     const sut = middlewares("str", "str", {});
@@ -35,7 +35,7 @@ describe("Middlewares", () => {
     jest.mock("../lib/globals", () => ({
       MOCKS: true,
       PROXY: false,
-      SKIP_VALIDATION: false
+      SKIP_VALIDATION: false,
     }));
     const middlewares = require("./middlewares").default;
     const sut = middlewares("str", "str", {});
@@ -47,7 +47,7 @@ describe("Middlewares", () => {
     jest.mock("../lib/globals", () => ({
       MOCKS: true,
       PROXY: true,
-      SKIP_VALIDATION: false
+      SKIP_VALIDATION: false,
     }));
     const middlewares = require("./middlewares").default;
     const sut = middlewares("str", "str", {});

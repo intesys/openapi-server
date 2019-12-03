@@ -31,7 +31,7 @@ export default (url: string): RequestHandler => async (req, res, next) => {
       data: req.body,
       withCredentials: true,
       httpAgent,
-      httpsAgent
+      httpsAgent,
     });
     res.locals.body = response.data;
     res.set(response.headers);
@@ -39,7 +39,7 @@ export default (url: string): RequestHandler => async (req, res, next) => {
     log({
       "Request forwarded to": `${method.toUpperCase()} ${fullUrl}`,
       "Request body": req.body,
-      "Response body": response.data
+      "Response body": response.data,
     });
     next();
   } catch (err) {
