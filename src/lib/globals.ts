@@ -20,12 +20,11 @@ const exitWithError = (message: string, code: number = 1) => {
   return ""; // for typescript compliance only
 };
 
-// MOCKS_PATH and API_YML must be absolute paths
+// Absolutize MOCKS_PATH
+globals.MOCKS_PATH =
+  findDirInCwd(globals.MOCKS_PATH || "/") || exitWithError(`Directory not found: ${globals.MOCKS_PATH}`);
 
-if (globals.MOCKS) {
-  globals.MOCKS_PATH = findDirInCwd(globals.MOCKS_PATH) || exitWithError(`Directory not found: ${globals.MOCKS_PATH}`);
-}
-
+// Absolutize API_YML path
 export const specs: string[] = findSpecs(globals.API_YML) || exitWithError(`Invalid param: ${globals.API_YML}`);
 
 const {
