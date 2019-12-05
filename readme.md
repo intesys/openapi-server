@@ -100,12 +100,12 @@ CLI options take precedence over env variables.
 Usage: index [options]
 
 Options:
-  -v, --version                     output the version number
+  -v, --version                     output version number
   -a,--API_YML [value]              api yml file / folder / list of file or folders
   -m,--MOCKS_PATH [value]           mocks path
   -l,--LOG                          enable console log
   -s,--SKIP_VALIDATION              turn off validation
-  -w,--WATCH                        restart the server on changes
+  -w,--WATCH                        restart server on changes
   --API_PREFIX [value]
   --API_PORT [value]
   --API_PROTOCOL [value]            http and https are supported
@@ -118,6 +118,7 @@ Options:
   --PROXY_HOSTNAME [value]
   --PROXY_PORT [value]
   --PROXY_PREFIX [value]
+  --VERBOSE [number]                depth of logs shown
   -h, --help                        output usage information
 ```
 
@@ -145,10 +146,11 @@ PROXY_PREFIX=/api
 # proxy configuration (development only)
 SKIP_VALIDATION=false
 LOG=false
+VERBOSE=2
 WATCH=false
 ```
 
-> Note: place .env file(s) in the directory you use to launch the server, because it looks for files in `process.cwd()` (_current working directory_)
+> Note: place .env file(s) in the directory you use to launch server, because it looks for files in `process.cwd()` (_current working directory_)
 
 ### Defaults
 
@@ -172,7 +174,8 @@ PROXY_PORT: ''
 PROXY_PREFIX: ''
 
 SKIP_VALIDATION: false  
-LOG: false
+LOG: false  
+VERBOSE: 2  
 WATCH: false
 
 ## Mocks
@@ -181,7 +184,7 @@ Mocks are `.json` or `.js` files placed in the `MOCKS_PATH` directory.
 
 Mocks are enabled by default. The only way to disable is using an ENV variable.
 
-Mocks take precedence over proxy, if a mock is found for the requested route, it is server, otherwise the request is proxied to backend.
+Mocks take precedence over proxy, if a mock is found for the requested route, it is served, otherwise the request is proxied to backend.
 
 The MOCKS_PATH directory has a sub-folder structure which follows the paths to mock, as example:
 

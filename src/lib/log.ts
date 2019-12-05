@@ -1,5 +1,7 @@
-import { LOG } from "./globals";
+import { LOG, VERBOSE } from "./globals";
 import { inspect } from "util";
+
+const depth: number | null = VERBOSE !== true ? VERBOSE || 0 : null;
 
 export const print = (message: any) => {
   console.info(stringify(message));
@@ -23,5 +25,5 @@ const stringify = (message: any): string => {
   if (typeof message === "string") {
     return message;
   }
-  return inspect(message, { colors: true, compact: false, breakLength: Infinity }) as string;
+  return inspect(message, { colors: true, compact: false, breakLength: Infinity, depth }) as string;
 };

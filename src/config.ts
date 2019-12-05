@@ -37,6 +37,7 @@ export const defaults: Env = {
 
   SKIP_VALIDATION: false,
   LOG: false,
+  VERBOSE: 2,
   WATCH: false,
 };
 

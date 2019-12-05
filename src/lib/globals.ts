@@ -45,6 +45,7 @@ const {
   PROXY_PREFIX,
   SKIP_VALIDATION,
   LOG,
+  VERBOSE,
   WATCH,
 }: Env = globals;
 
@@ -66,6 +67,7 @@ export {
   PROXY_PREFIX,
   SKIP_VALIDATION,
   LOG,
+  VERBOSE,
   WATCH,
 };
 

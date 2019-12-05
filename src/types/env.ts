@@ -21,6 +21,7 @@ type Env = {
   PROXY_PREFIX: string;
   SKIP_VALIDATION?: boolean;
   LOG?: boolean;
+  VERBOSE: number | boolean | null;
   WATCH?: boolean;
 };
 
