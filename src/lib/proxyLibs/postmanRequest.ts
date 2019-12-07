@@ -1,3 +1,4 @@
+/// <reference path="./postmanRequest.d.ts" />
 import request from "postman-request";
 import { ProxyLib } from "../../types/proxyLib";
 import { RemoteError } from "../proxy";
