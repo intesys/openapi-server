@@ -1,7 +1,6 @@
-import axios from "axios";
-import http from "http";
-import https from "https";
 import { RequestHandler } from "express";
+import { proxyLib } from "../config";
+import { method } from "../types/proxyLib";
 import { log } from "./log";
 
 export class RemoteError {
@@ -16,23 +15,12 @@ export class RemoteError {
   }
 }
 
-const httpAgent = new http.Agent();
-const httpsAgent = new https.Agent({ rejectUnauthorized: false });
-
 export default (url: string): RequestHandler => async (req, res, next) => {
-  const fullUrl = `${url}${req.url}`;
   try {
+    const fullUrl = `${url}${req.url}`;
     const headers = req.headers;
-    const method = req.method.toLowerCase();
-    const response = await axios({
-      method,
-      headers,
-      url: fullUrl,
-      data: req.body,
-      withCredentials: true,
-      httpAgent,
-      httpsAgent,
-    });
+    const method = req.method.toLowerCase() as method;
+    const response = await proxyLib(method, fullUrl, headers)(req, res);
     res.locals.body = response.data;
     res.set(response.headers);
     res.set("Forwarded", `for=${url}`);
@@ -43,11 +31,6 @@ export default (url: string): RequestHandler => async (req, res, next) => {
     });
     next();
   } catch (err) {
-    if (err.response) {
-      // it's an axios error
-      next(new RemoteError(fullUrl, err.response));
-      return;
-    }
     next(err);
   }
 };

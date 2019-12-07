@@ -1,4 +1,5 @@
 import { isBoolean } from "lodash";
+import { proxyLibs } from "./lib/proxyLibs";
 import Env, { HTTPProtocol } from "./types/env";
 
 export enum CUSTOM_MIDDLEWARES {
@@ -40,6 +41,9 @@ export const defaults: Env = {
   VERBOSE: 2,
   WATCH: false,
 };
+
+// proxy library in use, can be axios, postman-request, got
+export const proxyLib = proxyLibs["axios"];
 
 // list of config keys
 export const options: string[] = Object.keys(defaults);
