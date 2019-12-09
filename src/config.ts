@@ -44,11 +44,8 @@ export const defaults: Env = {
 // list of config keys
 export const options: string[] = Object.keys(defaults);
 
-console.log("options", options);
-
 // boolean config values
 export const booleans: string[] = options.filter(key => isBoolean(defaults[key]));
-console.log("booleans", booleans);
 
 // proxy library in use, can be axios, postman-request, got
 export const proxyLib: string = "postman-request";
