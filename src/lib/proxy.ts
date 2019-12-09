@@ -23,15 +23,17 @@ export default (url: string): RequestHandler => async (req, res, next) => {
     const fullUrl = `${url}${req.url}`;
     const headers = req.headers;
     const method = req.method.toLowerCase() as method;
-    const response = await proxyLibinstance(method, fullUrl, headers)(req, res);
-    res.locals.body = response.data;
-    res.set(response.headers);
-    res.set("Forwarded", `for=${url}`);
-    log({
-      "Request forwarded to": `${method.toUpperCase()} ${fullUrl}`,
-      "Request body": req.body,
-      "Response body": response.data,
-    });
+
+    const response = proxyLibinstance(method, fullUrl, headers)(req, res);
+
+    // res.locals.body = response.data;
+    // res.set(response.headers);
+    // res.set("Forwarded", `for=${url}`);
+    // log({
+    //   "Request forwarded to": `${method.toUpperCase()} ${fullUrl}`,
+    //   "Request body": req.body,
+    //   "Response body": response.data,
+    // });
     next();
   } catch (err) {
     next(err);
