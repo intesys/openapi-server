@@ -2,6 +2,9 @@ import { RequestHandler } from "express";
 import { proxyLib } from "../config";
 import { method } from "../types/proxyLib";
 import { log } from "./log";
+import { proxyLibs } from "./proxyLibs";
+
+export const proxyLibinstance = proxyLibs[proxyLib];
 
 export class RemoteError {
   _remote: boolean;
@@ -20,7 +23,7 @@ export default (url: string): RequestHandler => async (req, res, next) => {
     const fullUrl = `${url}${req.url}`;
     const headers = req.headers;
     const method = req.method.toLowerCase() as method;
-    const response = await proxyLib(method, fullUrl, headers)(req, res);
+    const response = await proxyLibinstance(method, fullUrl, headers)(req, res);
     res.locals.body = response.data;
     res.set(response.headers);
     res.set("Forwarded", `for=${url}`);
