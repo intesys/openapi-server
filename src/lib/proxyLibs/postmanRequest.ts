@@ -20,7 +20,7 @@ const PostmanRequestLib: ProxyLib = (method, rawUrl, headers = {}) => async (req
   };
 
   return new Promise((resolve, reject) => {
-    request(options, (error: {}, response: {}, body: {}) => {
+    request(options, (error: any, response: { headers: any }, body: any) => {
       if (error) {
         return reject(new RemoteError(`${method} ${url}`, error));
       }
