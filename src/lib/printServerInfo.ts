@@ -1,5 +1,4 @@
 import {
-  API_HOSTNAME,
   API_PORT,
   API_PREFIX,
   API_PROTOCOL,
@@ -8,10 +7,10 @@ import {
   MOCKS_PATH,
   PROXY,
   proxyUrl,
+  SKIP_VALIDATION,
   STATIC,
   STATIC_PATH,
   STATIC_PREFIX,
-  SKIP_VALIDATION,
   WATCH,
 } from "./globals";
 import { clear, print } from "./log";
@@ -19,7 +18,7 @@ import { clear, print } from "./log";
 export default () => {
   clear();
   print(`
-  Openapi server running at ${API_PROTOCOL}://${API_HOSTNAME}:${API_PORT}
+  Openapi server running at ${API_PROTOCOL}://localhost:${API_PORT}
 
   Api yml: ${API_YML}
   Api prefix: ${API_PREFIX}
