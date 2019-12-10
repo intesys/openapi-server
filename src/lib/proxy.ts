@@ -42,7 +42,6 @@ export default (url: string): RequestHandler => async (req, res, next) => {
     // Here headers are being set manually because passing the whole load of response headers directly
     // just like in the commented line of code above causes unexpected issues
 
-    console.log(res.getHeaders());
     log({
       "Request forwarded to": `${method.toUpperCase()} ${fullUrl}`,
       "Request body": req.body,

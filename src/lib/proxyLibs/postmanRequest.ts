@@ -11,22 +11,21 @@ const PostmanRequestLib: ProxyLib = (method, rawUrl, headers = {}) => async (req
     Authorization: headers.authorization,
   };
 
+  const options = {
+    method,
+    headers: temp,
+    url: url.parse(rawUrl),
+    ...(Object.keys(req.body).length != 0 && { body: JSON.stringify(req.body) }),
+    strictSSL: false,
+  };
+
   return new Promise((resolve, reject) => {
-    request(
-      {
-        method,
-        headers: temp,
-        url: url.parse(rawUrl),
-        // body: req.body,
-        strictSSL: false,
-      },
-      (error: {}, response: {}, body: {}) => {
-        if (error) {
-          return reject(new RemoteError(`${method} ${url}`, error));
-        }
-        resolve({ data: body, headers: response.headers });
+    request(options, (error: {}, response: {}, body: {}) => {
+      if (error) {
+        return reject(new RemoteError(`${method} ${url}`, error));
       }
-    );
+      resolve({ data: body, headers: response.headers });
+    });
   });
 };
 
