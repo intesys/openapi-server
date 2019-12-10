@@ -3,16 +3,16 @@ import request from "postman-request";
 import { ProxyLib } from "../../types/proxyLib";
 import { RemoteError } from "../proxy";
 import url from "url";
-import { log } from "../log";
 
-const PostmanRequestLib: ProxyLib = (method, rawUrl, headers = {}) => (req, res) => {
+const PostmanRequestLib: ProxyLib = (method, rawUrl, headers = {}) => async (req, res) => {
+  // If the parameter 'header' is passed directly to request(), it takes back garbage code
+  // in the body instead of a json with preventivo data
   const temp = {
     Authorization: headers.authorization,
   };
 
-  try {
-    console.log("before request()");
-    return request(
+  return new Promise((resolve, reject) => {
+    request(
       {
         method,
         headers: temp,
@@ -21,19 +21,13 @@ const PostmanRequestLib: ProxyLib = (method, rawUrl, headers = {}) => (req, res)
         strictSSL: false,
       },
       (error: {}, response: {}, body: {}) => {
-        res.locals.body = body;
-        res.set(response.headers);
-        res.set("Forwarded", `for=${url}`);
-        log({
-          "Request forwarded to": `${method.toUpperCase()} ${rawUrl}`,
-          "Request body": req.body,
-          "Response body": body,
-        });
+        if (error) {
+          return reject(new RemoteError(`${method} ${url}`, error));
+        }
+        resolve({ data: body, headers: response.headers });
       }
     );
-  } catch (err) {
-    throw new RemoteError(`${method} ${url}`, err);
-  }
+  });
 };
 
 export default PostmanRequestLib;

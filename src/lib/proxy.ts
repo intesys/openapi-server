@@ -24,16 +24,22 @@ export default (url: string): RequestHandler => async (req, res, next) => {
     const headers = req.headers;
     const method = req.method.toLowerCase() as method;
 
-    const response = proxyLibinstance(method, fullUrl, headers)(req, res);
+    const response = await proxyLibinstance(method, fullUrl, headers)(req, res);
 
-    // res.locals.body = response.data;
-    // res.set(response.headers);
-    // res.set("Forwarded", `for=${url}`);
-    // log({
-    //   "Request forwarded to": `${method.toUpperCase()} ${fullUrl}`,
-    //   "Request body": req.body,
-    //   "Response body": response.data,
-    // });
+    res.locals.body = response.data;
+
+    // On postman app, it works only if this set is not made. although it goes with weird headers.
+    // Note that these headers inside response are pretty similar to the ones that appear when a
+    // direct call to the gateway is done, so I believe the problem is not on them. Take a look
+    // at postmanRequest.ts
+    res.set(response.headers);
+
+    res.set("Forwarded", `for=${url}`);
+    log({
+      "Request forwarded to": `${method.toUpperCase()} ${fullUrl}`,
+      "Request body": req.body,
+      "Response body": response.data,
+    });
     next();
   } catch (err) {
     next(err);
