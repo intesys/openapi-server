@@ -4,7 +4,7 @@ import { ProxyLib } from "../../types/proxyLib";
 import { RemoteError } from "../proxy";
 import url from "url";
 import e from "express";
-import { raw } from "body-parser";
+import { filterHeaders } from "./utils";
 
 const composeOptions = (options: {}, req: e.Request) => {
   switch (req.headers["content-type"]) {
@@ -36,14 +36,18 @@ const composeOptions = (options: {}, req: e.Request) => {
 };
 
 const PostmanRequestLib: ProxyLib = (method, rawUrl, headers = {}) => async (req, res) => {
-  delete headers["accept-encoding"];
+  let optionsTemplate = {};
 
-  const optionsTemplate = {
-    method,
-    headers,
-    url: url.parse(rawUrl),
-    strictSSL: false,
-  };
+  try {
+    optionsTemplate = {
+      method,
+      headers: filterHeaders(headers),
+      url: url.parse(rawUrl),
+      strictSSL: false,
+    };
+  } catch (err) {
+    return Promise.reject(err);
+  }
 
   const options = composeOptions(optionsTemplate, req);
 
@@ -52,7 +56,7 @@ const PostmanRequestLib: ProxyLib = (method, rawUrl, headers = {}) => async (req
       if (error) {
         return reject(new RemoteError(`${method} ${url}`, error));
       }
-      resolve({ data: body, headers: response.headers });
+      resolve({ data: body, headers: filterHeaders(response.headers) });
     });
   });
 };

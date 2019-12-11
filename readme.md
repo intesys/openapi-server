@@ -118,6 +118,7 @@ Options:
   --PROXY_HOSTNAME [value]
   --PROXY_PORT [value]
   --PROXY_PREFIX [value]
+  --PROXY_FILTER_HEADERS            remove some headers, look below for details
   --VERBOSE [number]                depth of logs shown
   -h, --help                        output usage information
 ```
@@ -142,6 +143,7 @@ PROXY_PROTOCOL=http
 PROXY_HOSTNAME=localhost
 PROXY_PORT=3001
 PROXY_PREFIX=/api
+PROXY_FILTER_HEADERS=false
 
 # proxy configuration (development only)
 SKIP_VALIDATION=false
@@ -171,7 +173,8 @@ PROXY: false
 PROXY_PROTOCOL: ''  
 PROXY_HOSTNAME: ''  
 PROXY_PORT: ''  
-PROXY_PREFIX: ''
+PROXY_PREFIX: ''  
+PROXY_FILTER_HEADERS: false
 
 SKIP_VALIDATION: false  
 LOG: false  
@@ -340,6 +343,41 @@ module.exports = async () => build(entrypoint, options);
 Proxy is disabled by default. To enable it, use --PROXY flag in CLI or set `PROXY=true` in `.env` file.
 
 When proxy is enabled, all valid requests which doesn't have a mock are forwarder to proxy.
+
+### PROXY_FILTER_HEADERS
+
+Some server may not accept some proxied requests. In this case it could be useful to filter some headers. This can be done by setting `PROXY_FILTER_HEADERS` to `true`.
+
+> Look at [https://github.com/postmanlabs/postman-request#proxies](https://github.com/postmanlabs/postman-request#proxies)
+
+Removes these headers:
+
+```
+accept
+accept-charset
+accept-encoding
+accept-language
+accept-ranges
+cache-control
+content-encoding
+content-language
+content-length
+content-location
+content-md5
+content-range
+content-type
+connection
+date
+expect
+max-forwards
+pragma
+proxy-authorization
+referer
+te
+transfer-encoding
+user-agent
+via
+```
 
 ## How it works
 

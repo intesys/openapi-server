@@ -34,6 +34,7 @@ export const defaults: Env = {
   PROXY_HOSTNAME: "",
   PROXY_PORT: "",
   PROXY_PREFIX: "",
+  PROXY_FILTER_HEADERS: false,
 
   SKIP_VALIDATION: false,
   LOG: false,

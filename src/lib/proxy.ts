@@ -1,8 +1,10 @@
 import { RequestHandler } from "express";
 import { proxyLib } from "../config";
 import { method } from "../types/proxyLib";
+import { PROXY_FILTER_HEADERS } from "./globals";
 import { log } from "./log";
 import { proxyLibs } from "./proxyLibs";
+import { filterHeaders } from "./proxyLibs/utils";
 
 export const proxyLibinstance = proxyLibs[proxyLib];
 
@@ -21,32 +23,19 @@ export class RemoteError {
 export default (url: string): RequestHandler => async (req, res, next) => {
   try {
     const fullUrl = `${url}${req.url}`;
-    const headers = req.headers;
+    const headers = PROXY_FILTER_HEADERS ? filterHeaders(req.headers) : req.headers;
     const method = req.method.toLowerCase() as method;
-
     const response = await proxyLibinstance(method, fullUrl, headers)(req, res);
-
+    const responseHeaders = PROXY_FILTER_HEADERS ? filterHeaders(response.headers) : response.headers;
     res.locals.body = response.data;
 
-    // On postman app, it works only if this set is not made. although it goes with weird headers.
-    // Note that these headers inside response are pretty similar to the ones that appear when a
-    // direct call to the gateway is done, so I believe the problem is not on them. Take a look
-    // at postmanRequest.ts
-
-    // res.set(response.headers);
-
-    res.contentType(response.headers["content-type"]);
-    res.set("Id", response.headers["id"]);
-    res.set("AuthToken", response.headers["authtoken"]);
-    res.set("Authorization", response.headers["authorization"]);
-    // Here headers are being set manually because passing the whole load of response headers directly
-    // just like in the commented line of code above causes unexpected issues
-
+    res.set(responseHeaders);
     res.set("Forwarded", `for=${url}`);
-
     log({
-      "Request forwarded to": `${method.toUpperCase()} ${fullUrl}`,
+      "Request forwarded to": `${method.toUpperCase()} ${fullUrl} ${PROXY_FILTER_HEADERS && "(filtered headers)"}`,
+      "Request headers": headers,
       "Request body": req.body,
+      "Reponse headers": responseHeaders,
       "Response body": response.data,
     });
     next();
