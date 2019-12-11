@@ -48,5 +48,5 @@ export const options: string[] = Object.keys(defaults);
 // boolean config values
 export const booleans: string[] = options.filter(key => isBoolean(defaults[key]));
 
-// proxy library in use, can be axios, postman-request, got
+// proxy library in use, can be axios, postman-request, nodeFetch
 export const proxyLib: string = "postman-request";

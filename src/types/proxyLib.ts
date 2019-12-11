@@ -15,9 +15,7 @@ export type method =
   | "HEAD"
   | "DELETE"
   | "OPTIONS"
-  | "TRACE"
-  | "options"
-  | "trace";
+  | "options";
 
 export interface ProxyResponse {
   data: any;

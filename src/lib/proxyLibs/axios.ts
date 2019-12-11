@@ -14,11 +14,12 @@ const AxiosLib: ProxyLib = (method, url, headers = {}) => async (req, res) => {
       headers,
       url,
       data: req.body,
+      maxRedirects: 0,
       withCredentials: true,
       httpAgent,
       httpsAgent,
     });
-    return { data: response.data, headers: response.headers };
+    return { data: response.data, headers: response.headers, status: response.status };
   } catch (err) {
     throw new RemoteError(`${method} ${url}`, err);
   }

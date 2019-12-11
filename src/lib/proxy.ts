@@ -20,20 +20,35 @@ export class RemoteError {
   }
 }
 
+const getHost = (url: string): string => {
+  const _url = new URL(url);
+  return _url.host;
+};
+
+/**
+ * @param {string} url fully qualified url
+ */
 export default (url: string): RequestHandler => async (req, res, next) => {
   try {
     const fullUrl = `${url}${req.url}`;
-    const headers = PROXY_FILTER_HEADERS ? filterHeaders(req.headers) : req.headers;
     const method = req.method.toLowerCase() as method;
+    const headers = PROXY_FILTER_HEADERS ? filterHeaders(req.headers) : req.headers;
+    headers.host = getHost(url);
 
     const response: ProxyResponse = await proxyLibinstance(method, fullUrl, headers)(req, res);
 
     const responseHeaders = PROXY_FILTER_HEADERS ? filterHeaders(response.headers) : response.headers;
-    res.locals.body = response.data;
 
     res.set(responseHeaders);
     res.set("Forwarded", `for=${url}`);
     res.status(response.status);
+
+    res.locals.body = response.data;
+
+    if (response.status >= 400 && !response.data) {
+      // avoid to pass to next middleware
+      res.locals.body = "";
+    }
 
     log({
       "Request forwarded to": `${method.toUpperCase()} ${fullUrl} ${PROXY_FILTER_HEADERS && "(filtered headers)"}`,

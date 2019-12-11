@@ -1,7 +1,6 @@
 /// <reference path="./postmanRequest.d.ts" />
 import { IncomingMessage } from "http";
 import request from "postman-request";
-import url from "url";
 import { ProxyLib } from "../../types/proxyLib";
 import { RemoteError } from "../proxy";
 
@@ -24,15 +23,16 @@ const composeOptions = (contentType: string, body: any, defaults: {}): {} => {
   }
 };
 
-const PostmanRequestLib: ProxyLib = (method, rawUrl, headers = {}) => async (req, res) => {
+const PostmanRequestLib: ProxyLib = (method, url, headers = {}) => async (req, res) => {
   let options = {};
 
   try {
-    const contentType = headers["content-type"] || "text/plain";
+    const contentType = req.headers["content-type"] || "text/plain";
     const defaults = {
       method,
       headers,
-      url: url.parse(rawUrl),
+      url,
+      followRedirect: false,
       strictSSL: false,
     };
     options = composeOptions(contentType, req.body, defaults);
