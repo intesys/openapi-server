@@ -30,7 +30,7 @@ const proxyHeaderExclusiveList = [
   "via",
 ];
 
-export const filterHeaders = (headers: IncomingHttpHeaders) => {
+export const filterHeaders = (headers: IncomingHttpHeaders): IncomingHttpHeaders => {
   return Object.keys(headers).reduce((res, header) => {
     if (proxyHeaderExclusiveList.indexOf(header) < 0) {
       res[header] = headers[header];
