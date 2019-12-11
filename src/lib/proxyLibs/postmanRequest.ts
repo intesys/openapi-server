@@ -1,9 +1,9 @@
 /// <reference path="./postmanRequest.d.ts" />
+import { IncomingMessage } from "http";
 import request from "postman-request";
 import url from "url";
 import { ProxyLib } from "../../types/proxyLib";
 import { RemoteError } from "../proxy";
-import { filterHeaders } from "./utils";
 
 const composeOptions = (contentType: string, body: any, defaults: {}): {} => {
   switch (contentType) {
@@ -31,7 +31,7 @@ const PostmanRequestLib: ProxyLib = (method, rawUrl, headers = {}) => async (req
     const contentType = headers["content-type"] || "text/plain";
     const defaults = {
       method,
-      headers: filterHeaders(headers),
+      headers,
       url: url.parse(rawUrl),
       strictSSL: false,
     };
@@ -41,11 +41,13 @@ const PostmanRequestLib: ProxyLib = (method, rawUrl, headers = {}) => async (req
   }
 
   return new Promise((resolve, reject) => {
-    request(options, (error: any, response: { headers: Record<string, string>; statusCode: number }, body: any) => {
+    request(options, (error: any, response: IncomingMessage, data: any) => {
       if (error) {
         return reject(new RemoteError(`${method} ${url}`, error));
       }
-      resolve({ data: body, headers: filterHeaders(response.headers), status: response.statusCode });
+      const headers = response.headers;
+      const status = response.statusCode || 0;
+      resolve({ data, headers, status });
     });
   });
 };
