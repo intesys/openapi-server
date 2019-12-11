@@ -1,12 +1,12 @@
 import { RequestHandler } from "express";
 import { proxyLib } from "../config";
-import { method } from "../types/proxyLib";
+import { method, ProxyLib, ProxyResponse } from "../types/proxyLib";
 import { PROXY_FILTER_HEADERS } from "./globals";
 import { log } from "./log";
 import { proxyLibs } from "./proxyLibs";
 import { filterHeaders } from "./proxyLibs/utils";
 
-export const proxyLibinstance = proxyLibs[proxyLib];
+export const proxyLibinstance: ProxyLib = proxyLibs[proxyLib];
 
 export class RemoteError {
   _remote: boolean;
@@ -25,19 +25,25 @@ export default (url: string): RequestHandler => async (req, res, next) => {
     const fullUrl = `${url}${req.url}`;
     const headers = PROXY_FILTER_HEADERS ? filterHeaders(req.headers) : req.headers;
     const method = req.method.toLowerCase() as method;
-    const response = await proxyLibinstance(method, fullUrl, headers)(req, res);
+
+    const response: ProxyResponse = await proxyLibinstance(method, fullUrl, headers)(req, res);
+
     const responseHeaders = PROXY_FILTER_HEADERS ? filterHeaders(response.headers) : response.headers;
     res.locals.body = response.data;
 
     res.set(responseHeaders);
     res.set("Forwarded", `for=${url}`);
+    res.status(response.status);
+
     log({
       "Request forwarded to": `${method.toUpperCase()} ${fullUrl} ${PROXY_FILTER_HEADERS && "(filtered headers)"}`,
       "Request headers": headers,
       "Request body": req.body,
-      "Reponse headers": responseHeaders,
+      "Response status": response.status,
+      "Response headers": responseHeaders,
       "Response body": response.data,
     });
+
     next();
   } catch (err) {
     next(err);

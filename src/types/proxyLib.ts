@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { IncomingHttpHeaders } from "http";
 
 export type method =
   | "get"
@@ -21,6 +22,7 @@ export type method =
 export interface ProxyResponse {
   data: any;
   headers: any;
+  status: number;
 }
 
 export interface ProxyCall {
@@ -28,5 +30,5 @@ export interface ProxyCall {
 }
 
 export interface ProxyLib {
-  (method: method, url: string, headers?: any): ProxyCall;
+  (method: method, url: string, headers?: IncomingHttpHeaders): ProxyCall;
 }
