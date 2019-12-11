@@ -1,10 +1,10 @@
 import { RequestHandler } from "express";
 import { proxyLib } from "../config";
 import { method } from "../types/proxyLib";
+import { PROXY_FILTER_HEADERS } from "./globals";
 import { log } from "./log";
 import { proxyLibs } from "./proxyLibs";
 import { filterHeaders } from "./proxyLibs/utils";
-import { PROXY_FILTER_HEADERS } from "./globals";
 
 export const proxyLibinstance = proxyLibs[proxyLib];
 
