@@ -6,57 +6,47 @@ import url from "url";
 import e from "express";
 import { filterHeaders } from "./utils";
 
-const composeOptions = (options: {}, req: e.Request) => {
-  switch (req.headers["content-type"]) {
+const composeOptions = (contentType: string, body: any, defaults: {}): {} => {
+  switch (contentType) {
     case "application/json":
       return {
-        ...options,
-        body: JSON.stringify(req.body),
+        ...defaults,
+        body: JSON.stringify(body),
       };
     case "text/plain":
-      return {
-        ...options,
-        body: req.body,
-      };
     case "application/x-www-form-urlencoded":
-      return {
-        ...options,
-      };
     case "multipart/form-data":
-      return {
-        ...options,
-      };
     case "multipart/related":
-      return {
-        ...options,
-      };
     default:
-      return options;
+      return {
+        ...defaults,
+        body: body,
+      };
   }
 };
 
 const PostmanRequestLib: ProxyLib = (method, rawUrl, headers = {}) => async (req, res) => {
-  let optionsTemplate = {};
+  let options = {};
 
   try {
-    optionsTemplate = {
+    const contentType = headers["content-type"] || "text/plain";
+    const defaults = {
       method,
       headers: filterHeaders(headers),
       url: url.parse(rawUrl),
       strictSSL: false,
     };
+    options = composeOptions(contentType, req.body, defaults);
   } catch (err) {
     return Promise.reject(err);
   }
 
-  const options = composeOptions(optionsTemplate, req);
-
   return new Promise((resolve, reject) => {
-    request(options, (error: any, response: { headers: any }, body: any) => {
+    request(options, (error: any, response: { headers: Record<string, string>; statusCode: number }, body: any) => {
       if (error) {
         return reject(new RemoteError(`${method} ${url}`, error));
       }
-      resolve({ data: body, headers: filterHeaders(response.headers) });
+      resolve({ data: body, headers: filterHeaders(response.headers), status: response.statusCode });
     });
   });
 };
