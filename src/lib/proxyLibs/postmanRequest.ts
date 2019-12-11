@@ -5,6 +5,7 @@ import { RemoteError } from "../proxy";
 import url from "url";
 import e from "express";
 import { filterHeaders } from "./utils";
+import { IncomingMessage } from "http";
 
 const composeOptions = (options: {}, req: e.Request) => {
   switch (req.headers["content-type"]) {
@@ -52,7 +53,7 @@ const PostmanRequestLib: ProxyLib = (method, rawUrl, headers = {}) => async (req
   const options = composeOptions(optionsTemplate, req);
 
   return new Promise((resolve, reject) => {
-    request(options, (error: any, response: { headers: any }, body: any) => {
+    request(options, (error: any, response: IncomingMessage, body: any) => {
       if (error) {
         return reject(new RemoteError(`${method} ${url}`, error));
       }
