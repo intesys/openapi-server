@@ -13,7 +13,7 @@ const AxiosLib: ProxyLib = (method, url, headers = {}) => async (req, res) => {
       method,
       headers,
       url,
-      data: req.body,
+      data: req.body, // TODO: remove data if body is undefined or empty
       maxRedirects: 0,
       withCredentials: true,
       httpAgent,
