@@ -4,6 +4,7 @@ import { ProxyLib } from "../../types/proxyLib";
 import { RemoteError } from "../proxy";
 import url from "url";
 import { filterHeaders } from "./utils";
+import { reject } from "bluebird";
 
 const PostmanRequestLib: ProxyLib = (method, rawUrl, headers = {}) => async (req, res) => {
   // If the parameter 'header' is passed directly to request(), it takes back garbage code
@@ -12,13 +13,19 @@ const PostmanRequestLib: ProxyLib = (method, rawUrl, headers = {}) => async (req
   //   Authorization: headers.authorization,
   // };
 
-  const options = {
-    method,
-    headers: filterHeaders(headers),
-    url: url.parse(rawUrl),
-    ...(Object.keys(req.body).length != 0 && { body: JSON.stringify(req.body) }),
-    strictSSL: false,
-  };
+  let options: {};
+
+  try {
+    options = {
+      method,
+      headers: filterHeaders(headers),
+      url: url.parse(rawUrl),
+      ...(Object.keys(req.body).length != 0 && { body: JSON.stringify(req.body) }),
+      strictSSL: false,
+    };
+  } catch (err) {
+    return reject(err);
+  }
 
   return new Promise((resolve, reject) => {
     request(options, (error: any, response: { headers: any }, body: any) => {
