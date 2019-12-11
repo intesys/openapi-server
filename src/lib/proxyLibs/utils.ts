@@ -1,5 +1,8 @@
 import { IncomingHttpHeaders } from "http";
 
+/**
+ * For reference, look at https://github.com/postmanlabs/postman-request#proxies
+ */
 const proxyHeaderExclusiveList = [
   "accept",
   "accept-charset",
