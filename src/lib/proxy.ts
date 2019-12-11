@@ -35,13 +35,14 @@ export default (url: string): RequestHandler => async (req, res, next) => {
 
     // res.set(response.headers);
 
-    res.set("Forwarded", `for=${url}`);
-    res.set("Content-Type", response.headers["content-type"]);
+    res.contentType(response.headers["content-type"]);
     res.set("Id", response.headers["id"]);
     res.set("AuthToken", response.headers["authtoken"]);
     res.set("Authorization", response.headers["authorization"]);
     // Here headers are being set manually because passing the whole load of response headers directly
     // just like in the commented line of code above causes unexpected issues
+
+    res.set("Forwarded", `for=${url}`);
 
     log({
       "Request forwarded to": `${method.toUpperCase()} ${fullUrl}`,
