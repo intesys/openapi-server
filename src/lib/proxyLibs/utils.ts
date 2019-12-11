@@ -16,7 +16,7 @@ const proxyHeaderExclusiveList = [
   "content-location",
   "content-md5",
   "content-range",
-  "content-type",
+  // "content-type", // we want content type
   "connection",
   "date",
   "expect",
