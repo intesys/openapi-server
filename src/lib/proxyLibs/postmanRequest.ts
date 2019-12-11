@@ -1,9 +1,8 @@
 /// <reference path="./postmanRequest.d.ts" />
 import request from "postman-request";
+import url from "url";
 import { ProxyLib } from "../../types/proxyLib";
 import { RemoteError } from "../proxy";
-import url from "url";
-import e from "express";
 import { filterHeaders } from "./utils";
 
 const composeOptions = (contentType: string, body: any, defaults: {}): {} => {
