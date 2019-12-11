@@ -1,10 +1,23 @@
 /// <reference path="./postmanRequest.d.ts" />
 import { IncomingMessage } from "http";
 import request from "postman-request";
-import { ProxyLib } from "../../types/proxyLib";
+import { ProxyLib, method } from "../../types/proxyLib";
 import { RemoteError } from "../proxy";
 
-const composeOptions = (contentType: string, body: any, defaults: {}): {} => {
+const addBody = (method: method, contentType: string, body: any, defaults: {}): {} => {
+  const allowedMethods = ["PATCH", "POST", "PUT"];
+  const _method = method.toLowerCase();
+
+  if (allowedMethods.indexOf(_method) < 0) {
+    // only allowedMethods can have body
+    return defaults;
+  }
+
+  if (!body) {
+    // avoid empty body
+    return defaults;
+  }
+
   switch (contentType) {
     case "application/json":
       return {
@@ -35,7 +48,7 @@ const PostmanRequestLib: ProxyLib = (method, url, headers = {}) => async (req, r
       followRedirect: false,
       strictSSL: false,
     };
-    options = composeOptions(contentType, req.body, defaults);
+    options = addBody(method, contentType, req.body, defaults);
   } catch (err) {
     return Promise.reject(err);
   }
