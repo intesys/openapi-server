@@ -29,8 +29,9 @@ export default (url: string): RequestHandler => async (req, res, next) => {
     res.set("Forwarded", `for=${url}`);
     log({
       "Request forwarded to": `${method.toUpperCase()} ${fullUrl}`,
-      "Reponse headers": response.headers,
+      "Request headers": req.headers,
       "Request body": req.body,
+      "Reponse headers": response.headers,
       "Response body": response.data,
     });
     next();
