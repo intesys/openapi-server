@@ -15,12 +15,6 @@ export const CUSTOM_MIDDLEWARES_NAMES: CUSTOM_MIDDLEWARES_TYPE = {
   [CUSTOM_MIDDLEWARES.POST]: "post.js",
 };
 
-export enum PROXY_LIBS {
-  AXIOS,
-  POSTMAN_REQUEST,
-  NODE_FETCH,
-}
-
 export const defaults: Env = {
   API_YML: "api.yaml",
   API_PREFIX: "/api",
@@ -53,6 +47,12 @@ export const options: string[] = Object.keys(defaults);
 
 // boolean config values
 export const booleans: string[] = options.filter(key => isBoolean(defaults[key]));
+
+export enum PROXY_LIBS {
+  AXIOS,
+  POSTMAN_REQUEST,
+  NODE_FETCH,
+}
 
 // proxy library in use, can be axios, postman-request, nodeFetch
 export const proxyLib: PROXY_LIBS = PROXY_LIBS.POSTMAN_REQUEST;
