@@ -1,6 +1,5 @@
 import { isBoolean } from "lodash";
 import Env, { HTTPProtocol } from "./types/env";
-import { PROXY_LIBS } from "./lib/proxyLibs";
 
 export enum CUSTOM_MIDDLEWARES {
   "PRE",
@@ -15,6 +14,12 @@ export const CUSTOM_MIDDLEWARES_NAMES: CUSTOM_MIDDLEWARES_TYPE = {
   [CUSTOM_MIDDLEWARES.PRE]: "pre.js",
   [CUSTOM_MIDDLEWARES.POST]: "post.js",
 };
+
+export enum PROXY_LIBS {
+  AXIOS,
+  POSTMAN_REQUEST,
+  NODE_FETCH,
+}
 
 export const defaults: Env = {
   API_YML: "api.yaml",

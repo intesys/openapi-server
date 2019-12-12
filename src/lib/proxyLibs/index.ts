@@ -2,12 +2,7 @@ import AxiosLib from "./axios";
 import PostmanRequestLib from "./postmanRequest";
 import NodeFetchLib from "./nodeFetch";
 import { ProxyLib } from "../../types/proxyLib";
-
-export enum PROXY_LIBS {
-  AXIOS,
-  POSTMAN_REQUEST,
-  NODE_FETCH,
-}
+import { PROXY_LIBS } from "../../config";
 
 export const proxyLibs: Record<PROXY_LIBS, ProxyLib> = {
   [PROXY_LIBS.AXIOS]: AxiosLib,
