@@ -20,11 +20,6 @@ export class RemoteError {
   }
 }
 
-const getHost = (url: string): string => {
-  const _url = new URL(url);
-  return _url.host;
-};
-
 /**
  * @param {string} url fully qualified url
  */
@@ -33,7 +28,6 @@ export default (url: string): RequestHandler => async (req, res, next) => {
     const fullUrl = `${url}${req.url}`;
     const method = req.method.toLowerCase() as method;
     const headers = PROXY_FILTER_HEADERS ? filterHeaders(req.headers) : req.headers;
-    headers.host = getHost(url);
 
     const response: ProxyResponse = await proxyLibinstance(method, fullUrl, headers)(req, res);
 
