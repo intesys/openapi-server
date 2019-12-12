@@ -1,5 +1,6 @@
 import { isBoolean } from "lodash";
 import Env, { HTTPProtocol } from "./types/env";
+import { PROXY_LIBS } from "./lib/proxyLibs";
 
 export enum CUSTOM_MIDDLEWARES {
   "PRE",
@@ -49,4 +50,4 @@ export const options: string[] = Object.keys(defaults);
 export const booleans: string[] = options.filter(key => isBoolean(defaults[key]));
 
 // proxy library in use, can be axios, postman-request, nodeFetch
-export const proxyLib: string = "postman-request";
+export const proxyLib: PROXY_LIBS = PROXY_LIBS.POSTMAN_REQUEST;
