@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, RequestHandler } from "express";
 import { IncomingHttpHeaders } from "http";
 
 export type method =
@@ -28,5 +28,5 @@ export interface ProxyCall {
 }
 
 export interface ProxyLib {
-  (method: method, url: string, headers?: IncomingHttpHeaders): ProxyCall;
+  (method: method, url: string, headers?: IncomingHttpHeaders): RequestHandler;
 }
