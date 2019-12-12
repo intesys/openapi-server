@@ -1,8 +1,7 @@
-/// <reference path="./postmanRequest.d.ts" />
 import { IncomingMessage } from "http";
-import request from "postman-request";
 import { ProxyLib, method } from "../../types/proxyLib";
 import { RemoteError } from "../proxy";
+const request = require("postman-request");
 
 const addBody = (method: method, contentType: string, body: any, defaults: {}): {} => {
   const allowedMethods = ["PATCH", "POST", "PUT"];
