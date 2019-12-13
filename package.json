@@ -62,5 +62,7 @@
     "typescript": "^3.7.3",
     "typesync": "^0.6.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/prettier": "^1.19.0"
+  }
 }
