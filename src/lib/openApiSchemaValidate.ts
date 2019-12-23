@@ -1,7 +1,7 @@
 import { get } from "lodash";
 import OpenAPISchemaValidator from "openapi-schema-validator";
 import { OpenAPI } from "openapi-types";
-import { log } from "./log";
+import { print } from "./log";
 import openApiVersion from "./openApiVersion";
 
 /**
@@ -19,6 +19,6 @@ export default (spec: OpenAPI.Document): boolean => {
     throw new Error(`Invalid openApi schema ${title}: ${error}`);
   }
 
-  log(`Valid openApi schema ${title}`);
+  print(`Valid openApi schema ${title}`);
   return true;
 };

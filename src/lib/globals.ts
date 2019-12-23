@@ -42,7 +42,6 @@ const {
   PROXY_HOSTNAME,
   PROXY_PORT,
   PROXY_PREFIX,
-  PROXY_FILTER_HEADERS,
   SKIP_VALIDATION,
   LOG,
   VERBOSE,
@@ -65,14 +64,13 @@ export {
   PROXY_HOSTNAME,
   PROXY_PORT,
   PROXY_PREFIX,
-  PROXY_FILTER_HEADERS,
   SKIP_VALIDATION,
   LOG,
   VERBOSE,
   WATCH,
 };
 
-const port = getPort(PROXY_PORT);
-const prefix = getPrefix(PROXY_PREFIX);
+export const port = getPort(PROXY_PORT);
+export const prefix = getPrefix(PROXY_PREFIX);
 
 export const proxyUrl = `${PROXY_PROTOCOL}://${PROXY_HOSTNAME}${port}${prefix}`;

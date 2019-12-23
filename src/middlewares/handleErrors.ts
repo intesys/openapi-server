@@ -1,7 +1,7 @@
 import { ErrorRequestHandler } from "express";
-import { error as logError } from "../lib/log";
 import { inspect } from "util";
-import { RemoteError } from "../lib/proxy";
+import { error as logError } from "../lib/log";
+import { RemoteError } from "./tryProxy";
 
 interface ErrorWithStatus extends Error {
   status?: number;

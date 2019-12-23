@@ -4,9 +4,9 @@ import { log } from "../lib/log";
 
 export default (): RequestHandler => (req, res, next) => {
   const messages = [];
-  log(`${req.method} ${req.url} not found. Look for mock in ${MOCKS_PATH} or remote on ${proxyUrl}`);
-  MOCKS && messages.push(`mock in ${MOCKS_PATH}`);
-  PROXY && messages.push(`remote ${proxyUrl}`);
-  const notFoundMessage = `Uri ${req.url} not found: ${messages.join(", ")}.`;
+  console.log(req.url);
+  MOCKS && messages.push(`- Mock not found in: ${MOCKS_PATH}`);
+  PROXY && messages.push(`- Remote host called: ${proxyUrl}`);
+  const notFoundMessage = `Uri ${req.url} not found \n${messages.join("\n")}`;
   res.status(404).send(notFoundMessage);
 };
