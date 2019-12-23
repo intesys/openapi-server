@@ -16,8 +16,7 @@ const globals: Env = fixBooleans({ ...defaults, ...env }, booleans) as Env;
 const exitWithError = (message: string, code: number = 1) => {
   const err = new Error(message);
   console.error(err);
-  process.exit(code);
-  return ""; // for typescript compliance only
+  throw err;
 };
 
 // Absolutize MOCKS_PATH

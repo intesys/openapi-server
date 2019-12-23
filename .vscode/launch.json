@@ -32,7 +32,7 @@
         "PROXY_PREFIX": "/api",
 
         "SKIP_VALIDATION": "false",
-        "LOG": "false",
+        "LOG": "true",
         "WATCH": "false"
       }
     }

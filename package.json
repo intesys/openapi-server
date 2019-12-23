@@ -67,5 +67,9 @@
     "typescript": "^3.7.3",
     "typesync": "^0.6.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/prettier": "^1.19.0",
+    "@types/request": "^2.48.4",
+    "@types/request-promise": "^4.1.45"
+  }
 }

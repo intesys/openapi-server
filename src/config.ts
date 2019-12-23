@@ -16,7 +16,7 @@ export const CUSTOM_MIDDLEWARES_NAMES: CUSTOM_MIDDLEWARES_TYPE = {
 };
 
 export const defaults: Env = {
-  API_YML: "api.yaml",
+  API_YML: "/examples/api.yml",
   API_PREFIX: "/api",
   API_PORT: "3000",
   API_PROTOCOL: HTTPProtocol.http,
@@ -24,10 +24,10 @@ export const defaults: Env = {
 
   STATIC: false,
   STATIC_PREFIX: "/resources",
-  STATIC_PATH: "/resources",
+  STATIC_PATH: "/examples/resources",
 
   MOCKS: true,
-  MOCKS_PATH: "/mocks",
+  MOCKS_PATH: "/examples/mocks",
 
   PROXY: false,
   PROXY_PROTOCOL: HTTPProtocol.http,
