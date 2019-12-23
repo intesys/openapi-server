@@ -29,7 +29,7 @@ const init = async (app: Express): Promise<Server> =>
 
       app.use(await customMiddleware(CUSTOM_MIDDLEWARES.POST));
 
-      app.use(handleErrors(), handleNotFound());
+      app.use(handleErrors() /*, handleNotFound()*/);
 
       const server = createServer(API_PROTOCOL, app);
 

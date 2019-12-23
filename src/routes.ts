@@ -14,7 +14,7 @@ export const operations = {
   delete: "delete",
   options: "options",
   head: "head",
-  patch: "patch"
+  patch: "patch",
 };
 
 export default (spec: OpenAPI.Document): Router => {
