@@ -28,7 +28,6 @@ const router = async (): Promise<Router> => {
     specDocs.forEach(spec => {
       openApiSchemaValidate(spec);
       router.use(prefix, routes(spec), sendBody());
-      console.log("route:", prefix, routes(spec));
     });
   } catch (err) {
     console.error(err);
