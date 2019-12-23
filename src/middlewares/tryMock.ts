@@ -25,17 +25,17 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
 
     if (isFunction(mock)) {
       log({
-        Mode: "mock",
-        Request: `${method.toUpperCase()} ${req.originalUrl}`,
-        Middleware: mockPath,
+        "Request handler": "Mock (middleware)",
+        "Request uri": `${method.toUpperCase()} ${req.originalUrl}`,
+        "Handled by": mockPath,
       });
       return mock(req, res, next);
     }
 
     set(res, "locals.body", mock);
     log({
-      Mode: "mock",
-      Request: `${method.toUpperCase()} ${req.originalUrl}`,
+      "Request handler": "Mock (json)",
+      "Request uri": `${method.toUpperCase()} ${req.originalUrl}`,
     });
   } catch (err) {
     const error = new Error(err);
