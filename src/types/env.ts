@@ -19,6 +19,7 @@ type Env = {
   PROXY_HOSTNAME: string;
   PROXY_PORT: string;
   PROXY_PREFIX: string;
+  PROXY_FILTER_HEADERS: boolean;
   SKIP_VALIDATION?: boolean;
   LOG?: boolean;
   VERBOSE: number | boolean | null;

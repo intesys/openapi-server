@@ -26,6 +26,7 @@ program
   .option("--PROXY_HOSTNAME [value]")
   .option("--PROXY_PORT [value]")
   .option("--PROXY_PREFIX [value]")
+  .option("--PROXY_FILTER_HEADERS", "remove some headers, details in doc")
   .option("--VERBOSE [number]", "depth of logs shown")
   .parse(process.argv);
 

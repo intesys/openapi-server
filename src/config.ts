@@ -34,6 +34,7 @@ export const defaults: Env = {
   PROXY_HOSTNAME: "",
   PROXY_PORT: "",
   PROXY_PREFIX: "",
+  PROXY_FILTER_HEADERS: false,
 
   SKIP_VALIDATION: false,
   LOG: false,
@@ -46,3 +47,12 @@ export const options: string[] = Object.keys(defaults);
 
 // boolean config values
 export const booleans: string[] = options.filter(key => isBoolean(defaults[key]));
+
+export enum PROXY_LIBS {
+  AXIOS,
+  POSTMAN_REQUEST,
+  NODE_FETCH,
+}
+
+// proxy library in use, can be axios, postman-request, nodeFetch
+export const proxyLib: PROXY_LIBS = PROXY_LIBS.POSTMAN_REQUEST;
