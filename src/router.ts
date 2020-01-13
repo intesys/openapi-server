@@ -17,8 +17,8 @@ const router = async (): Promise<Router> => {
     router.options("*", cors());
     router.use(
       cors({ credentials: true }),
-      bodyParser.urlencoded({ extended: false, limit: "50mb" }),
-      bodyParser.json()
+      bodyParser.urlencoded({ extended: false, limit: "100mb" }),
+      bodyParser.json({ limit: "100mb" })
     );
 
     STATIC && router.use(STATIC_PREFIX, handleStatic(STATIC_PATH));
