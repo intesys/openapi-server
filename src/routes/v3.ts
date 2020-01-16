@@ -8,7 +8,8 @@
 
 import { RequestHandler, Router } from "express";
 import { get } from "lodash";
-import { OpenAPIV3, OpenAPI } from "openapi-types";
+import { OpenAPI, OpenAPIV3 } from "openapi-types";
+import joinUrl from "../lib/joinUrl";
 import toExpressParam from "../lib/toExpressParam";
 import { operations } from "../routes";
 import getMiddlewares from "./middlewares";
@@ -59,7 +60,7 @@ export const getV3BasePath = (spec: OpenAPI.Document): string => {
 
 const buildV3Routes = (router: Router, paths: Record<string, OpenAPIV3.PathItemObject>, basePath: string): Router => {
   Object.keys(paths).forEach((route: string) => {
-    const fullRoute = basePath + route;
+    const fullRoute = joinUrl(basePath, route);
     const expressRoute = toExpressParam(fullRoute);
     const routerRef = router.route(expressRoute);
     const methods = Object.keys(operations);

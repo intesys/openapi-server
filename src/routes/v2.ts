@@ -1,15 +1,16 @@
 import { RequestHandler, Router } from "express";
-import { OpenAPIV2, OpenAPI } from "openapi-types";
+import { get } from "lodash";
+import { OpenAPI, OpenAPIV2 } from "openapi-types";
+import joinUrl from "../lib/joinUrl";
 import toExpressParam from "../lib/toExpressParam";
 import { operations } from "../routes";
 import getMiddlewares from "./middlewares";
-import { get } from "lodash";
 
 export const getV2BasePath = (spec: OpenAPI.Document): string => get(spec, "basePath", "");
 
 const buildV2Routes = (router: Router, paths: OpenAPIV2.PathsObject, basePath: string): Router => {
   Object.keys(paths).forEach((route: string) => {
-    const fullRoute = basePath + route;
+    const fullRoute = joinUrl(basePath, route);
     const expressRoute = toExpressParam(fullRoute);
     const routerRef = router.route(expressRoute);
     const methods = Object.keys(operations);
