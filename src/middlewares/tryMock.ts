@@ -14,9 +14,9 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
     return voidMiddleware(req, res, next);
   }
 
-  try {
-    const mockPath = path.join(MOCKS_PATH, route, method);
+  const mockPath = path.join(MOCKS_PATH, route, method);
 
+  try {
     if (WATCH) {
       invalidateRequireCache(mockPath);
     }
@@ -36,18 +36,20 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
     log({
       "Request handler": "Mock (json)",
       "Request uri": `${method.toUpperCase()} ${req.originalUrl}`,
+      "Handled by": mockPath,
     });
   } catch (err) {
     const error = new Error(err);
-    if (!notFoundError(error)) {
+    if (!nodeRequireError(error)) {
       return next(error);
     }
+    log(`If you want to mock ${method.toUpperCase()} ${route}, put a mock in ${mockPath}`);
   }
 
   return next();
 };
 
-const notFoundError = (err: Error): boolean => /cannot find module/.test(err.message.toLowerCase());
+const nodeRequireError = (err: Error): boolean => /cannot find module/.test(err.message.toLowerCase());
 
 const isFunction = (value: any): boolean => typeof value === "function";
 
