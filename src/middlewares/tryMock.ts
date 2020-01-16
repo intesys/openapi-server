@@ -43,7 +43,7 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
     if (!nodeRequireError(error)) {
       return next(error);
     }
-    log(`If you want to mock ${method.toUpperCase()} ${route}, put a mock in ${mockPath}`);
+    log(`\n${method.toUpperCase()} ${route} is not mocked\n To mock it, touch ${mockPath}.js(on)`);
   }
 
   return next();
