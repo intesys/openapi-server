@@ -11,6 +11,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "changelog":"auto-changelog -u --release-summary",
     "start": "npm run build && node dist/cli.js",
     "prepare": "npm run build",
     "test": "jest",
@@ -69,6 +70,7 @@
   "devDependencies": {
     "@types/prettier": "^1.19.0",
     "@types/request": "^2.48.4",
-    "@types/request-promise": "^4.1.45"
+    "@types/request-promise": "^4.1.45",
+    "auto-changelog": "^1.16.2"
   }
 }
