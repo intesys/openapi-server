@@ -1,6 +1,6 @@
 {
   "name": "openapi-server",
-  "version": "3.5.3",
+  "version": "3.5.4",
   "description": "A web server based on openApi spec, with proxy, mocks and optional validation",
   "main": "dist/index.js",
   "bin": {
