@@ -129,7 +129,6 @@ Place an `.env.{NODE_ENV}.local`, `.env.{NODE_ENV}` or `.env` file, with this va
 
 ```
 # api endpoint used by frontend
-API_IGNORE_HOST=false
 API_PROTOCOL=http
 API_HOSTNAME=localhost
 API_PORT=3000
