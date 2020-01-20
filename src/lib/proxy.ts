@@ -46,7 +46,7 @@ export default (url: string): RequestHandler => async (req, res, next) => {
 
     log({
       "Request handler": "Proxy",
-      "Request forwarded to": `${method.toUpperCase()} ${fullUrl} ${PROXY_FILTER_HEADERS && "(filtered headers)"}`,
+      "Request forwarded to": `${method.toUpperCase()} ${fullUrl} ${PROXY_FILTER_HEADERS ? "(filtered headers)" : ""}`,
       "Request headers": headers,
       "Request body": req.body,
       "Response status": response.status,
