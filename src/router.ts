@@ -1,4 +1,5 @@
 import bodyParser from "body-parser";
+import compression from "compression";
 import cors from "cors";
 import express, { Router } from "express";
 import getPrefix from "./lib/getPrefix";
@@ -16,6 +17,7 @@ const router = async (): Promise<Router> => {
   try {
     router.options("*", cors());
     router.use(
+      compression(),
       cors({ credentials: true }),
       bodyParser.urlencoded({ extended: false, limit: "100mb" }),
       bodyParser.json({ limit: "100mb" })
