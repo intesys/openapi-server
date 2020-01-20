@@ -18,7 +18,7 @@ const addBody = (method: method, contentType: string, body: any, defaults: {}): 
   }
 
   switch (contentType) {
-    case "application/json":
+    case contentType.includes("application/json") && contentType:
       return {
         ...defaults,
         body: JSON.stringify(body),
@@ -45,6 +45,7 @@ const PostmanRequestLib: ProxyLib = (method, url, headers = {}) => async (req, r
       headers,
       url,
       followRedirect: false,
+      gzip: true,
       strictSSL: false,
     };
     options = addBody(method, contentType, req.body, defaults);
