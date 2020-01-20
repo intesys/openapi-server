@@ -55,4 +55,4 @@ export enum PROXY_LIBS {
 }
 
 // proxy library in use, can be axios, postman-request, nodeFetch
-export const proxyLib: PROXY_LIBS = PROXY_LIBS.POSTMAN_REQUEST;
+export const proxyLib: PROXY_LIBS = PROXY_LIBS.AXIOS;

@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse, AxiosRequestConfig } from "axios";
 import http from "http";
 import https from "https";
 import { ProxyLib } from "../../types/proxyLib";
@@ -9,16 +9,22 @@ const httpsAgent = new https.Agent({ rejectUnauthorized: false });
 
 const AxiosLib: ProxyLib = (method, url, headers = {}) => async (req, res) => {
   try {
-    const response: AxiosResponse = await axios({
+    const request: AxiosRequestConfig = {
       method,
       headers,
       url,
-      data: req.body, // TODO: remove data if body is undefined or empty
       maxRedirects: 0,
       withCredentials: true,
       httpAgent,
       httpsAgent,
-    });
+    };
+
+    if (req.body) {
+      // declare data only if there is a body!
+      request.data = req.body;
+    }
+
+    const response: AxiosResponse = await axios(request);
     return { data: response.data, headers: response.headers, status: response.status };
   } catch (err) {
     throw new RemoteError(`${method} ${url}`, err);
