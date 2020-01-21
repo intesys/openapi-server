@@ -16,7 +16,10 @@ const invalidateRequireCache = (name: string) => {
 
 const isFunction = (value: any): boolean => typeof value === "function";
 
-const nodeRequireError = (err: Error): boolean => /cannot find module/.test(err.message.toLowerCase());
+const nodeRequireError = (err: Error): boolean => {
+  const message = err.message.toLowerCase();
+  return message.includes("cannot find module") || message.includes("ENOENT");
+};
 
 /**
  * @param method one value of `operations`
