@@ -18,7 +18,7 @@ const isFunction = (value: any): boolean => typeof value === "function";
 
 const nodeRequireError = (err: Error): boolean => {
   const message = err.message.toLowerCase();
-  return message.includes("cannot find module") || message.includes("ENOENT");
+  return message.includes("cannot find module") || message.includes("enoent");
 };
 
 /**
