@@ -1,5 +1,4 @@
 import { specs, MOCKS_PATH } from "./lib/globals";
-import openApiSchemaValidate from "./lib/openApiSchemaValidate";
 import openApiVersion from "./lib/openApiVersion";
 import { get } from "lodash";
 import load from "./lib/load";
@@ -16,14 +15,10 @@ const allowedMethods = ["GET", "HEAD", "DELETE", "OPTIONS", "PATCH", "POST", "PU
 const generateMocks = async (): Promise<void> => 
     new Promise(async (resolve, reject) => {
         try {
-
-        // STATIC && router.use(STATIC_PREFIX, handleStatic(STATIC_PATH));
-        // const prefix = getPrefix(API_PREFIX);
         const specDocs = await Promise.all(specs.map(spec => load(spec)));
 
         specDocs.forEach(spec => {
             const version = openApiVersion(spec);
-            // const title = get(spec, "info.title") || "";
             const paths = get(spec, "paths", {});
             let basePath= "";
 
