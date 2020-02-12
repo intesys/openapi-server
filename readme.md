@@ -51,12 +51,6 @@ You can include it as dependency in your `package.json`:
 
 ## Use
 
-### From command line
-
-```
-npx openapi-server [options]
-```
-
 ### As package.json script (recommended)
 
 ```js
@@ -388,3 +382,36 @@ Openapi-server is an [express](https://expressjs.com/) web server with some midd
   - looks for a mock (replies with mock if found)
   - proxies the request to the backend server
   - (optional) validates the response
+
+# Generate Mocks
+
+With the script "generate-mocks" you can parse the .yml files and generate mocks from the parsed structures.
+If some examples are written in the docs the generator will use them for the data population.
+
+## Use
+
+### From command line
+
+```
+npx openapi-server [options]
+```
+
+### Configuration using CLI
+
+CLI options take precedence over env variables.
+
+```
+Usage: index [options]
+
+Options:
+  -v, --version                     output version number
+  -a,--API_YML [value]              api yml file / folder / list of file or folders
+  -m,--MOCKS_PATH [value]           mocks path
+  -l,--LOG                          enable console log
+  --VERBOSE [number]                depth of logs shown
+  -h, --help                        output usage information
+```
+
+### Configuration using `.env` file
+
+See upper "Configuration using `.env` file" section witch .env file is common between the scripts.
