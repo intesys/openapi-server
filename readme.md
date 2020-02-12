@@ -155,7 +155,7 @@ WATCH=false
 
 ### Defaults
 
-API_YML: 'api.yml'  
+API_YML: 'api/'  
 API_PREFIX: '/api'  
 API_PORT: '3000'  
 API_PROTOCOL: 'http'  
@@ -388,3 +388,8 @@ Openapi-server is an [express](https://expressjs.com/) web server with some midd
   - looks for a mock (replies with mock if found)
   - proxies the request to the backend server
   - (optional) validates the response
+
+
+## Dev hints
+
+- Use "npm run start" for testing the openapi-server script, watch out for "basePath" in .yaml Api Configurations

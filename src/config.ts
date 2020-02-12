@@ -16,7 +16,7 @@ export const CUSTOM_MIDDLEWARES_NAMES: CUSTOM_MIDDLEWARES_TYPE = {
 };
 
 export const defaults: Env = {
-  API_YML: "/examples/api.yml",
+  API_YML: "/examples/api/",
   API_PREFIX: "/api",
   API_PORT: "3000",
   API_PROTOCOL: HTTPProtocol.http,
