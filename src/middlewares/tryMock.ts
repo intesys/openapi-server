@@ -28,14 +28,9 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
   }
 
   const mockPath = path.join(MOCKS_PATH, route, method);
+  const generatedMockPath = path.join(MOCKS_PATH, route, method + "-generated");
 
-  try {
-    if (WATCH) {
-      invalidateRequireCache(mockPath);
-    }
-
-    const mock = require(mockPath);
-
+  const returnMock = (mock: any) => {
     if (isFunction(mock)) {
       log({
         "Request handler": "Mock (middleware)",
@@ -51,15 +46,45 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
       "Request uri": `${method.toUpperCase()} ${req.originalUrl}`,
       "Handled by": mockPath,
     });
+    return next();
+  }
+
+  const tryGeneratedMock = () => {
+    try {
+      console.log("TRYING ", generatedMockPath);
+      const generatedMock = require(generatedMockPath);
+
+      return returnMock(generatedMock);
+    } catch (err) {
+      console.log("tryGeneratedMock", err);
+      const error = new Error(err);
+
+      if (!nodeRequireError(error)) {
+        return next(error);
+      }
+
+      log(`\n${method.toUpperCase()} ${route} is not mocked\n To mock it, touch ${mockPath}.js(on)`);
+      return next();
+    }
+  }
+
+  try {
+    if (WATCH) {
+      invalidateRequireCache(mockPath);
+      invalidateRequireCache(generatedMockPath);
+    }
+
+    const mock = require(mockPath);
+    return returnMock(mock);
   } catch (err) {
     const error = new Error(err);
     if (!nodeRequireError(error)) {
       return next(error);
+    } else {
+      console.log("NOT FOUNDED OVERRIDED MOCK, TRY GENERATED MOCK");
+      return tryGeneratedMock();
     }
-    log(`\n${method.toUpperCase()} ${route} is not mocked\n To mock it, touch ${mockPath}.js(on)`);
   }
-
-  return next();
 };
 
 export default tryMock;

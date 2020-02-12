@@ -4,7 +4,8 @@
   "description": "A web server based on openApi spec, with proxy, mocks and optional validation",
   "main": "dist/index.js",
   "bin": {
-    "openapi-server": "./bin/openapi-server.js"
+    "openapi-server": "./bin/openapi-server.js",
+    "generate-mocks": "./bin/generate-mocks.js"
   },
   "engines": {
     "node": ">9.0.0"
@@ -13,6 +14,7 @@
     "build": "tsc",
     "changelog": "auto-changelog -u --release-summary",
     "start": "npm run build && node dist/cli.js",
+    "generate-mocks": "npm run build && node dist/cli-gm.js",
     "prepare": "npm run build",
     "test": "jest",
     "tdd": "jest --watch",
@@ -64,6 +66,7 @@
     "prettier": "^1.19.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.5",
+    "swagmock": "^1.0.0",
     "ts-jest": "^24.3.0",
     "tslib": "^1.10.0",
     "typescript": "^3.7.5",
