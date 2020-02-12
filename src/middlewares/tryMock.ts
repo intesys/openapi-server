@@ -30,7 +30,7 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
   const mockPath = path.join(MOCKS_PATH, route, method);
   const generatedMockPath = path.join(MOCKS_PATH, route, method + "-generated");
 
-  const returnMock = (mock: any) => {
+  const returnMock = (mock: any, mockPath: string) => {
     if (isFunction(mock)) {
       log({
         "Request handler": "Mock (middleware)",
@@ -51,12 +51,10 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
 
   const tryGeneratedMock = () => {
     try {
-      console.log("TRYING ", generatedMockPath);
       const generatedMock = require(generatedMockPath);
 
-      return returnMock(generatedMock);
+      return returnMock(generatedMock, generatedMockPath);
     } catch (err) {
-      console.log("tryGeneratedMock", err);
       const error = new Error(err);
 
       if (!nodeRequireError(error)) {
@@ -75,13 +73,12 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
     }
 
     const mock = require(mockPath);
-    return returnMock(mock);
+    return returnMock(mock, mockPath);
   } catch (err) {
     const error = new Error(err);
     if (!nodeRequireError(error)) {
       return next(error);
     } else {
-      console.log("NOT FOUNDED OVERRIDED MOCK, TRY GENERATED MOCK");
       return tryGeneratedMock();
     }
   }
