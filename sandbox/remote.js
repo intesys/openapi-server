@@ -2,6 +2,12 @@ const express = require("express");
 
 const app = express();
 
+app.get("/api/v2/pets", (req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  //res.status(500).send("Server error");
+  res.send("Pets response");
+});
+
 app.get("/api/200", (req, res, next) => {
   console.log(`${req.method} ${req.url}`);
   res.send("ok");

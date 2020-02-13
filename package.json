@@ -13,6 +13,8 @@
     "build": "tsc",
     "changelog": "auto-changelog -u --release-summary",
     "start": "npm run build && node dist/cli.js",
+    "start:server": "node sandbox/remote.js",
+    "generate-mocks": "npm run build && node dist/cli-gm.js",
     "prepare": "npm run build",
     "test": "jest",
     "tdd": "jest --watch",
