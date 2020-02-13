@@ -47,6 +47,9 @@ const {
   LOG,
   VERBOSE,
   WATCH,
+  DELAY,
+  DELAY_RANGE_START,
+  DELAY_RANGE_END,
 }: Env = globals;
 
 export {
@@ -70,6 +73,9 @@ export {
   LOG,
   VERBOSE,
   WATCH,
+  DELAY,
+  DELAY_RANGE_START,
+  DELAY_RANGE_END,
 };
 
 const port = getPort(PROXY_PORT);

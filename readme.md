@@ -119,6 +119,9 @@ Options:
   --PROXY_PORT [value]
   --PROXY_PREFIX [value]
   --PROXY_FILTER_HEADERS            remove some headers, look below for details
+  --DELAY                           enable delay
+  --DELAY_RANGE_START               delay value in ms or range start if DELAY_RANGE_END is setted
+  --DELAY_RANGE_END                 delay range end value in ms
   --VERBOSE [number]                depth of logs shown
   -h, --help                        output usage information
 ```
@@ -149,6 +152,10 @@ SKIP_VALIDATION=false
 LOG=false
 VERBOSE=2
 WATCH=false
+
+DELAY=false
+DELAY_RANGE_START=1000
+DELAY_RANGE_END=2000
 ```
 
 > Note: place .env file(s) in the directory you use to launch server, because it looks for files in `process.cwd()` (_current working directory_)
@@ -180,6 +187,9 @@ LOG: false
 VERBOSE: 2  
 WATCH: false
 
+DELAY: false
+DELAY_RANGE_START: 1000
+DELAY_RANGE_END:
 ## Mocks
 
 Mocks are `.json` or `.js` files placed in the `MOCKS_PATH` directory.
@@ -377,6 +387,18 @@ transfer-encoding
 user-agent
 via
 ```
+
+### Delay
+
+When delay is enabled the script adds a sleep time based by the configuration (constant value or random value between a range, see configuration values).
+
+If some delay is needed on a single route level you can import the "sleep" function.
+
+const sleep = require("openapi-server").sleep;
+sleep(5000).then(() => {
+  next();
+})
+
 
 ## How it works
 

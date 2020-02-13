@@ -27,6 +27,9 @@ program
   .option("--PROXY_PORT [value]")
   .option("--PROXY_PREFIX [value]")
   .option("--PROXY_FILTER_HEADERS", "remove some headers, details in doc")
+  .option("--DELAY", "enable delay")
+  .option("--DELAY_RANGE_START", "delay value in ms or range start if DELAY_RANGE_END is setted")
+  .option("--DELAY_RANGE_END", "delay range end value in ms")
   .option("--VERBOSE [number]", "depth of logs shown")
   .parse(process.argv);
 

@@ -36,6 +36,10 @@ export const defaults: Env = {
   PROXY_PREFIX: "",
   PROXY_FILTER_HEADERS: false,
 
+  DELAY: false,
+  DELAY_RANGE_START: 1000,
+  // DELAY_RANGE_END: ,
+
   SKIP_VALIDATION: false,
   LOG: false,
   VERBOSE: 2,

@@ -20,6 +20,9 @@ type Env = {
   PROXY_PORT: string;
   PROXY_PREFIX: string;
   PROXY_FILTER_HEADERS: boolean;
+  DELAY: boolean,
+  DELAY_RANGE_START?: number,
+  DELAY_RANGE_END?: number,
   SKIP_VALIDATION?: boolean;
   LOG?: boolean;
   VERBOSE: number | boolean | null;
