@@ -8,15 +8,15 @@ const app = async (): Promise<Express> => {
   clear();
   print("Starting server");
 
-  const app: Express = express();
+  const expressInstance: Express = express();
 
-  const server = await init(app);
+  const server = await init(expressInstance);
 
   if (WATCH) {
-    watch(app, server);
+    watch(expressInstance, server);
   }
 
-  return app;
+  return expressInstance;
 };
 
 export default app;
