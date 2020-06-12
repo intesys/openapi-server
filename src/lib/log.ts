@@ -7,7 +7,13 @@ export const print = (message: any) => {
   console.info(stringify(message));
 };
 
-export const clear = () => console.clear();
+export const clear = () => {
+  if (LOG) {
+    // when log is enabled, show all console messages
+    return;
+  }
+  console.clear();
+};
 
 export const log = (message: any) => {
   if (LOG) {

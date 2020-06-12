@@ -14,7 +14,7 @@ import handleSigint from "./lib/handleSigint";
 import printServerInfo from "./lib/printServerInfo";
 import { createServer } from "./lib/server";
 import handleErrors from "./middlewares/handleErrors";
-import handleNotFound from "./middlewares/handleNotFound";
+// import handleNotFound from "./middlewares/handleNotFound";
 import router from "./router";
 
 const init = async (app: Express): Promise<Server> =>
