@@ -320,7 +320,8 @@ const entrypoint = "public/index.html";
 const options = {
   open: false,
   outDir: "dist/",
-  publicUrl: "/",
+  publicUrl: "/",  
+  autoInstall: false, // disable autoinstall of missing dependencies (can lead to dependency pollution)
 };
 
 const build = async (file, options = {}) => {
