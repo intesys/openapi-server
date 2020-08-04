@@ -28,7 +28,11 @@ export default (spec: OperationObject): RequestHandler => (req, res, next) => {
   }
 };
 
-const getResponseSchema = (spec: OperationObject, code: number, format: string): ResponsesObject => {
+const getResponseSchema = (
+  spec: OperationObject,
+  code: number,
+  format: string
+): ResponsesObject => {
   return (
     get(spec, `responses.${code}.schema`) || // swagger v.2
     get(spec, `responses.default.schema`) || // swagger v.2

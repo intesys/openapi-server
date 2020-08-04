@@ -34,7 +34,8 @@ describe("TryMock", () => {
       const next = jest.fn();
       sut(req, res, next);
 
-      const expectedErrorMessage = "SyntaxError: Unexpected token } in JSON at position 19";
+      const expectedErrorMessage =
+        "SyntaxError: Unexpected token } in JSON at position 19";
       expect(next).toBeCalledWith(new Error(expectedErrorMessage));
     });
   });

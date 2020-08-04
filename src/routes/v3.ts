@@ -21,11 +21,11 @@ const compileServerVars = (
   }
 ): string => {
   const mapObj = {};
-  Object.keys(variables).map(item => {
+  Object.keys(variables).map((item) => {
     return (mapObj["{" + item + "}"] = variables[item].default);
   });
-  var regex = new RegExp("(" + Object.keys(mapObj).join("|") + ")", "gi");
-  const newUrl = url.replace(regex, function(matched) {
+  const regex = new RegExp("(" + Object.keys(mapObj).join("|") + ")", "gi");
+  const newUrl = url.replace(regex, function (matched) {
     return mapObj[matched];
   });
   return newUrl;
@@ -53,26 +53,36 @@ const getPath = (server: string): string => {
 
 export const getV3BasePath = (spec: OpenAPI.Document): string => {
   const serverFallback: OpenAPIV3.ServerObject = { url: "" };
-  const servers: OpenAPIV3.ServerObject[] = get(spec, "servers", [serverFallback]);
+  const servers: OpenAPIV3.ServerObject[] = get(spec, "servers", [
+    serverFallback,
+  ]);
   const server = getServer(servers);
   return getPath(server);
 };
 
-const buildV3Routes = (router: Router, paths: Record<string, OpenAPIV3.PathItemObject>, basePath: string): Router => {
+const buildV3Routes = (
+  router: Router,
+  paths: Record<string, OpenAPIV3.PathItemObject>,
+  basePath: string
+): Router => {
   Object.keys(paths).forEach((route: string) => {
     const fullRoute = joinUrl(basePath, route);
     const expressRoute = toExpressParam(fullRoute);
     const routerRef = router.route(expressRoute);
     const methods = Object.keys(operations);
     const spec: OpenAPIV3.PathItemObject = paths[route];
-    methods.forEach(_method => {
+    methods.forEach((_method) => {
       const method: string = operations[_method];
       const operationSpec: OpenAPIV3.OperationObject = spec[method];
       if (!operationSpec) {
         // skip because method is not defined in spec
         return;
       }
-      const middlewares: RequestHandler[] = getMiddlewares(method, fullRoute, operationSpec);
+      const middlewares: RequestHandler[] = getMiddlewares(
+        method,
+        fullRoute,
+        operationSpec
+      );
       routerRef[method](middlewares);
     });
   });

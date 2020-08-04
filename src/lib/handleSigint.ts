@@ -16,7 +16,7 @@ export default (server: Server) => {
 };
 
 const handleSigint = (server: Server): Function => {
-  const onExit = function() {
+  const onExit = function () {
     print("Bye");
     server.close(() => {
       process.exit(0);

@@ -13,7 +13,7 @@ export const findFileInCwd = (files: string | string[]): string | undefined => {
   if (isString(files)) {
     files = [files];
   }
-  const file = files.find(file => {
+  const file = files.find((file) => {
     try {
       const path = Path.join(process.cwd(), file);
       const stat = fs.statSync(path);

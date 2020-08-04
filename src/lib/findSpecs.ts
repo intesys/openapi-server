@@ -22,8 +22,11 @@ import Path from "path";
 export const findSpecs = (strings: string): string[] =>
   strings
     .split(",")
-    .map(source => {
-      if (source.toLowerCase().endsWith(".yml") || source.toLowerCase().endsWith(".yaml")) {
+    .map((source) => {
+      if (
+        source.toLowerCase().endsWith(".yml") ||
+        source.toLowerCase().endsWith(".yaml")
+      ) {
         return glob.sync(Path.join(process.cwd(), source.trim()));
       }
 

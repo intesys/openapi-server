@@ -46,7 +46,9 @@ export const defaults: Env = {
 export const options: string[] = Object.keys(defaults);
 
 // boolean config values
-export const booleans: string[] = options.filter(key => isBoolean(defaults[key]));
+export const booleans: string[] = options.filter(key =>
+  isBoolean(defaults[key])
+);
 
 export enum PROXY_LIBS {
   AXIOS,

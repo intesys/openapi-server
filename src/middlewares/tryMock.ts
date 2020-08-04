@@ -8,7 +8,7 @@ import { log } from "../lib/log";
 const invalidateRequireCache = (name: string) => {
   try {
     const key = require.resolve(name);
-    if (Boolean(require.cache[key])) {
+    if (require.cache[key]) {
       delete require.cache[key];
     }
   } catch (e) {}
@@ -25,7 +25,11 @@ const nodeRequireError = (err: Error): boolean => {
  * @param method one value of `operations`
  * @param route path key, as example: '/item/{id}'
  */
-const tryMock = (method: string, route: string): RequestHandler => (req, res, next) => {
+const tryMock = (method: string, route: string): RequestHandler => (
+  req,
+  res,
+  next
+) => {
   if (!isUndefined(get(res, "locals.body"))) {
     return voidMiddleware(req, res, next);
   }
@@ -59,7 +63,9 @@ const tryMock = (method: string, route: string): RequestHandler => (req, res, ne
     if (!nodeRequireError(error)) {
       return next(error);
     }
-    log(`\n${method.toUpperCase()} ${route} is not mocked\n To mock it, touch ${mockPath}.js(on)`);
+    log(
+      `\n${method.toUpperCase()} ${route} is not mocked\n To mock it, touch ${mockPath}.js(on)`
+    );
   }
 
   return next();

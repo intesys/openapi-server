@@ -34,13 +34,13 @@ const loadYaml = async (file: string): Promise<OpenAPI.Document> => {
 const resolve = async (spec: OpenAPI.Document): Promise<OpenAPI.Document> => {
   const options: JsonRefsOptions = {
     loaderOptions: {
-      processContent: function(
+      processContent: function (
         res: SuperagentResponseMock,
         callback: (str: string) => void
       ) {
         callback(yaml.safeLoad(res.text) as string);
-      }
-    }
+      },
+    },
   };
   const res = await JsonRefs.resolveRefs(spec, options);
   return res.resolved as OpenAPI.Document;

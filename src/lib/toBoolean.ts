@@ -15,9 +15,12 @@ export default function toBoolean(input: any): boolean {
   }
 }
 // fixes boolean configs
-export const fixBooleans = (input: Record<string, any>, booleans: string[]): Record<string, any> => {
+export const fixBooleans = (
+  input: Record<string, any>,
+  booleans: string[]
+): Record<string, any> => {
   const output = { ...input };
-  booleans.forEach(_var => {
+  booleans.forEach((_var) => {
     if (input[_var]) {
       output[_var] = toBoolean(input[_var]);
     }

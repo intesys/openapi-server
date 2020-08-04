@@ -3,11 +3,11 @@ import { inspect } from "util";
 
 const depth: number | null = VERBOSE !== true ? VERBOSE || 0 : null;
 
-export const print = (message: any) => {
+export const print = (message: unknown): void => {
   console.info(stringify(message));
 };
 
-export const clear = () => {
+export const clear = (): void => {
   if (LOG) {
     // when log is enabled, show all console messages
     return;
@@ -15,21 +15,26 @@ export const clear = () => {
   console.clear();
 };
 
-export const log = (message: any) => {
+export const log = (message: unknown): void => {
   if (LOG) {
     console.log(stringify(message));
   }
 };
 
-export const error = (message: any, stack: any = "") => {
+export const error = (message: unknown, stack: any = ""): void => {
   if (LOG) {
     console.error(stringify(message), stack);
   }
 };
 
-const stringify = (message: any): string => {
+const stringify = (message: unknown): string => {
   if (typeof message === "string") {
     return message;
   }
-  return inspect(message, { colors: true, compact: false, breakLength: Infinity, depth }) as string;
+  return inspect(message, {
+    colors: true,
+    compact: false,
+    breakLength: Infinity,
+    depth,
+  }) as string;
 };

@@ -3,7 +3,12 @@ import { ProxyLib, method } from "../../types/proxyLib";
 import { RemoteError } from "../proxy";
 const request = require("postman-request");
 
-const addBody = (method: method, contentType: string, body: any, defaults: {}): {} => {
+const addBody = (
+  method: method,
+  contentType: string,
+  body: any,
+  defaults: {}
+): {} => {
   const allowedMethods = ["PATCH", "POST", "PUT"];
   const _method = method.toLowerCase();
 
@@ -35,7 +40,10 @@ const addBody = (method: method, contentType: string, body: any, defaults: {}): 
   }
 };
 
-const PostmanRequestLib: ProxyLib = (method, url, headers = {}) => async (req, res) => {
+const PostmanRequestLib: ProxyLib = (method, url, headers = {}) => async (
+  req,
+  res
+) => {
   let options = {};
 
   try {

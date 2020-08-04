@@ -25,7 +25,11 @@ const AxiosLib: ProxyLib = (method, url, headers = {}) => async (req, res) => {
     }
 
     const response: AxiosResponse = await axios(request);
-    return { data: response.data, headers: response.headers, status: response.status };
+    return {
+      data: response.data,
+      headers: response.headers,
+      status: response.status,
+    };
   } catch (err) {
     throw new RemoteError(`${method} ${url}`, err);
   }

@@ -27,11 +27,19 @@ export default (url: string): RequestHandler => async (req, res, next) => {
   try {
     const fullUrl = `${url}${req.url}`;
     const method = req.method.toLowerCase() as method;
-    const headers = PROXY_FILTER_HEADERS ? filterHeaders(req.headers) : req.headers;
+    const headers = PROXY_FILTER_HEADERS
+      ? filterHeaders(req.headers)
+      : req.headers;
 
-    const response: ProxyResponse = await proxyLibinstance(method, fullUrl, headers)(req, res);
+    const response: ProxyResponse = await proxyLibinstance(
+      method,
+      fullUrl,
+      headers
+    )(req, res);
 
-    const responseHeaders = PROXY_FILTER_HEADERS ? filterHeaders(response.headers) : response.headers;
+    const responseHeaders = PROXY_FILTER_HEADERS
+      ? filterHeaders(response.headers)
+      : response.headers;
 
     res.set(responseHeaders);
     res.set("Forwarded", `for=${url}`);
@@ -46,7 +54,9 @@ export default (url: string): RequestHandler => async (req, res, next) => {
 
     log({
       "Request handler": "Proxy",
-      "Request forwarded to": `${method.toUpperCase()} ${fullUrl} ${PROXY_FILTER_HEADERS ? "(filtered headers)" : ""}`,
+      "Request forwarded to": `${method.toUpperCase()} ${fullUrl} ${
+        PROXY_FILTER_HEADERS ? "(filtered headers)" : ""
+      }`,
       "Request headers": headers,
       "Request body": req.body,
       "Response status": response.status,

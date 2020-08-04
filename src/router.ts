@@ -3,7 +3,13 @@ import compression from "compression";
 import cors from "cors";
 import express, { Router } from "express";
 import getPrefix from "./lib/getPrefix";
-import { API_PREFIX, specs, STATIC, STATIC_PATH, STATIC_PREFIX } from "./lib/globals";
+import {
+  API_PREFIX,
+  specs,
+  STATIC,
+  STATIC_PATH,
+  STATIC_PREFIX,
+} from "./lib/globals";
 import load from "./lib/load";
 import openApiSchemaValidate from "./lib/openApiSchemaValidate";
 import { validateSpecsOrThrow } from "./lib/validatePaths";
@@ -27,11 +33,11 @@ const router = async (): Promise<Router> => {
 
     const prefix = getPrefix(API_PREFIX);
 
-    const specDocs = await Promise.all(specs.map(spec => load(spec)));
+    const specDocs = await Promise.all(specs.map((spec) => load(spec)));
 
     validateSpecsOrThrow(specDocs);
 
-    specDocs.forEach(spec => {
+    specDocs.forEach((spec) => {
       openApiSchemaValidate(spec);
       router.use(prefix, routes(spec), sendBody());
     });

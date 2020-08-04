@@ -7,7 +7,10 @@ import { RemoteError } from "../proxy";
 const httpAgent = new http.Agent();
 const httpsAgent = new https.Agent({ rejectUnauthorized: false });
 
-const NodeFetchLib: ProxyLib = (method, rawUrl, headers = {}) => async (req, res) => {
+const NodeFetchLib: ProxyLib = (method, rawUrl, headers = {}) => async (
+  req,
+  res
+) => {
   try {
     const agent = rawUrl.startsWith("https") ? httpsAgent : httpAgent;
     const response = await fetch(rawUrl, {
