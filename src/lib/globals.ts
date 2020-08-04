@@ -48,7 +48,7 @@ const {
   SKIP_VALIDATION,
   LOG,
   VERBOSE,
-  WATCH
+  WATCH,
 }: Env = globals;
 
 export {
@@ -71,7 +71,7 @@ export {
   SKIP_VALIDATION,
   LOG,
   VERBOSE,
-  WATCH
+  WATCH,
 };
 
 const port = getPort(PROXY_PORT);

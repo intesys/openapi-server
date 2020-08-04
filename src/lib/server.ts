@@ -5,7 +5,10 @@ import Path from "path";
 import { HTTPProtocol } from "../types/env";
 import { Express } from "express";
 
-export const createServer = (protocol: HTTPProtocol, app: Express) => {
+export const createServer = (
+  protocol: HTTPProtocol,
+  app: Express
+): https.Server | http.Server => {
   switch (protocol) {
     case HTTPProtocol.https:
       return createHttps(app);

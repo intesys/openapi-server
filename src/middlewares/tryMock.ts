@@ -14,6 +14,7 @@ const invalidateRequireCache = (name: string) => {
   } catch (e) {}
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isFunction = (value: any): boolean => typeof value === "function";
 
 const nodeRequireError = (err: Error): boolean => {
@@ -41,6 +42,7 @@ const tryMock = (method: string, route: string): RequestHandler => (
       invalidateRequireCache(mockPath);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const mock = require(mockPath);
 
     if (isFunction(mock)) {

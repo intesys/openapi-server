@@ -15,7 +15,7 @@ import {
 } from "./globals";
 import { clear, print } from "./log";
 
-export default () => {
+export default (): void => {
   clear();
   print(`
   Openapi server running at ${API_PROTOCOL}://localhost:${API_PORT}

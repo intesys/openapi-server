@@ -44,6 +44,7 @@ const handleLocalError: ErrorRequestHandler = (err, req, res) => {
   return res.send(error.message);
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const formatError = (err: any): ErrorWithStatus => {
   if (!err.message) {
     err.message = stringify(err);
@@ -54,6 +55,7 @@ const formatError = (err: any): ErrorWithStatus => {
   return err;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const stringify = (obj: any): string => {
   return inspect(obj, {
     colors: false,

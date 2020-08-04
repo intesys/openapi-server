@@ -1,4 +1,4 @@
-import { OpenAPIV2, OpenAPIV3, OpenAPI } from "openapi-types";
+import { OpenAPIV2, OpenAPIV3 } from "openapi-types";
 import openApiSchemaValidate from "./openApiSchemaValidate";
 
 describe("openApiSchemaValidate", () => {
@@ -40,6 +40,7 @@ describe("openApiSchemaValidate", () => {
     },
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const invalidV2 = (): any => ({
     swagger: "2.0",
     info: {
@@ -58,6 +59,7 @@ describe("openApiSchemaValidate", () => {
     },
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const invalidV3 = (): any => ({
     openapi: "3.0.0",
     info: {

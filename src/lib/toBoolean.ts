@@ -1,4 +1,4 @@
-export default function toBoolean(input: any): boolean {
+export default function toBoolean(input: unknown): boolean {
   switch (input) {
     case "false":
     case "False":
@@ -16,9 +16,9 @@ export default function toBoolean(input: any): boolean {
 }
 // fixes boolean configs
 export const fixBooleans = (
-  input: Record<string, any>,
+  input: Record<string, unknown>,
   booleans: string[]
-): Record<string, any> => {
+): Record<string, unknown> => {
   const output = { ...input };
   booleans.forEach((_var) => {
     if (input[_var]) {

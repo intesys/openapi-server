@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import { MOCKS, PROXY, MOCKS_PATH, proxyUrl } from "../lib/globals";
 import { log } from "../lib/log";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default (): RequestHandler => (req, res, next) => {
   const messages = [];
   log(req.url);

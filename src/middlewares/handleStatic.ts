@@ -1,4 +1,5 @@
-import express from "express";
+import express, { Handler } from "express";
 import Path from "path";
 
-export default (dir: string) => express.static(Path.join(process.cwd(), dir));
+export default (dir: string): Handler =>
+  express.static(Path.join(process.cwd(), dir));

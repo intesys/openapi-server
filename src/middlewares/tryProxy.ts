@@ -8,7 +8,7 @@ import voidMiddleware from "./void";
  * @param method one value of `operations`
  * @param route path key, as example: '/item/{id}'
  */
-const tryProxy = (method: string, route: string): RequestHandler => (
+const tryProxy = (/*method: string, route: string*/): RequestHandler => (
   req,
   res,
   next

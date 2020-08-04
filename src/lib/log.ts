@@ -21,6 +21,7 @@ export const log = (message: unknown): void => {
   }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const error = (message: unknown, stack: any = ""): void => {
   if (LOG) {
     console.error(stringify(message), stack);

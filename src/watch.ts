@@ -8,7 +8,7 @@ import { clear, print } from "./lib/log";
 /**
  * Restarts the server on file changes
  */
-export default (app: Express, server: Server) => {
+export default (app: Express, server: Server): void => {
   let restarting = false;
   let scheduleRestart = false;
 

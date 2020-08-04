@@ -46,7 +46,7 @@ export const defaults: Env = {
 export const options: string[] = Object.keys(defaults);
 
 // boolean config values
-export const booleans: string[] = options.filter(key =>
+export const booleans: string[] = options.filter((key) =>
   isBoolean(defaults[key])
 );
 

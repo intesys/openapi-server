@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import { proxyLib } from "../config";
-import { method, ProxyLib, ProxyResponse } from "../types/proxyLib";
+import { method as Method, ProxyLib, ProxyResponse } from "../types/proxyLib";
 import { PROXY_FILTER_HEADERS } from "./globals";
 import { log } from "./log";
 import { proxyLibs } from "./proxyLibs";
@@ -11,9 +11,10 @@ export const proxyLibinstance: ProxyLib = proxyLibs[proxyLib];
 export class RemoteError {
   _remote: boolean;
   source: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error: any;
 
-  constructor(source: string, error: any) {
+  constructor(source: string, error: unknown) {
     this._remote = true;
     this.source = source;
     this.error = error;
@@ -26,7 +27,7 @@ export class RemoteError {
 export default (url: string): RequestHandler => async (req, res, next) => {
   try {
     const fullUrl = `${url}${req.url}`;
-    const method = req.method.toLowerCase() as method;
+    const method = req.method.toLowerCase() as Method;
     const headers = PROXY_FILTER_HEADERS
       ? filterHeaders(req.headers)
       : req.headers;

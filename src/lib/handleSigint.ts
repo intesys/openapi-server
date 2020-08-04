@@ -5,9 +5,9 @@
 import { Server } from "net";
 import { print } from "./log";
 
-let unregisterSigint: Function;
+let unregisterSigint: () => void;
 
-export default (server: Server) => {
+export default (server: Server): void => {
   if (unregisterSigint) {
     unregisterSigint();
   }
@@ -15,7 +15,7 @@ export default (server: Server) => {
   unregisterSigint = handleSigint(server);
 };
 
-const handleSigint = (server: Server): Function => {
+const handleSigint = (server: Server): (() => void) => {
   const onExit = function () {
     print("Bye");
     server.close(() => {
