@@ -18,6 +18,7 @@ import handleErrors from "./middlewares/handleErrors";
 import router from "./router";
 
 const init = async (app: Express): Promise<Server> =>
+  // eslint-disable-next-line no-async-promise-executor
   new Promise(async (resolve, reject) => {
     try {
       app.set("trust proxy", true);

@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Router } from "express";
 import Fs from "fs";
 import Path from "path";
 import {
@@ -9,6 +9,7 @@ import {
 import { MOCKS_PATH } from "./lib/globals";
 import { print } from "./lib/log";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isAsyncFunction = (fn: any): boolean =>
   fn[Symbol.toStringTag] === "AsyncFunction";
 
@@ -24,7 +25,7 @@ const isFile = (routerFile: string): boolean => {
   }
 };
 
-export default async (middleware: CUSTOM_MIDDLEWARES) => {
+export default async (middleware: CUSTOM_MIDDLEWARES): Promise<Router> => {
   const router = express.Router();
   const routerFile = Path.join(
     MOCKS_PATH,
@@ -33,6 +34,7 @@ export default async (middleware: CUSTOM_MIDDLEWARES) => {
   );
   if (isFile(routerFile)) {
     print(`Using custom middleware: ${routerFile}`);
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const customRouter = require(routerFile);
     if (isAsyncFunction(customRouter)) {
       const awaitedCustomRouter = await customRouter();
