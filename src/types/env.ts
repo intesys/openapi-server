@@ -1,4 +1,4 @@
-export enum HTTPProtocol {
+export const enum HTTPProtocol {
   "http" = "http",
   "https" = "https",
 }

@@ -27,6 +27,7 @@ export default (spec: OpenAPI.Document): Router => {
       return buildV2Routes(router, paths, getV2BasePath(spec));
     case Version.v3:
       return buildV3Routes(router, paths, getV3BasePath(spec));
+    default:
+      throw new Error("Unsupported openApi version");
   }
-  throw new Error("Unsupported openApi version");
 };

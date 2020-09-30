@@ -1,4 +1,4 @@
-enum Version {
+const enum Version {
   "v2",
   "v3",
 }
