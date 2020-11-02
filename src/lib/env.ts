@@ -17,7 +17,7 @@ const loadEnv = () => {
     ".env",
   ].filter(Boolean);
 
-  dotenvFiles.map(dotenvFile => {
+  dotenvFiles.forEach(dotenvFile => {
     if (!dotenvFile) {
       return;
     }
