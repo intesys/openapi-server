@@ -188,34 +188,40 @@ Mocks are enabled by default. The only way to disable is using an ENV variable.
 
 Mocks take precedence over proxy, if a mock is found for the requested route, it is served, otherwise the request is proxied to backend.
 
-The MOCKS_PATH directory has a sub-folder structure which follows the paths to mock, as example:
+The MOCKS_PATH directory has a sub-folder structure which follows the paths to mock, including basePath defined in the spec, as example:
 
-```
+```yml
 // api.yml
-...
+server:
+  - url: /base/path
+  # can be relative or absolute
+
 paths:
   /route1:
     post:
-      ...
+      #...
     get:
-      ...
+      #...
   /route1/sub/route:
     get:
-      ...
-...
+      #...
 ```
 
 ```
 MOCKS_PATH folder:
 
 /mocks
-  /route1
-    post.json
-    get.json
-    /sub
-      /route
-        get.js
+  /base
+    /path
+      /route1
+        post.json
+        get.json
+        /sub
+          /route
+            get.js
 ```
+
+> Note: env var `API_PREFIX` is NOT used to build mock paths. It's only used as prefix to serve api.
 
 ### JSON mocks
 
@@ -320,7 +326,7 @@ const entrypoint = "public/index.html";
 const options = {
   open: false,
   outDir: "dist/",
-  publicUrl: "/",  
+  publicUrl: "/",
   autoInstall: false, // disable autoinstall of missing dependencies (can lead to dependency pollution)
 };
 
