@@ -7,9 +7,9 @@ import { Express } from "express";
 
 export const createServer = (protocol: HTTPProtocol, app: Express) => {
   switch (protocol) {
-    case HTTPProtocol.https:
+    case "https":
       return createHttps(app);
-    case HTTPProtocol.http:
+    case "http":
     default:
       return createHttp(app);
   }

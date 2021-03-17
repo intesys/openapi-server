@@ -1,5 +1,5 @@
 import { isBoolean } from "lodash";
-import Env, { HTTPProtocol } from "./types/env";
+import Env from "./types/env";
 
 export const enum CUSTOM_MIDDLEWARES {
   "PRE",
@@ -19,7 +19,7 @@ export const defaults: Env = {
   API_YML: "",
   API_PREFIX: "",
   API_PORT: "3000",
-  API_PROTOCOL: HTTPProtocol.http,
+  API_PROTOCOL: "http",
   API_HOSTNAME: "localhost",
 
   STATIC: false,
@@ -30,7 +30,7 @@ export const defaults: Env = {
   MOCKS_PATH: "/mocks",
 
   PROXY: false,
-  PROXY_PROTOCOL: HTTPProtocol.http,
+  PROXY_PROTOCOL: "http",
   PROXY_HOSTNAME: "",
   PROXY_PORT: "",
   PROXY_PREFIX: "",
@@ -46,7 +46,7 @@ export const defaults: Env = {
 export const options: string[] = Object.keys(defaults);
 
 // boolean config values
-export const booleans: string[] = options.filter((key) => isBoolean(defaults[key]));
+export const booleans: string[] = options.filter(key => isBoolean(defaults[key]));
 
 export const enum PROXY_LIBS {
   AXIOS,
