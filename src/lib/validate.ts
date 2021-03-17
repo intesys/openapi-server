@@ -4,9 +4,9 @@ import { SchemaObject } from "../types/openApi";
 export default (schema: SchemaObject, data: any) => {
   const ajv = new Ajv({
     // format: false, // don't validate by format
-    unknownFormats: "ignore", // as example, ignores int64
-    allErrors: true,
-    nullable: true,
+    // unknownFormats: "ignore", // as example, ignores int64
+    // allErrors: true,
+    // nullable: true,
   });
   const valid = ajv.validate(schema, data);
   if (!valid) {

@@ -30,7 +30,7 @@ program
   .option("--VERBOSE [number]", "depth of logs shown")
   .parse(process.argv);
 
-const cliOptions: Partial<Env> = pick(program, options);
+const cliOptions: Partial<Env> = pick(program.opts(), options) as Partial<Env>;
 
 // overwrite env variables
 Object.keys(cliOptions).forEach(key => (process.env[key] = cliOptions[key]));
