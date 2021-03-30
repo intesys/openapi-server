@@ -1,4 +1,3 @@
-import bodyParser from "body-parser";
 import compression from "compression";
 import cors from "cors";
 import express, { Router } from "express";
@@ -19,19 +18,19 @@ const router = async (): Promise<Router> => {
     router.use(
       compression(),
       cors({ credentials: true }),
-      bodyParser.urlencoded({ extended: false, limit: "100mb" }),
-      bodyParser.json({ limit: "100mb" })
+      express.urlencoded({ extended: false, limit: "100mb" }),
+      express.json({ limit: "100mb" })
     );
 
     STATIC && router.use(STATIC_PREFIX, handleStatic(STATIC_PATH));
 
     const prefix = getPrefix(API_PREFIX);
 
-    const specDocs = await Promise.all(specs.map(spec => load(spec)));
+    const specDocs = await Promise.all(specs.map((spec) => load(spec)));
 
     validateSpecsOrThrow(specDocs);
 
-    specDocs.forEach(spec => {
+    specDocs.forEach((spec) => {
       openApiSchemaValidate(spec);
       router.use(prefix, routes(spec), sendBody());
     });
