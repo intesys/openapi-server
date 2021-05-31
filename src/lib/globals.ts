@@ -21,10 +21,11 @@ const exitWithError = (message: string, code: number = 1) => {
 
 // Absolutize MOCKS_PATH
 globals.MOCKS_PATH =
-  findDirInCwd(globals.MOCKS_PATH || "/") || exitWithError(`Directory not found: ${globals.MOCKS_PATH}`);
+  findDirInCwd(globals.MOCKS_PATH || "/") ||
+  exitWithError(`Mock directory not found: ${globals.MOCKS_PATH}, please set MOCKS_PATH`);
 
 // Absolutize API_YML path
-export const specs: string[] = findSpecs(globals.API_YML) || exitWithError(`Invalid param: ${globals.API_YML}`);
+export const specs: string[] = findSpecs(globals.API_YML) || exitWithError(`Invalid API_YML: ${globals.API_YML}`);
 
 const {
   API_YML,
