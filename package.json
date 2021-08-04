@@ -12,14 +12,15 @@
   "scripts": {
     "build": "tsc",
     "changelog": "auto-changelog -u --release-summary",
-    "start": "npm run build && node dist/cli.js",
-    "prepare": "npm run build",
-    "test": "jest",
-    "tdd": "jest --watch",
     "coverage": "jest --coverage",
-    "install:types": "typesync",
     "example": "npm run build && node dist/cli.js -l --API_YML /examples/api.yml --API_PREFIX /api --STATIC_PATH /examples/static --MOCKS_PATH /examples/mocks",
-    "preversion": "npm run changelog"
+    "install:types": "typesync",
+    "postinstall": "npm run build",
+    "prepare": "npm run build",
+    "preversion": "npm run changelog",
+    "start": "npm run build && node dist/cli.js",
+    "tdd": "jest --watch",
+    "test": "jest"
   },
   "files": [
     "cert/**/*",
