@@ -1,0 +1,24 @@
+export declare type HTTPProtocol = "http" | "https";
+declare type Env = {
+    API_YML: string;
+    API_PREFIX: string;
+    API_PORT: string;
+    API_PROTOCOL: HTTPProtocol;
+    API_HOSTNAME: string;
+    STATIC: boolean;
+    STATIC_PREFIX: string;
+    STATIC_PATH: string;
+    MOCKS: boolean;
+    MOCKS_PATH: string;
+    PROXY: boolean;
+    PROXY_PROTOCOL: HTTPProtocol;
+    PROXY_HOSTNAME: string;
+    PROXY_PORT: string;
+    PROXY_PREFIX: string;
+    PROXY_FILTER_HEADERS: boolean;
+    SKIP_VALIDATION?: boolean;
+    LOG?: boolean;
+    VERBOSE: number | boolean | null;
+    WATCH?: boolean;
+};
+export default Env;

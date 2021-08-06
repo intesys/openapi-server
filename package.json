@@ -15,7 +15,6 @@
     "coverage": "jest --coverage",
     "example": "npm run build && node dist/cli.js -l --API_YML /examples/api.yml --API_PREFIX /api --STATIC_PATH /examples/static --MOCKS_PATH /examples/mocks",
     "install:types": "typesync",
-    "postinstall": "npm run build",
     "prepare": "npm run build",
     "preversion": "npm run changelog",
     "start": "npm run build && node dist/cli.js",
