@@ -1,6 +1,8 @@
 import compression from "compression";
 import cors from "cors";
 import express, { Router } from "express";
+import { CUSTOM_MIDDLEWARES } from "./config";
+import customMiddleware from "./customMiddleware";
 import getPrefix from "./lib/getPrefix";
 import { API_PREFIX, specs, STATIC, STATIC_PATH, STATIC_PREFIX } from "./lib/globals";
 import load from "./lib/load";
@@ -14,6 +16,8 @@ const router = async (): Promise<Router> => {
   const router: Router = express.Router();
 
   try {
+    router.use(await customMiddleware(CUSTOM_MIDDLEWARES.PRE));
+
     router.options("*", cors());
     router.use(
       compression(),
@@ -34,6 +38,8 @@ const router = async (): Promise<Router> => {
       openApiSchemaValidate(spec);
       router.use(prefix, routes(spec), sendBody());
     });
+
+    router.use(await customMiddleware(CUSTOM_MIDDLEWARES.POST));
   } catch (err) {
     console.error(err);
     process.exit(1);
