@@ -18,23 +18,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const customMiddleware_1 = __importDefault(require("./customMiddleware"));
 const globals_1 = require("./lib/globals");
 const handleSigint_1 = __importDefault(require("./lib/handleSigint"));
 const printServerInfo_1 = __importDefault(require("./lib/printServerInfo"));
 const server_1 = require("./lib/server");
 const handleErrors_1 = __importDefault(require("./middlewares/handleErrors"));
-// import handleNotFound from "./middlewares/handleNotFound";
 const router_1 = __importDefault(require("./router"));
 const init = (app) => __awaiter(void 0, void 0, void 0, function* () {
-    return new Promise((resolve, reject) => __awaiter(void 0, void 0, void 0, function* () {
+    const _router = yield router_1.default();
+    return new Promise((resolve, reject) => {
         try {
             app.set("trust proxy", true);
-            app.use(yield customMiddleware_1.default(0 /* PRE */));
-            const _router = yield router_1.default();
             app.use(_router);
-            app.use(yield customMiddleware_1.default(1 /* POST */));
-            app.use(handleErrors_1.default() /*, handleNotFound()*/);
+            app.use(handleErrors_1.default());
             const server = server_1.createServer(globals_1.API_PROTOCOL, app);
             server.listen(globals_1.API_PORT, () => {
                 printServerInfo_1.default();
@@ -48,7 +44,7 @@ const init = (app) => __awaiter(void 0, void 0, void 0, function* () {
         catch (err) {
             reject(err);
         }
-    }));
+    });
 });
 exports.default = init;
 //# sourceMappingURL=init.js.map

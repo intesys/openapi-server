@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const compression_1 = __importDefault(require("compression"));
 const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
+const customMiddleware_1 = __importDefault(require("./customMiddleware"));
 const getPrefix_1 = __importDefault(require("./lib/getPrefix"));
 const globals_1 = require("./lib/globals");
 const load_1 = __importDefault(require("./lib/load"));
@@ -26,6 +27,7 @@ const routes_1 = __importDefault(require("./routes"));
 const router = () => __awaiter(void 0, void 0, void 0, function* () {
     const router = express_1.default.Router();
     try {
+        router.use(yield customMiddleware_1.default(0 /* PRE */));
         router.options("*", cors_1.default());
         router.use(compression_1.default(), cors_1.default({ credentials: true }), express_1.default.urlencoded({ extended: false, limit: "100mb" }), express_1.default.json({ limit: "100mb" }));
         globals_1.STATIC && router.use(globals_1.STATIC_PREFIX, handleStatic_1.default(globals_1.STATIC_PATH));
@@ -36,6 +38,7 @@ const router = () => __awaiter(void 0, void 0, void 0, function* () {
             openApiSchemaValidate_1.default(spec);
             router.use(prefix, routes_1.default(spec), sendBody_1.default());
         });
+        router.use(yield customMiddleware_1.default(1 /* POST */));
     }
     catch (err) {
         console.error(err);
