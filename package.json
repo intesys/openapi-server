@@ -19,7 +19,7 @@
     "coverage": "jest --coverage",
     "install:types": "typesync",
     "example": "npm run build && node dist/cli.js -l --API_YML /examples/api.yml --API_PREFIX /api --STATIC_PATH /examples/static --MOCKS_PATH /examples/mocks",
-    "preversion": "npm run changelog"
+    "preversion": "npm run build && npm run changelog"
   },
   "files": [
     "cert/**/*",
