@@ -1,34 +1,8 @@
 {
-  "name": "openapi-server",
-  "version": "4.5.2",
-  "description": "A web server based on openApi spec, with proxy, mocks and optional validation",
-  "main": "dist/index.js",
+  "author": "alessandro falezza",
   "bin": {
     "openapi-server": "./bin/openapi-server.js"
   },
-  "engines": {
-    "node": ">9.0.0"
-  },
-  "scripts": {
-    "build": "tsc",
-    "changelog": "auto-changelog -u --release-summary",
-    "start": "npm run build && node dist/cli.js",
-    "prepare": "npm run build",
-    "test": "jest",
-    "tdd": "jest --watch",
-    "coverage": "jest --coverage",
-    "install:types": "typesync",
-    "example": "npm run build && node dist/cli.js -l --API_YML /examples/api.yml --API_PREFIX /api --STATIC_PATH /examples/static --MOCKS_PATH /examples/mocks",
-    "preversion": "npm run build && npm run changelog"
-  },
-  "files": [
-    "cert/**/*",
-    "dist/**/*",
-    "bin/**/*",
-    "examples/**/*"
-  ],
-  "author": "alessandro falezza",
-  "license": "ISC",
   "dependencies": {
     "ajv": "^7.2.1",
     "axios": "^0.21.1",
@@ -55,6 +29,7 @@
     "tslib": "^2.1.0",
     "typescript": "^4.2.3"
   },
+  "description": "A web server based on openApi spec, with proxy, mocks and optional validation",
   "devDependencies": {
     "@types/compression": "^1.7.0",
     "@types/cors": "^2.8.10",
@@ -77,6 +52,34 @@
     "ts-jest": "^26.5.4",
     "typesync": "^0.8.0"
   },
+  "engines": {
+    "node": ">9.0.0"
+  },
+  "files": [
+    "cert/**/*",
+    "dist/**/*",
+    "bin/**/*",
+    "examples/**/*"
+  ],
+  "license": "ISC",
+  "main": "dist/index.js",
+  "name": "openapi-server",
+  "publishConfig": {
+    "registry": "https://nexus.intesys.it/repository/npm-private/"
+  },
+  "scripts": {
+    "build": "tsc",
+    "changelog": "auto-changelog -u --release-summary",
+    "coverage": "jest --coverage",
+    "example": "npm run build && node dist/cli.js -l --API_YML /examples/api.yml --API_PREFIX /api --STATIC_PATH /examples/static --MOCKS_PATH /examples/mocks",
+    "install:types": "typesync",
+    "prepare": "npm run build",
+    "preversion": "npm run build && npm run changelog",
+    "start": "npm run build && node dist/cli.js",
+    "tdd": "jest --watch",
+    "test": "jest"
+  },
+  "version": "4.5.2",
   "volta": {
     "node": "20.18.0"
   }
