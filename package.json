@@ -63,7 +63,7 @@
   ],
   "license": "ISC",
   "main": "dist/index.js",
-  "name": "openapi-server",
+  "name": "@intesys/openapi-server",
   "publishConfig": {
     "registry": "https://nexus.intesys.it/repository/npm-private/"
   },
