@@ -17,18 +17,19 @@ export default (): ErrorRequestHandler => (err, req, res, next) => {
   return next(err);
 };
 
-const handleRemoteError: ErrorRequestHandler = (err, req, res) => {
+export const handleRemoteError: ErrorRequestHandler = (err, req, res) => {
   const { error } = err;
-  const { data, headers, status } = error;
+  const { data, response } = error;
+
   logError({
     Request: `${req.method.toUpperCase()} ${req.originalUrl}`,
-    Status: status,
+    Status: response.status,
     Source: err.source,
-    Headers: headers,
-    Error: data,
+    Headers: response.headers,
+    Error: response.data,
   });
-  const statusCode = error.status || res.statusCode || 500;
-  res.set(headers);
+  const statusCode = response.status || res.statusCode || 500;
+  res.set(response.headers);
   res.status(statusCode);
   return res.send(data);
 };
