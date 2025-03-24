@@ -1,0 +1,4 @@
+export declare const specs: string[];
+declare const API_YML: string, API_PREFIX: string, API_PORT: string, API_PROTOCOL: import("../types/env").HTTPProtocol, API_HOSTNAME: string, STATIC: boolean, STATIC_PREFIX: string, STATIC_PATH: string, MOCKS: boolean, MOCKS_PATH: string, PROXY: boolean, PROXY_PROTOCOL: import("../types/env").HTTPProtocol, PROXY_HOSTNAME: string, PROXY_PORT: string, PROXY_PREFIX: string, PROXY_FILTER_HEADERS: boolean, SKIP_VALIDATION: boolean | undefined, LOG: boolean | undefined, VERBOSE: number | boolean | null, WATCH: boolean | undefined;
+export { API_YML, API_PREFIX, API_PORT, API_PROTOCOL, API_HOSTNAME, STATIC, STATIC_PREFIX, STATIC_PATH, MOCKS, MOCKS_PATH, PROXY, PROXY_PROTOCOL, PROXY_HOSTNAME, PROXY_PORT, PROXY_PREFIX, PROXY_FILTER_HEADERS, SKIP_VALIDATION, LOG, VERBOSE, WATCH, };
+export declare const proxyUrl: string;

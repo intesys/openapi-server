@@ -1,0 +1,26 @@
+stages:
+  - build
+
+variables:
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+
+build:
+  image: node:lts-hydrogen
+  allow_failure: false
+  before_script:
+    - npm ci --cache $npm_config_cache --prefer-offline
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - $npm_config_cache
+    policy: pull-push
+  stage: build
+  rules:
+    # - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_TAG != null
+  script:
+    - npm run build
+    - npm config set @intesys:registry=https://nexus.intesys.it/repository/npm-private --location=project
+    - npm config set //nexus.intesys.it/repository/:_authToken=$NPM_AUTH_TOKEN --location=project
+    - npm config set //nexus.intesys.it/repository/:email=no-reply@intesys.it --location=project
+    - npm publish --verbose

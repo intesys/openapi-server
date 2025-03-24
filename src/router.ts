@@ -1,7 +1,8 @@
-import bodyParser from "body-parser";
 import compression from "compression";
 import cors from "cors";
 import express, { Router } from "express";
+import { CUSTOM_MIDDLEWARES } from "./config";
+import customMiddleware from "./customMiddleware";
 import getPrefix from "./lib/getPrefix";
 import { API_PREFIX, specs, STATIC, STATIC_PATH, STATIC_PREFIX } from "./lib/globals";
 import load from "./lib/load";
@@ -15,26 +16,30 @@ const router = async (): Promise<Router> => {
   const router: Router = express.Router();
 
   try {
+    router.use(await customMiddleware(CUSTOM_MIDDLEWARES.PRE));
+
     router.options("*", cors());
     router.use(
       compression(),
       cors({ credentials: true }),
-      bodyParser.urlencoded({ extended: false, limit: "100mb" }),
-      bodyParser.json({ limit: "100mb" })
+      express.urlencoded({ extended: false, limit: "100mb" }),
+      express.json({ limit: "100mb" })
     );
 
     STATIC && router.use(STATIC_PREFIX, handleStatic(STATIC_PATH));
 
     const prefix = getPrefix(API_PREFIX);
 
-    const specDocs = await Promise.all(specs.map(spec => load(spec)));
+    const specDocs = await Promise.all(specs.map((spec) => load(spec)));
 
     validateSpecsOrThrow(specDocs);
 
-    specDocs.forEach(spec => {
+    specDocs.forEach((spec) => {
       openApiSchemaValidate(spec);
       router.use(prefix, routes(spec), sendBody());
     });
+
+    router.use(await customMiddleware(CUSTOM_MIDDLEWARES.POST));
   } catch (err) {
     console.error(err);
     process.exit(1);

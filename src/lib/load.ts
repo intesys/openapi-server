@@ -18,7 +18,7 @@ const loadYaml = async (file: string): Promise<OpenAPI.Document> => {
         return reject(new Error(`Unable to load file ${file}`));
       }
       try {
-        const spec: OpenAPI.Document = yaml.safeLoad(data);
+        const spec: OpenAPI.Document = yaml.load(data) as OpenAPI.Document;
         resolve(spec);
       } catch (err) {
         reject(new Error(`Error reading file ${file}`));
@@ -31,7 +31,7 @@ const resolve = async (spec: OpenAPI.Document): Promise<OpenAPI.Document> => {
   const options = {
     loaderOptions: {
       processContent: function(res: any, callback: Function) {
-        callback(null, yaml.safeLoad(res.text));
+        callback(null, yaml.load(res.text));
       },
     },
   };

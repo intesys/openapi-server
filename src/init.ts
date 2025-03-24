@@ -7,29 +7,21 @@
 
 import { Express } from "express";
 import { Server } from "net";
-import { CUSTOM_MIDDLEWARES } from "./config";
-import customMiddleware from "./customMiddleware";
 import { API_PORT, API_PROTOCOL } from "./lib/globals";
 import handleSigint from "./lib/handleSigint";
 import printServerInfo from "./lib/printServerInfo";
 import { createServer } from "./lib/server";
 import handleErrors from "./middlewares/handleErrors";
-import handleNotFound from "./middlewares/handleNotFound";
 import router from "./router";
 
-const init = async (app: Express): Promise<Server> =>
-  new Promise(async (resolve, reject) => {
+const init = async (app: Express): Promise<Server> => {
+  const _router = await router();
+
+  return new Promise((resolve, reject) => {
     try {
       app.set("trust proxy", true);
-
-      app.use(await customMiddleware(CUSTOM_MIDDLEWARES.PRE));
-
-      const _router = await router();
       app.use(_router);
-
-      app.use(await customMiddleware(CUSTOM_MIDDLEWARES.POST));
-
-      app.use(handleErrors() /*, handleNotFound()*/);
+      app.use(handleErrors());
 
       const server = createServer(API_PROTOCOL, app);
 
@@ -47,5 +39,6 @@ const init = async (app: Express): Promise<Server> =>
       reject(err);
     }
   });
+}
 
 export default init;

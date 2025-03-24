@@ -1,7 +1,4 @@
-export enum HTTPProtocol {
-  "http" = "http",
-  "https" = "https",
-}
+export type HTTPProtocol = "http" | "https";
 
 type Env = {
   API_YML: string;

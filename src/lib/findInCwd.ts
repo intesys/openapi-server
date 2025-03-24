@@ -1,6 +1,5 @@
 import fs from "fs";
 import Path from "path";
-import { isString } from "util";
 
 /**
  * Searches for files in current working directory, returns the first file found.
@@ -10,7 +9,7 @@ import { isString } from "util";
  * @returns string | undefined full path to file
  */
 export const findFileInCwd = (files: string | string[]): string | undefined => {
-  if (isString(files)) {
+  if (typeof files === "string") {
     files = [files];
   }
   const file = files.find(file => {
