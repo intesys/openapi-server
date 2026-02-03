@@ -63,10 +63,25 @@
   ],
   "license": "ISC",
   "main": "dist/index.js",
-  "name": "@intesys/openapi-server",
-  "publishConfig": {
-    "registry": "https://nexus.intesys.it/repository/npm-private/"
+  "name": "openapi-server-mock",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/intesys/openapi-server.git"
   },
+  "bugs": {
+    "url": "https://github.com/intesys/openapi-server/issues"
+  },
+  "homepage": "https://github.com/intesys/openapi-server#readme",
+  "keywords": [
+    "openapi",
+    "swagger",
+    "mock",
+    "server",
+    "api",
+    "proxy",
+    "express",
+    "testing"
+  ],
   "scripts": {
     "build": "tsc",
     "changelog": "auto-changelog -u --release-summary",
@@ -79,7 +94,7 @@
     "tdd": "jest --watch",
     "test": "jest"
   },
-  "version": "4.5.4",
+  "version": "4.5.5",
   "volta": {
     "node": "20.18.0"
   }
