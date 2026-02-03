@@ -63,7 +63,7 @@
   ],
   "license": "ISC",
   "main": "dist/index.js",
-  "name": "openapi-server-mock",
+  "name": "@openapiserver/openapi-server-mock",
   "repository": {
     "type": "git",
     "url": "https://github.com/intesys/openapi-server.git"
@@ -94,7 +94,7 @@
     "tdd": "jest --watch",
     "test": "jest"
   },
-  "version": "4.5.7",
+  "version": "4.5.8",
   "volta": {
     "node": "20.18.0"
   }
