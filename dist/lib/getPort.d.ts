@@ -1,2 +1,2 @@
-declare const getPort: (port?: string | undefined) => string;
+declare const getPort: (port?: string) => string;
 export default getPort;

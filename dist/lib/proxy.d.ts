@@ -7,8 +7,8 @@ export declare class RemoteError {
     error: any;
     constructor(source: string, error: any);
 }
-declare const _default: (url: string) => RequestHandler;
 /**
  * @param {string} url fully qualified url
  */
+declare const _default: (url: string) => RequestHandler;
 export default _default;

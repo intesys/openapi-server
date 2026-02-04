@@ -1,2 +1,2 @@
-declare const getPrefix: (prefix?: string | undefined) => string;
+declare const getPrefix: (prefix?: string) => string;
 export default getPrefix;

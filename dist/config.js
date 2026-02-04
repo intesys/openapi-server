@@ -4,8 +4,8 @@ exports.proxyLib = exports.booleans = exports.options = exports.defaults = expor
 const lodash_1 = require("lodash");
 exports.CUSTOM_MIDDLEWARES_PATH = "__middlewares__";
 exports.CUSTOM_MIDDLEWARES_NAMES = {
-    [0 /* PRE */]: "pre.js",
-    [1 /* POST */]: "post.js",
+    [0 /* CUSTOM_MIDDLEWARES.PRE */]: "pre.js",
+    [1 /* CUSTOM_MIDDLEWARES.POST */]: "post.js",
 };
 exports.defaults = {
     API_YML: "",
@@ -32,7 +32,7 @@ exports.defaults = {
 // list of config keys
 exports.options = Object.keys(exports.defaults);
 // boolean config values
-exports.booleans = exports.options.filter(key => lodash_1.isBoolean(exports.defaults[key]));
+exports.booleans = exports.options.filter(key => (0, lodash_1.isBoolean)(exports.defaults[key]));
 // proxy library in use, can be axios, postman-request, nodeFetch
-exports.proxyLib = 0 /* AXIOS */;
+exports.proxyLib = 0 /* PROXY_LIBS.AXIOS */;
 //# sourceMappingURL=config.js.map

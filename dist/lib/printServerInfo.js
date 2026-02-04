@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const globals_1 = require("./globals");
 const log_1 = require("./log");
 exports.default = () => {
-    log_1.clear();
-    log_1.print(`
+    (0, log_1.clear)();
+    (0, log_1.print)(`
   Openapi server running at ${globals_1.API_PROTOCOL}://localhost:${globals_1.API_PORT}
 
   Api yml: ${globals_1.API_YML}

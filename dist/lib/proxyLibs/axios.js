@@ -33,7 +33,7 @@ const AxiosLib = (method, url, headers = {}) => (req, res) => __awaiter(void 0, 
             // declare data only if there is a body!
             request.data = req.body;
         }
-        const response = yield axios_1.default(request);
+        const response = yield (0, axios_1.default)(request);
         return { data: response.data, headers: response.headers, status: response.status };
     }
     catch (err) {

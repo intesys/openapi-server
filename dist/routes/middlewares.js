@@ -9,10 +9,10 @@ const tryProxy_1 = __importDefault(require("../middlewares/tryProxy"));
 const validateResponse_1 = __importDefault(require("../middlewares/validateResponse"));
 const setProxyHeaders_1 = __importDefault(require("../middlewares/setProxyHeaders"));
 exports.default = (method, route, operationSpec) => {
-    const middlewares = [setProxyHeaders_1.default()];
-    globals_1.MOCKS && middlewares.push(tryMock_1.default(method, route));
-    globals_1.PROXY && middlewares.push(tryProxy_1.default(method, route));
-    !globals_1.SKIP_VALIDATION && middlewares.push(validateResponse_1.default(operationSpec));
+    const middlewares = [(0, setProxyHeaders_1.default)()];
+    globals_1.MOCKS && middlewares.push((0, tryMock_1.default)(method, route));
+    globals_1.PROXY && middlewares.push((0, tryProxy_1.default)(method, route));
+    !globals_1.SKIP_VALIDATION && middlewares.push((0, validateResponse_1.default)(operationSpec));
     return middlewares;
 };
 //# sourceMappingURL=middlewares.js.map

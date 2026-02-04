@@ -22,7 +22,7 @@ exports.default = (spec) => (req, res, next) => {
     const format = res.get("Content-Type") || "application/json";
     const schema = getResponseSchema(spec, code, format);
     try {
-        validate_1.default(schema, res.locals.body);
+        (0, validate_1.default)(schema, res.locals.body);
         next();
     }
     catch (err) {
@@ -31,9 +31,9 @@ exports.default = (spec) => (req, res, next) => {
     }
 };
 const getResponseSchema = (spec, code, format) => {
-    return (lodash_1.get(spec, `responses.${code}.schema`) || // swagger v.2
-        lodash_1.get(spec, `responses.default.schema`) || // swagger v.2
-        lodash_1.get(spec, `responses.${code}.content.${format}.schema`) || // openapi v.3.0.*
-        lodash_1.get(spec, `responses.default.content.${format}.schema`)); // openapi v.3.0.*
+    return ((0, lodash_1.get)(spec, `responses.${code}.schema`) || // swagger v.2
+        (0, lodash_1.get)(spec, `responses.default.schema`) || // swagger v.2
+        (0, lodash_1.get)(spec, `responses.${code}.content.${format}.schema`) || // openapi v.3.0.*
+        (0, lodash_1.get)(spec, `responses.default.content.${format}.schema`)); // openapi v.3.0.*
 };
 //# sourceMappingURL=validateResponse.js.map

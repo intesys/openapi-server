@@ -11,15 +11,15 @@ const openApiVersion_1 = __importDefault(require("./openApiVersion"));
  * @param {OpenApi.Document} spec
  */
 exports.default = (spec) => {
-    const version = openApiVersion_1.default(spec);
-    const title = lodash_1.get(spec, "info.title") || "";
+    const version = (0, openApiVersion_1.default)(spec);
+    const title = (0, lodash_1.get)(spec, "info.title") || "";
     const validator = new openapi_schema_validator_1.default({ version });
     const validation = validator.validate(spec);
     if (validation.errors.length) {
         const error = JSON.stringify(validation.errors, null, 2);
         throw new Error(`Invalid openApi schema ${title}: ${error}`);
     }
-    log_1.print(`Valid openApi schema ${title}`);
+    (0, log_1.print)(`Valid openApi schema ${title}`);
     return true;
 };
 //# sourceMappingURL=openApiSchemaValidate.js.map

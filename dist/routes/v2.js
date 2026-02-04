@@ -9,19 +9,23 @@ const joinUrl_1 = __importDefault(require("../lib/joinUrl"));
 const toExpressParam_1 = __importDefault(require("../lib/toExpressParam"));
 const routes_1 = require("../routes");
 const middlewares_1 = __importDefault(require("./middlewares"));
-const getV2BasePath = (spec) => lodash_1.get(spec, "basePath", "");
+const getV2BasePath = (spec) => (0, lodash_1.get)(spec, "basePath", "");
 exports.getV2BasePath = getV2BasePath;
 const buildV2Routes = (router, paths, basePath) => {
     Object.keys(paths).forEach((route) => {
-        const fullRoute = joinUrl_1.default(basePath, route);
-        const expressRoute = toExpressParam_1.default(fullRoute);
+        const fullRoute = (0, joinUrl_1.default)(basePath, route);
+        const expressRoute = (0, toExpressParam_1.default)(fullRoute);
         const routerRef = router.route(expressRoute);
         const methods = Object.keys(routes_1.operations);
         const spec = paths[route];
         methods.forEach((_method) => {
             const method = routes_1.operations[_method];
             const operationSpec = spec[method];
-            const middlewares = middlewares_1.default(method, fullRoute, operationSpec);
+            if (!operationSpec) {
+                // skip because method is not defined in spec
+                return;
+            }
+            const middlewares = (0, middlewares_1.default)(method, fullRoute, operationSpec);
             routerRef[method](middlewares);
         });
     });
