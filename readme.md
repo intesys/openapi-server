@@ -26,7 +26,7 @@ You can also use mocks for testing purpose, as to run end-to-end tests with pred
 ## Install
 
 ```
-npm i https://gitlab.intesys.it/open-source/openapi-server.git
+npm i https://github.com/intesys/openapi-server.git
 ```
 
 You can include it as dependency in your `package.json`:
@@ -35,7 +35,7 @@ You can include it as dependency in your `package.json`:
 {
   // ...
   "devDependencies": {
-    "openapi-server": "git+https://gitlab.intesys.it/open-source/openapi-server.git"
+    "openapi-server": "git+https://github.com/intesys/openapi-server.git"
   }
   // ...
 }
@@ -43,7 +43,7 @@ You can include it as dependency in your `package.json`:
 
 ## Quick start
 
-- run `npm i https://gitlab.intesys.it/open-source/openapi-server.git`
+- run `npm i https://github.com/intesys/openapi-server.git`
 - place a file `api.yml` (openapi v.3, swagger v.2 is also supported) in the root folder of your project
 - create a folder `/mocks` in the root folder of your project
 - run `npx openapi-server`
@@ -335,7 +335,7 @@ const build = async (file, options = {}) => {
   const parcelMiddleware = await bundler.middleware();
   return new Promise((resolve, reject) => {
     bundler.on("bundled", () => resolve(parcelMiddleware));
-    bundler.on("buildError", error => reject(error));
+    bundler.on("buildError", (error) => reject(error));
   });
 };
 
