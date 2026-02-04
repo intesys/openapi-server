@@ -18,6 +18,10 @@ const buildV2Routes = (router: Router, paths: OpenAPIV2.PathsObject, basePath: s
     methods.forEach((_method) => {
       const method = operations[_method];
       const operationSpec: OpenAPIV2.OperationObject = spec[method];
+      if (!operationSpec) {
+        // skip because method is not defined in spec
+        return;
+      }
       const middlewares: RequestHandler[] = getMiddlewares(method, fullRoute, operationSpec);
       routerRef[method](middlewares);
     });
