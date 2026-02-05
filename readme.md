@@ -395,3 +395,32 @@ Openapi-server is an [express](https://expressjs.com/) web server with some midd
   - looks for a mock (replies with mock if found)
   - proxies the request to the backend server
   - (optional) validates the response
+
+## Publishing / Release (npm)
+
+Openapi-server now uses npm Trusted Publishing with GitHub Actions OIDC.
+
+### How to release a new version
+
+1. Bump version locally:
+
+```
+npm version patch (or mino / major)
+```
+
+2. Push commits and tags:
+
+```
+git push
+git push --tags
+```
+
+3. GitHub Actions detects the new tag and:
+
+- Runs build and tests
+- Publishes to npm automatically using OIDC with `--provenance`
+
+> ⚠️ Do not run `npm publish` locally anymore.
+> Npm expects a valid OIDC token and will reject manual publishing.
+
+The workflow used is `.github/workflows/release.yml`.
