@@ -23,10 +23,10 @@ const getFullPaths = (spec) => {
     const paths = (0, lodash_1.get)(spec, "paths", {});
     const operationMethods = Object.values(routes_1.operations);
     return Object.keys(paths)
-        .map(path => Object.keys(paths[path] || {})
+        .map((path) => Object.keys(paths[path] || {})
         // only valid http methods are evaluated
-        .filter(method => operationMethods.indexOf(method) > -1)
-        .map(method => `${basePath}${path}/${method}`))
+        .filter((method) => operationMethods.indexOf(method) > -1)
+        .map((method) => `${basePath}${path}/${method}`))
         .reduce((paths, specPaths) => paths.concat(specPaths), []);
 };
 const findDuplicates = (arr) => arr.filter((item, index) => arr.indexOf(item) != index);
@@ -38,7 +38,7 @@ const validatePathsOrThrow = (paths) => {
     return true;
 };
 const validateSpecsOrThrow = (specs) => {
-    const paths = specs.map(spec => getFullPaths(spec)).reduce((paths, spec) => paths.concat(spec), []);
+    const paths = specs.map((spec) => getFullPaths(spec)).reduce((paths, spec) => paths.concat(spec), []);
     return validatePathsOrThrow(paths);
 };
 exports.validateSpecsOrThrow = validateSpecsOrThrow;

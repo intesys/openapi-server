@@ -32,7 +32,7 @@ exports.defaults = {
 // list of config keys
 exports.options = Object.keys(exports.defaults);
 // boolean config values
-exports.booleans = exports.options.filter(key => (0, lodash_1.isBoolean)(exports.defaults[key]));
+exports.booleans = exports.options.filter((key) => (0, lodash_1.isBoolean)(exports.defaults[key]));
 // proxy library in use, can be axios, postman-request, nodeFetch
 exports.proxyLib = 0 /* PROXY_LIBS.AXIOS */;
 //# sourceMappingURL=config.js.map

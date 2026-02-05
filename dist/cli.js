@@ -33,7 +33,7 @@ commander_1.default
     .parse(process.argv);
 const cliOptions = (0, lodash_1.pick)(commander_1.default.opts(), config_1.options);
 // overwrite env variables
-Object.keys(cliOptions).forEach(key => {
+Object.keys(cliOptions).forEach((key) => {
     const typedKey = key;
     const value = cliOptions[typedKey];
     if (typeof value !== "undefined") {
