@@ -89,7 +89,7 @@
     "example": "npm run build && node dist/cli.js -l --API_YML /examples/api.yml --API_PREFIX /api --STATIC_PATH /examples/static --MOCKS_PATH /examples/mocks",
     "install:types": "typesync",
     "prepare": "npm run build",
-    "preversion": "npm run build && npm run changelog",
+    "version": "npm run build && npm run changelog && git add CHANGELOG.md",
     "start": "npm run build && node dist/cli.js",
     "tdd": "jest --watch",
     "test": "jest"
