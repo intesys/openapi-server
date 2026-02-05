@@ -15,7 +15,7 @@ exports.default = () => (err, req, res, next) => {
 const handleRemoteError = (err, req, res) => {
     const { error } = err;
     const { data, headers, status } = error;
-    log_1.error({
+    (0, log_1.error)({
         Request: `${req.method.toUpperCase()} ${req.originalUrl}`,
         Status: status,
         Source: err.source,
@@ -28,7 +28,7 @@ const handleRemoteError = (err, req, res) => {
     return res.send(data);
 };
 const handleLocalError = (err, req, res) => {
-    log_1.error({
+    (0, log_1.error)({
         Request: `${req.method.toUpperCase()} ${req.originalUrl}`,
         Error: err,
     });
@@ -47,7 +47,7 @@ const formatError = (err) => {
     return err;
 };
 const stringify = (obj) => {
-    return util_1.inspect(obj, {
+    return (0, util_1.inspect)(obj, {
         colors: false,
         compact: false,
         breakLength: Infinity,

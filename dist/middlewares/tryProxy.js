@@ -12,10 +12,10 @@ const void_1 = __importDefault(require("./void"));
  * @param route path key, as example: '/item/{id}'
  */
 const tryProxy = (method, route) => (req, res, next) => {
-    if (!lodash_1.isUndefined(lodash_1.get(res, "locals.body"))) {
-        return void_1.default(req, res, next);
+    if (!(0, lodash_1.isUndefined)((0, lodash_1.get)(res, "locals.body"))) {
+        return (0, void_1.default)(req, res, next);
     }
-    return proxy_1.default(globals_1.proxyUrl)(req, res, next);
+    return (0, proxy_1.default)(globals_1.proxyUrl)(req, res, next);
 };
 exports.default = tryProxy;
 //# sourceMappingURL=tryProxy.js.map

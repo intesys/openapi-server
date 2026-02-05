@@ -23,9 +23,9 @@ exports.default = (app, server) => {
     let restarting = false;
     let scheduleRestart = false;
     const restart = () => __awaiter(void 0, void 0, void 0, function* () {
-        log_1.clear();
-        log_1.print("Restarting server");
-        server = yield init_1.default(app);
+        (0, log_1.clear)();
+        (0, log_1.print)("Restarting server");
+        server = yield (0, init_1.default)(app);
         restarting = false;
         if (scheduleRestart) {
             scheduleRestart = false;
@@ -38,8 +38,8 @@ exports.default = (app, server) => {
             return;
         }
         restarting = true;
-        log_1.clear();
-        log_1.print("Stopping server");
+        (0, log_1.clear)();
+        (0, log_1.print)("Stopping server");
         server.close(restart);
     });
     Object.values(globals_1.specs).forEach((item) => {

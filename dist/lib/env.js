@@ -21,7 +21,7 @@ const loadEnv = () => {
         if (!dotenvFile) {
             return;
         }
-        const envPath = findInCwd_1.findFileInCwd([dotenvFile]);
+        const envPath = (0, findInCwd_1.findFileInCwd)([dotenvFile]);
         if (envPath) {
             const envs = dotenv.config({ path: envPath });
             variableExpansion(envs);

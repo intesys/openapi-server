@@ -31,9 +31,9 @@ exports.default = (url) => (req, res, next) => __awaiter(void 0, void 0, void 0,
     try {
         const fullUrl = `${url}${req.url}`;
         const method = req.method.toLowerCase();
-        const headers = globals_1.PROXY_FILTER_HEADERS ? utils_1.filterHeaders(req.headers) : req.headers;
-        const response = yield exports.proxyLibinstance(method, fullUrl, headers)(req, res);
-        const responseHeaders = globals_1.PROXY_FILTER_HEADERS ? utils_1.filterHeaders(response.headers) : response.headers;
+        const headers = globals_1.PROXY_FILTER_HEADERS ? (0, utils_1.filterHeaders)(req.headers) : req.headers;
+        const response = yield (0, exports.proxyLibinstance)(method, fullUrl, headers)(req, res);
+        const responseHeaders = globals_1.PROXY_FILTER_HEADERS ? (0, utils_1.filterHeaders)(response.headers) : response.headers;
         res.set(responseHeaders);
         res.set("Forwarded", `for=${url}`);
         res.status(response.status);
@@ -42,7 +42,7 @@ exports.default = (url) => (req, res, next) => __awaiter(void 0, void 0, void 0,
             // avoid to pass to next middleware
             res.locals.body = "";
         }
-        log_1.log({
+        (0, log_1.log)({
             "Request handler": "Proxy",
             "Request forwarded to": `${method.toUpperCase()} ${fullUrl} ${globals_1.PROXY_FILTER_HEADERS ? "(filtered headers)" : ""}`,
             "Request headers": headers,

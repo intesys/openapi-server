@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fixBooleans = void 0;
+exports.default = toBoolean;
 function toBoolean(input) {
     switch (input) {
         case "false":
@@ -17,7 +18,6 @@ function toBoolean(input) {
             return true;
     }
 }
-exports.default = toBoolean;
 // fixes boolean configs
 const fixBooleans = (input, booleans) => {
     const output = Object.assign({}, input);

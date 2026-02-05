@@ -13,7 +13,7 @@ exports.default = (server) => {
 };
 const handleSigint = (server) => {
     const onExit = function () {
-        log_1.print("Bye");
+        (0, log_1.print)("Bye");
         server.close(() => {
             process.exit(0);
         });

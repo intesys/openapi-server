@@ -25,21 +25,21 @@ const server_1 = require("./lib/server");
 const handleErrors_1 = __importDefault(require("./middlewares/handleErrors"));
 const router_1 = __importDefault(require("./router"));
 const init = (app) => __awaiter(void 0, void 0, void 0, function* () {
-    const _router = yield router_1.default();
+    const _router = yield (0, router_1.default)();
     return new Promise((resolve, reject) => {
         try {
             app.set("trust proxy", true);
             app.use(_router);
-            app.use(handleErrors_1.default());
-            const server = server_1.createServer(globals_1.API_PROTOCOL, app);
+            app.use((0, handleErrors_1.default)());
+            const server = (0, server_1.createServer)(globals_1.API_PROTOCOL, app);
             server.listen(globals_1.API_PORT, () => {
-                printServerInfo_1.default();
+                (0, printServerInfo_1.default)();
                 resolve(server);
             });
             server.on("error", (e) => {
                 console.log(e);
             });
-            handleSigint_1.default(server);
+            (0, handleSigint_1.default)(server);
         }
         catch (err) {
             reject(err);

@@ -1,5 +1,5 @@
-export declare type HTTPProtocol = "http" | "https";
-declare type Env = {
+export type HTTPProtocol = "http" | "https";
+type Env = {
     API_YML: string;
     API_PREFIX: string;
     API_PORT: string;

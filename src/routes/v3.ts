@@ -20,9 +20,9 @@ const compileServerVars = (
     [variable: string]: OpenAPIV3.ServerVariableObject;
   }
 ): string => {
-  const mapObj = {};
+  const mapObj: Record<string, string> = {};
   Object.keys(variables).map((item) => {
-    return (mapObj["{" + item + "}"] = variables[item].default);
+    return (mapObj["{" + item + "}"] = variables[item].default as string);
   });
   var regex = new RegExp("(" + Object.keys(mapObj).join("|") + ")", "gi");
   const newUrl = url.replace(regex, function (matched) {
@@ -66,14 +66,14 @@ const buildV3Routes = (router: Router, paths: Record<string, OpenAPIV3.PathItemO
     const methods = Object.keys(operations);
     const spec: OpenAPIV3.PathItemObject = paths[route];
     methods.forEach((_method) => {
-      const method: string = operations[_method];
-      const operationSpec: OpenAPIV3.OperationObject = spec[method];
+      const method = operations[_method] as keyof OpenAPIV3.PathItemObject;
+      const operationSpec = (spec as any)[method] as OpenAPIV3.OperationObject | undefined;
       if (!operationSpec) {
         // skip because method is not defined in spec
         return;
       }
       const middlewares: RequestHandler[] = getMiddlewares(method, fullRoute, operationSpec);
-      routerRef[method](middlewares);
+      (routerRef as any)[method](middlewares);
     });
   });
   return router;

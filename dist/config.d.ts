@@ -3,7 +3,7 @@ export declare const enum CUSTOM_MIDDLEWARES {
     "PRE" = 0,
     "POST" = 1
 }
-export declare type CUSTOM_MIDDLEWARES_TYPE = {
+export type CUSTOM_MIDDLEWARES_TYPE = {
     [CUSTOM_MIDDLEWARES.PRE]: string;
     [CUSTOM_MIDDLEWARES.POST]: string;
 };

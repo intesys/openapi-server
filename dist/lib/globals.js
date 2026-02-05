@@ -12,8 +12,8 @@ const getPort_1 = __importDefault(require("./getPort"));
 const getPrefix_1 = __importDefault(require("./getPrefix"));
 const toBoolean_1 = require("./toBoolean");
 require("./env");
-const env = lodash_1.pick(process.env, config_1.options);
-const globals = toBoolean_1.fixBooleans(Object.assign(Object.assign({}, config_1.defaults), env), config_1.booleans);
+const env = (0, lodash_1.pick)(process.env, config_1.options);
+const globals = (0, toBoolean_1.fixBooleans)(Object.assign(Object.assign({}, config_1.defaults), env), config_1.booleans);
 const exitWithError = (message, code = 1) => {
     const err = new Error(message);
     console.error(err);
@@ -21,10 +21,10 @@ const exitWithError = (message, code = 1) => {
 };
 // Absolutize MOCKS_PATH
 globals.MOCKS_PATH =
-    findInCwd_1.findDirInCwd(globals.MOCKS_PATH || "/") ||
+    (0, findInCwd_1.findDirInCwd)(globals.MOCKS_PATH || "/") ||
         exitWithError(`Mock directory not found: ${globals.MOCKS_PATH}, please set MOCKS_PATH`);
 // Absolutize API_YML path
-exports.specs = findSpecs_1.findSpecs(globals.API_YML) || exitWithError(`Invalid API_YML: ${globals.API_YML}`);
+exports.specs = (0, findSpecs_1.findSpecs)(globals.API_YML) || exitWithError(`Invalid API_YML: ${globals.API_YML}`);
 const { API_YML, API_PREFIX, API_PORT, API_PROTOCOL, API_HOSTNAME, STATIC, STATIC_PREFIX, STATIC_PATH, MOCKS, MOCKS_PATH, PROXY, PROXY_PROTOCOL, PROXY_HOSTNAME, PROXY_PORT, PROXY_PREFIX, PROXY_FILTER_HEADERS, SKIP_VALIDATION, LOG, VERBOSE, WATCH, } = globals;
 exports.API_YML = API_YML;
 exports.API_PREFIX = API_PREFIX;
@@ -46,7 +46,7 @@ exports.SKIP_VALIDATION = SKIP_VALIDATION;
 exports.LOG = LOG;
 exports.VERBOSE = VERBOSE;
 exports.WATCH = WATCH;
-const port = getPort_1.default(PROXY_PORT);
-const prefix = getPrefix_1.default(PROXY_PREFIX);
+const port = (0, getPort_1.default)(PROXY_PORT);
+const prefix = (0, getPrefix_1.default)(PROXY_PREFIX);
 exports.proxyUrl = `${PROXY_PROTOCOL}://${PROXY_HOSTNAME}${port}${prefix}`;
 //# sourceMappingURL=globals.js.map

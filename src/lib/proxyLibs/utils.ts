@@ -31,10 +31,10 @@ const proxyHeaderExclusiveList = [
 ];
 
 export const filterHeaders = (headers: IncomingHttpHeaders): IncomingHttpHeaders => {
-  return Object.keys(headers).reduce((res, header) => {
+  return Object.keys(headers).reduce((res: IncomingHttpHeaders, header) => {
     if (proxyHeaderExclusiveList.indexOf(header) < 0) {
       res[header] = headers[header];
     }
     return res;
-  }, {});
+  }, {} as IncomingHttpHeaders);
 };

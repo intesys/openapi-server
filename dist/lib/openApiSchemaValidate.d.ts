@@ -1,6 +1,6 @@
 import { OpenAPI } from "openapi-types";
-declare const _default: (spec: OpenAPI.Document) => boolean;
 /**
  * @param {OpenApi.Document} spec
  */
+declare const _default: (spec: OpenAPI.Document) => boolean;
 export default _default;

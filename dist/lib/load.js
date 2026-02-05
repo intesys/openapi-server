@@ -19,7 +19,7 @@ const json_schema_resolve_allof_1 = __importDefault(require("json-schema-resolve
 exports.default = (file) => __awaiter(void 0, void 0, void 0, function* () {
     const spec = yield loadYaml(file);
     let resolvedSpec = yield resolve(spec);
-    resolvedSpec = json_schema_resolve_allof_1.default(resolvedSpec);
+    resolvedSpec = (0, json_schema_resolve_allof_1.default)(resolvedSpec);
     return resolvedSpec;
 });
 const loadYaml = (file) => __awaiter(void 0, void 0, void 0, function* () {

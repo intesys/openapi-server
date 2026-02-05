@@ -16,14 +16,14 @@ const buildV2Routes = (router: Router, paths: OpenAPIV2.PathsObject, basePath: s
     const methods = Object.keys(operations);
     const spec: OpenAPIV2.PathItemObject = paths[route];
     methods.forEach((_method) => {
-      const method = operations[_method];
-      const operationSpec: OpenAPIV2.OperationObject = spec[method];
+      const method = operations[_method] as keyof OpenAPIV2.PathItemObject;
+      const operationSpec = (spec as any)[method] as OpenAPIV2.OperationObject | undefined;
       if (!operationSpec) {
         // skip because method is not defined in spec
         return;
       }
-      const middlewares: RequestHandler[] = getMiddlewares(method, fullRoute, operationSpec);
-      routerRef[method](middlewares);
+      const middlewares: RequestHandler[] = getMiddlewares(method as string, fullRoute, operationSpec);
+      (routerRef as any)[method](middlewares);
     });
   });
   return router;

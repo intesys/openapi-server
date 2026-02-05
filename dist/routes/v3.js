@@ -29,8 +29,8 @@ const compileServerVars = (url, variables) => {
 };
 const getServer = (servers) => {
     const server = servers[0];
-    const variables = lodash_1.get(server, "variables");
-    const url = lodash_1.get(server, "url");
+    const variables = (0, lodash_1.get)(server, "variables");
+    const url = (0, lodash_1.get)(server, "url");
     if (variables) {
         return compileServerVars(url, variables);
     }
@@ -48,15 +48,15 @@ const getPath = (server) => {
 };
 const getV3BasePath = (spec) => {
     const serverFallback = { url: "" };
-    const servers = lodash_1.get(spec, "servers", [serverFallback]);
+    const servers = (0, lodash_1.get)(spec, "servers", [serverFallback]);
     const server = getServer(servers);
     return getPath(server);
 };
 exports.getV3BasePath = getV3BasePath;
 const buildV3Routes = (router, paths, basePath) => {
     Object.keys(paths).forEach((route) => {
-        const fullRoute = joinUrl_1.default(basePath, route);
-        const expressRoute = toExpressParam_1.default(fullRoute);
+        const fullRoute = (0, joinUrl_1.default)(basePath, route);
+        const expressRoute = (0, toExpressParam_1.default)(fullRoute);
         const routerRef = router.route(expressRoute);
         const methods = Object.keys(routes_1.operations);
         const spec = paths[route];
@@ -67,7 +67,7 @@ const buildV3Routes = (router, paths, basePath) => {
                 // skip because method is not defined in spec
                 return;
             }
-            const middlewares = middlewares_1.default(method, fullRoute, operationSpec);
+            const middlewares = (0, middlewares_1.default)(method, fullRoute, operationSpec);
             routerRef[method](middlewares);
         });
     });

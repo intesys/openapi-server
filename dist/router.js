@@ -27,18 +27,18 @@ const routes_1 = __importDefault(require("./routes"));
 const router = () => __awaiter(void 0, void 0, void 0, function* () {
     const router = express_1.default.Router();
     try {
-        router.use(yield customMiddleware_1.default(0 /* PRE */));
-        router.options("*", cors_1.default());
-        router.use(compression_1.default(), cors_1.default({ credentials: true }), express_1.default.urlencoded({ extended: false, limit: "100mb" }), express_1.default.json({ limit: "100mb" }));
-        globals_1.STATIC && router.use(globals_1.STATIC_PREFIX, handleStatic_1.default(globals_1.STATIC_PATH));
-        const prefix = getPrefix_1.default(globals_1.API_PREFIX);
-        const specDocs = yield Promise.all(globals_1.specs.map((spec) => load_1.default(spec)));
-        validatePaths_1.validateSpecsOrThrow(specDocs);
+        router.use(yield (0, customMiddleware_1.default)(0 /* CUSTOM_MIDDLEWARES.PRE */));
+        router.options("*", (0, cors_1.default)());
+        router.use((0, compression_1.default)(), (0, cors_1.default)({ credentials: true }), express_1.default.urlencoded({ extended: false, limit: "100mb" }), express_1.default.json({ limit: "100mb" }));
+        globals_1.STATIC && router.use(globals_1.STATIC_PREFIX, (0, handleStatic_1.default)(globals_1.STATIC_PATH));
+        const prefix = (0, getPrefix_1.default)(globals_1.API_PREFIX);
+        const specDocs = yield Promise.all(globals_1.specs.map((spec) => (0, load_1.default)(spec)));
+        (0, validatePaths_1.validateSpecsOrThrow)(specDocs);
         specDocs.forEach((spec) => {
-            openApiSchemaValidate_1.default(spec);
-            router.use(prefix, routes_1.default(spec), sendBody_1.default());
+            (0, openApiSchemaValidate_1.default)(spec);
+            router.use(prefix, (0, routes_1.default)(spec), (0, sendBody_1.default)());
         });
-        router.use(yield customMiddleware_1.default(1 /* POST */));
+        router.use(yield (0, customMiddleware_1.default)(1 /* CUSTOM_MIDDLEWARES.POST */));
     }
     catch (err) {
         console.error(err);

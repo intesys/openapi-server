@@ -1,7 +1,6 @@
-/// <reference types="node" />
 import { Request, Response } from "express";
 import { IncomingHttpHeaders } from "http";
-export declare type method = "get" | "post" | "put" | "patch" | "head" | "delete" | "GET" | "POST" | "PUT" | "PATCH" | "HEAD" | "DELETE" | "OPTIONS" | "options";
+export type method = "get" | "post" | "put" | "patch" | "head" | "delete" | "GET" | "POST" | "PUT" | "PATCH" | "HEAD" | "DELETE" | "OPTIONS" | "options";
 export interface ProxyResponse {
     data: any;
     headers: any;

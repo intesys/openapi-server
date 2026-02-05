@@ -19,17 +19,17 @@ const log_1 = require("./lib/log");
 const watch_1 = __importDefault(require("./watch"));
 const app = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        log_1.clear();
-        log_1.print("Starting server");
-        const expressInstance = express_1.default();
-        const server = yield init_1.default(expressInstance);
+        (0, log_1.clear)();
+        (0, log_1.print)("Starting server");
+        const expressInstance = (0, express_1.default)();
+        const server = yield (0, init_1.default)(expressInstance);
         if (globals_1.WATCH) {
-            watch_1.default(expressInstance, server);
+            (0, watch_1.default)(expressInstance, server);
         }
         return expressInstance;
     }
     catch (e) {
-        log_1.error(e);
+        (0, log_1.error)(e);
         process.exit(1);
     }
 });

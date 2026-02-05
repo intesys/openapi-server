@@ -32,6 +32,6 @@ const stringify = (message) => {
     if (typeof message === "string") {
         return message;
     }
-    return util_1.inspect(message, { colors: true, compact: false, breakLength: Infinity, depth });
+    return (0, util_1.inspect)(message, { colors: true, compact: false, breakLength: Infinity, depth });
 };
 //# sourceMappingURL=log.js.map

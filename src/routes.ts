@@ -6,7 +6,7 @@ import buildV2Routes, { getV2BasePath } from "./routes/v2";
 import buildV3Routes, { getV3BasePath } from "./routes/v3";
 import Version from "./types/openApiVersion";
 
-export const operations = {
+export const operations: Record<string, string> = {
   get: "get",
   put: "put",
   post: "post",

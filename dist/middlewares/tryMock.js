@@ -27,8 +27,8 @@ const nodeRequireError = (err) => {
  * @param route path key, as example: '/item/{id}'
  */
 const tryMock = (method, route) => (req, res, next) => {
-    if (!lodash_1.isUndefined(lodash_1.get(res, "locals.body"))) {
-        return void_1.default(req, res, next);
+    if (!(0, lodash_1.isUndefined)((0, lodash_1.get)(res, "locals.body"))) {
+        return (0, void_1.default)(req, res, next);
     }
     const mockPath = path_1.default.join(globals_1.MOCKS_PATH, route, method);
     try {
@@ -37,15 +37,15 @@ const tryMock = (method, route) => (req, res, next) => {
         }
         const mock = require(mockPath);
         if (isFunction(mock)) {
-            log_1.log({
+            (0, log_1.log)({
                 "Request handler": "Mock (middleware)",
                 "Request uri": `${method.toUpperCase()} ${req.originalUrl}`,
                 "Handled by": mockPath,
             });
             return mock(req, res, next);
         }
-        lodash_1.set(res, "locals.body", mock);
-        log_1.log({
+        (0, lodash_1.set)(res, "locals.body", mock);
+        (0, log_1.log)({
             "Request handler": "Mock (json)",
             "Request uri": `${method.toUpperCase()} ${req.originalUrl}`,
             "Handled by": mockPath,
@@ -56,7 +56,7 @@ const tryMock = (method, route) => (req, res, next) => {
         if (!nodeRequireError(error)) {
             return next(error);
         }
-        log_1.log(`\n${method.toUpperCase()} ${route} is not mocked\n To mock it, touch ${mockPath}.js(on)`);
+        (0, log_1.log)(`\n${method.toUpperCase()} ${route} is not mocked\n To mock it, touch ${mockPath}.js(on)`);
     }
     return next();
 };

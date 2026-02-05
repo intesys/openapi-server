@@ -21,11 +21,11 @@ const getFullPaths = (spec: OpenAPI.Document): string[] => {
   const paths = get(spec, "paths", {});
   const operationMethods = Object.values(operations);
   return Object.keys(paths)
-    .map(path =>
-      Object.keys(paths[path])
+    .map((path) =>
+      Object.keys((paths as Record<string, any>)[path] || {})
         // only valid http methods are evaluated
-        .filter(method => operationMethods.indexOf(method) > -1)
-        .map(method => `${basePath}${path}/${method}`)
+        .filter((method) => operationMethods.indexOf(method) > -1)
+        .map((method) => `${basePath}${path}/${method}`)
     )
     .reduce((paths, specPaths) => paths.concat(specPaths), []);
 };
@@ -43,6 +43,6 @@ const validatePathsOrThrow = (paths: string[]): boolean => {
 };
 
 export const validateSpecsOrThrow = (specs: OpenAPI.Document[]): boolean => {
-  const paths = specs.map(spec => getFullPaths(spec)).reduce((paths, spec) => paths.concat(spec), []);
+  const paths = specs.map((spec) => getFullPaths(spec)).reduce((paths, spec) => paths.concat(spec), []);
   return validatePathsOrThrow(paths);
 };

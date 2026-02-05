@@ -31,8 +31,14 @@ commander_1.default
     .option("--PROXY_FILTER_HEADERS", "remove some headers, details in doc")
     .option("--VERBOSE [number]", "depth of logs shown")
     .parse(process.argv);
-const cliOptions = lodash_1.pick(commander_1.default.opts(), config_1.options);
+const cliOptions = (0, lodash_1.pick)(commander_1.default.opts(), config_1.options);
 // overwrite env variables
-Object.keys(cliOptions).forEach(key => (process.env[key] = cliOptions[key]));
+Object.keys(cliOptions).forEach((key) => {
+    const typedKey = key;
+    const value = cliOptions[typedKey];
+    if (typeof value !== "undefined") {
+        process.env[typedKey] = String(value);
+    }
+});
 require("./app").default();
 //# sourceMappingURL=cli.js.map

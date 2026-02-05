@@ -35,7 +35,7 @@ exports.default = (middleware) => __awaiter(void 0, void 0, void 0, function* ()
     const router = express_1.default.Router();
     const routerFile = path_1.default.join(globals_1.MOCKS_PATH, config_1.CUSTOM_MIDDLEWARES_PATH, config_1.CUSTOM_MIDDLEWARES_NAMES[middleware]);
     if (isFile(routerFile)) {
-        log_1.print(`Using custom middleware: ${routerFile}`);
+        (0, log_1.print)(`Using custom middleware: ${routerFile}`);
         const customRouter = require(routerFile);
         if (isAsyncFunction(customRouter)) {
             const awaitedCustomRouter = yield customRouter();
