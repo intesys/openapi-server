@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { Request, Response } from "express";
 import { IncomingHttpHeaders } from "http";
 export type method = "get" | "post" | "put" | "patch" | "head" | "delete" | "GET" | "POST" | "PUT" | "PATCH" | "HEAD" | "DELETE" | "OPTIONS" | "options";

@@ -33,6 +33,12 @@ commander_1.default
     .parse(process.argv);
 const cliOptions = (0, lodash_1.pick)(commander_1.default.opts(), config_1.options);
 // overwrite env variables
-Object.keys(cliOptions).forEach(key => (process.env[key] = cliOptions[key]));
+Object.keys(cliOptions).forEach(key => {
+    const typedKey = key;
+    const value = cliOptions[typedKey];
+    if (typeof value !== "undefined") {
+        process.env[typedKey] = String(value);
+    }
+});
 require("./app").default();
 //# sourceMappingURL=cli.js.map

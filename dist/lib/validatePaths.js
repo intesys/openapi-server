@@ -23,7 +23,7 @@ const getFullPaths = (spec) => {
     const paths = (0, lodash_1.get)(spec, "paths", {});
     const operationMethods = Object.values(routes_1.operations);
     return Object.keys(paths)
-        .map(path => Object.keys(paths[path])
+        .map(path => Object.keys(paths[path] || {})
         // only valid http methods are evaluated
         .filter(method => operationMethods.indexOf(method) > -1)
         .map(method => `${basePath}${path}/${method}`))

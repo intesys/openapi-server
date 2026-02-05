@@ -33,6 +33,12 @@ program
 const cliOptions: Partial<Env> = pick(program.opts(), options) as Partial<Env>;
 
 // overwrite env variables
-Object.keys(cliOptions).forEach(key => (process.env[key] = cliOptions[key]));
+Object.keys(cliOptions).forEach((key) => {
+  const typedKey = key as keyof Env;
+  const value = cliOptions[typedKey];
+  if (typeof value !== "undefined") {
+    process.env[typedKey] = String(value);
+  }
+});
 
 require("./app").default();
