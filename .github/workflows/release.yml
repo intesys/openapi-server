@@ -2,8 +2,8 @@ name: Release to NPM (OIDC)
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - "v*.*.*"
 
 permissions:
   contents: write
