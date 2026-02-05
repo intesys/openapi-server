@@ -94,7 +94,7 @@
     "tdd": "jest --watch",
     "test": "jest"
   },
-  "version": "5.0.1",
+  "version": "5.0.2",
   "volta": {
     "node": "20.18.0"
   }
