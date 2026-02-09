@@ -37,6 +37,6 @@ jobs:
       # Per la prima release: usa NODE_AUTH_TOKEN dal secret
       # Le release future possono usare OIDC senza token
       - name: Publish to npm
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish --access public --provenance
+      #  env:
+      #    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
