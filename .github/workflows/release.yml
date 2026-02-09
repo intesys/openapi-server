@@ -1,4 +1,4 @@
-name: Release to NPM (OIDC)
+name: Release to NPM
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - "v*.*.*"
 
 permissions:
-  # id-token: write # necessario per OIDC
+  id-token: write # necessario per provenance
   contents: read
 
 jobs:
