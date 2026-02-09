@@ -6,7 +6,7 @@ on:
       - "v*.*.*"
 
 permissions:
-  id-token: write # necessario per OIDC
+  # id-token: write # necessario per OIDC
   contents: read
 
 jobs:
@@ -37,4 +37,6 @@ jobs:
       # Per la prima release: usa NODE_AUTH_TOKEN dal secret
       # Le release future possono usare OIDC senza token
       - name: Publish to npm
-        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance
